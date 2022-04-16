@@ -97,7 +97,13 @@
 
 
     <block>
+        <prompt>
+            We are submitting this offer now to our database.
+            <break time="500"/>
+            Good Bye!
+        </prompt>
         <submit next="http://forest-marche.herokuapp.com/api/v1/offers" method="post" namelist="product units price quantity" />
+        <disconnect/>
     </block>
 
 </vxml>
