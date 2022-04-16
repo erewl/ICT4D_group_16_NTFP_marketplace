@@ -26,7 +26,7 @@
             </enumerate>
         </prompt>
 
-        <choice event="fluid_product_selection" dtmf="1" message="SheaButter">Shea Butter</choice>
+        <choice event="fluid_product_selection" dtmf="1" message="Shea Butter">Shea Butter</choice>
         <choice event="kg_product_selected" dtmf="2" message="Honey">Honey</choice>
         <choice event="kg_product_selected" dtmf="3" message="Essential Oils">Essential Oils</choice>
 
@@ -45,7 +45,7 @@
     <!-- event for product selection-->
     <catch event="fluid_product_selection">
         <prompt>
-            .
+            <break time="200" />
         </prompt>
         <assign name="product" expr="_message" />
         <assign name="units" expr="'liters'" />
@@ -71,11 +71,26 @@
                 <value expr="product" />
                 ?
                 Enter the quantity and press hash
-                <break time="200" />
             </prompt>
 
             <filled>
                 <assign name="quantity" expr="form_quantity" />
+            </filled>
+        </field>
+
+
+        <field name="form_price" type="number">
+            <prompt>
+                How much is the price per 
+                <value expr="units" />
+                for
+                <value expr="product" />
+                ?
+                Enter the price and press hash
+            </prompt>
+
+            <filled>
+                <assign name="price" expr="form_price" />
             </filled>
         </field>
     </form>
