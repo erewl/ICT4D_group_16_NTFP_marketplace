@@ -3,7 +3,7 @@
 
     <property name="inputmodes" value="dtmf" />
 
-    <form scope="dialog">
+    <form id="greeting" scope="dialog">
         <block>
 
             <prompt bargein="false">
@@ -15,7 +15,7 @@
         </block>
 
     </form>
-    <goto nextitem="menu_product" />
+    <goto next="#menu_product" />
 
     <!-- entering offerings, main menu -->
     <menu id="menu_product" scope="dialog">
@@ -102,7 +102,7 @@
         </field>
 
     </form>
-    <goto nextitem="submission" />
+    <goto next="#submission" />
 
     <form id="submission" scope="dialog">
         <block>
