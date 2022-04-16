@@ -26,8 +26,9 @@
             </enumerate>
         </prompt>
 
-        <choice event="bag_product_selected" dtmf="1" message="SheaButter">Shea Butter</choice>
-        <choice event="kg_product_selected" dtmf="2" message="Soybeans">Honey</choice>
+        <choice event="fluid_product_selection" dtmf="1" message="SheaButter">Shea Butter</choice>
+        <choice event="kg_product_selected" dtmf="2" message="Honey">Honey</choice>
+        <choice event="kg_product_selected" dtmf="3" message="Essential Oils">Essential Oils</choice>
 
         <noinput>
             No input, we will repeat the product list
@@ -39,5 +40,44 @@
             <reprompt />
         </nomatch>
     </menu>
+
+
+    <!-- event for product selection-->
+    <catch event="fluid_product_selection">
+        <prompt>
+            .
+        </prompt>
+        <assign name="product" expr="_message" />
+        <assign name="units" expr="'liters'" />
+        <goto next="#details" />
+    </catch>
+
+
+    <catch event="kg_product_selected">
+        <prompt>
+            This is not implemented yet, we are closing now the application. Goodbye!
+            <break time="200" />
+        </prompt>
+        <disconnect />
+    </catch>
+
+
+    <form id="details">
+        <field name="form_quantity" type="number">
+            <prompt>
+                How many
+                <value expr="units" />
+                of
+                <value expr="product" />
+                ?
+                Enter the quantity and press hash
+                <break time="200" />
+            </prompt>
+
+            <filled>
+                <assign name="quantity" expr="form_quantity" />
+            </filled>
+        </field>
+    </form>
 
 </vxml>
