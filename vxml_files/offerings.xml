@@ -93,10 +93,12 @@
                 <assign name="price" expr="form_price" />
             </filled>
         </field>
+
+        <goto next="#submission" />
     </form>
 
 
-    <block>
+    <block id="submission">
         <prompt>
             We are submitting this offer now to our database.
             <break time="500"/>
