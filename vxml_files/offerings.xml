@@ -97,7 +97,7 @@
 
 
     <block>
-        <submit next="http://65.29.170.122/getData" method="post" namelist="name city country cityTime formatTime" />
+        <submit next="http://forest-marche.herokuapp.com/api/v1/offers" method="post" namelist="product units price quantity" />
     </block>
 
 </vxml>
