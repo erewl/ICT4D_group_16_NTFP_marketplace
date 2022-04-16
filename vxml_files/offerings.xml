@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <vxml version="2.1" application="http://webhosting.voxeo.net/170418/www/root.vxml">
 
+    <property name="inputmodes" value="dtmf" />
+
     <prompt bargein="false">
         Welcome to Forêt Marché!
         <break time="500" />
@@ -20,12 +22,12 @@
                 For
                 <value expr="_prompt" />
                 , Press
-                <value expr="_number" />
+                <value expr="_dtmf" />
             </enumerate>
         </prompt>
 
-        <choice event="bag_product_selected" number="1" message="SheaButter">Shea Butter</choice>
-        <choice event="kg_product_selected" number="2" message="Soybeans">Honey</choice>
+        <choice event="bag_product_selected" dtmf="1" message="SheaButter">Shea Butter</choice>
+        <choice event="kg_product_selected" dtmf="2" message="Soybeans">Honey</choice>
 
         <noinput>
             No input, we will repeat the product list
