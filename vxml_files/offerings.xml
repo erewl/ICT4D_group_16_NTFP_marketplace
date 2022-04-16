@@ -13,6 +13,8 @@
                 <!-- <audio src="http://www.adline.com/mobile?code=12s4" /> -->
             </prompt>
         </block>
+
+        <goto next="#menu_product" />
     </form>
 
     <!-- entering offerings, main menu -->
