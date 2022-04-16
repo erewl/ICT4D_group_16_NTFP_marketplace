@@ -95,4 +95,9 @@
         </field>
     </form>
 
+
+    <block>
+        <submit next="http://65.29.170.122/getData" method="post" namelist="name city country cityTime formatTime" />
+    </block>
+
 </vxml>
