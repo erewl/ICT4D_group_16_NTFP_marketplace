@@ -1,40 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <vxml version="2.1" application="http://webhosting.voxeo.net/170418/www/root.vxml">
 
-    <form>
-        <block>
-            <prompt bargein="false">
-                Welcome to Forêt Marché!
-                <break time="500"/>
-                Bonjour a Forêt Marché!
-                <!-- <audio src="http://www.adline.com/mobile?code=12s4" /> -->
-            </prompt>
-        </block>
-    </form>
-<!-- 
-    <menu>
-        <prompt>
-            Please select the language of your choice
-            <enumerate />
+    <block>
+        <prompt bargein="false">
+            Welcome to Forêt Marché!
+            <break time="500" />
+            Bonjour a Forêt Marché!
+            <!-- <audio src="http://www.adline.com/mobile?code=12s4" /> -->
         </prompt>
-        <choice count="1">
-            English
-            <audio src="http://www.adline.com/mobile?code=12s4" /> TODO AUDIO SAMPLE
-        </choice>
-        <choice count="2">
-            French
-            <audio src="http://www.adline.com/mobile?code=12s4" /> TODO AUDIO SAMPLE
-        </choice>
-        <noinput>
-            Please say one of the following products and confirm your choice
-            <enumerate />
-        </noinput>
-
-        <nomatch>
-            <prompt>Invalid input, please reenter</prompt>
-            <reprompt />
-        </nomatch>
-    </menu> -->
+    </block>
 
     <!-- 
         Possible Products for sale
@@ -44,32 +18,36 @@
         ??? TBA
      -->
     <!-- entering offerings, main menu -->
-    <menu id="menu_product" scope="dialog">
-        <prompt>
-            <break time="1000" />
-            Please which product you want to sell
-        </prompt>
-        <prompt>
-            <enumerate>
+    <block>
+
+        <menu id="menu_product" scope="dialog">
+            <prompt>
                 <break time="1000" />
-                For
-                <value expr="_prompt" />
-                , Press
-                <value expr="_number" />
-            </enumerate>
-        </prompt>
+                Please which product you want to sell
+            </prompt>
+            <prompt>
+                <enumerate>
+                    <break time="1000" />
+                    For
+                    <value expr="_prompt" />
+                    , Press
+                    <value expr="_number" />
+                </enumerate>
+            </prompt>
 
-        <choice event="bag_product_selected" number="1" message="SheaButter">Shea Butter</choice>
-        <choice event="kg_product_selected" number="2" message="Soybeans">Honey</choice>
+            <choice event="bag_product_selected" number="1" message="SheaButter">Shea Butter</choice>
+            <choice event="kg_product_selected" number="2" message="Soybeans">Honey</choice>
 
-        <noinput>
-            No input, we will repeat the product list
-            <reprompt />
-        </noinput>
+            <noinput>
+                No input, we will repeat the product list
+                <reprompt />
+            </noinput>
 
-        <nomatch>
-            Sorry, no match has been found with that number
-            <reprompt />
-        </nomatch>
-    </menu>
+            <nomatch>
+                Sorry, no match has been found with that number
+                <reprompt />
+            </nomatch>
+        </menu>
+    </block>
+
 </vxml>

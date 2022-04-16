@@ -1,0 +1,25 @@
+<menu>
+    <prompt>
+        Please select the language of your choice
+        <enumerate />
+    </prompt>
+    <choice count="1">
+        English
+        <audio src="http://www.adline.com/mobile?code=12s4" />
+        TODO AUDIO SAMPLE
+    </choice>
+    <choice count="2">
+        French
+        <audio src="http://www.adline.com/mobile?code=12s4" />
+        TODO AUDIO SAMPLE
+    </choice>
+    <noinput>
+        Please say one of the following products and confirm your choice
+        <enumerate />
+    </noinput>
+
+    <nomatch>
+        <prompt>Invalid input, please reenter</prompt>
+        <reprompt />
+    </nomatch>
+</menu> 
