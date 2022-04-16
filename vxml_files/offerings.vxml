@@ -11,7 +11,7 @@
             Bonjour a Forêt Marché!
             <!-- <audio src="http://www.adline.com/mobile?code=12s4" /> -->
             <break time="1000" />
-            Please which product you want to sell
+            Which product you want to sell
         </prompt>
         <prompt>
             <enumerate>
@@ -105,7 +105,7 @@
                 <break time="500" />
                 Good Bye!
             </prompt>
-            <submit next="http://forest-marche.herokuapp.com/api/v1/offers" method="post" namelist="product units price quantity" />
+            <submit expr="http://forest-marche.herokuapp.com/api/v1/offers" method="post" fetchtimeout="10s" namelist="product units price quantity" enctype="multipart/form-data" />
             <disconnect />
         </block>
     </form>
