@@ -3,12 +3,17 @@
 
     <property name="inputmodes" value="dtmf" />
 
-    <prompt bargein="false">
-        Welcome to Forêt Marché!
-        <break time="500" />
-        Bonjour a Forêt Marché!
-        <!-- <audio src="http://www.adline.com/mobile?code=12s4" /> -->
-    </prompt>
+    <form>
+        <block>
+
+            <prompt bargein="false">
+                Welcome to Forêt Marché!
+                <break time="500" />
+                Bonjour a Forêt Marché!
+                <!-- <audio src="http://www.adline.com/mobile?code=12s4" /> -->
+            </prompt>
+        </block>
+    </form>
 
     <!-- entering offerings, main menu -->
     <menu id="menu_product" scope="dialog">
@@ -99,13 +104,15 @@
 
 
     <form id="submission">
-        <prompt>
-            We are submitting this offer now to our database.
-            <break time="500"/>
-            Good Bye!
-        </prompt>
-        <submit next="http://forest-marche.herokuapp.com/api/v1/offers" method="post" namelist="product units price quantity" />
-        <disconnect/>
+        <block>
+            <prompt>
+                We are submitting this offer now to our database.
+                <break time="500"/>
+                Good Bye!
+            </prompt>
+            <submit next="http://forest-marche.herokuapp.com/api/v1/offers" method="post" namelist="product units price quantity" />
+            <disconnect/>
+        </block>
     </form>
 
 </vxml>
