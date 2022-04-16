@@ -4,6 +4,9 @@
     <property name="inputmodes" value="dtmf" />
 
     <form>
+
+
+    <form scope="dialog">
         <block>
 
             <prompt bargein="false">
@@ -105,7 +108,7 @@
     </form>
 
 
-    <form id="submission">
+    <form id="submission" scope="dialog">
         <block>
             <prompt>
                 We are submitting this offer now to our database.
@@ -116,5 +119,5 @@
             <disconnect/>
         </block>
     </form>
-
+    </form>
 </vxml>
