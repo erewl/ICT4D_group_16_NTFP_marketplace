@@ -14,7 +14,7 @@
             </prompt>
         </block>
 
-        <goto next="#menu_product" />
+        <goto nextitem="menu_product" />
     </form>
 
     <!-- entering offerings, main menu -->
@@ -101,7 +101,7 @@
             </filled>
         </field>
 
-        <goto next="#submission" />
+        <goto nextitem="submission" />
     </form>
 
 
