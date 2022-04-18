@@ -2,7 +2,7 @@
    
 import os
 
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, request, render_template, Response
 from flask_cors import CORS
 
 app = Flask(__name__, static_url_path='/build/')
@@ -26,8 +26,9 @@ def analysis():
     print("Json: ", request.json)
     print("Values: ", request.values)
 
-    response = {"message": "OK"}
-    return jsonify(response)
+    xmlResponse = "<prompt>Submission complete!</prompt>"
+
+    return Response(xmlResponse, mimetype='text/xml')
 
 if __name__ == '__main__':
     if os.environ['ENV'] and os.environ['ENV'] == 'prod':
