@@ -3,14 +3,22 @@
 
     <property name="inputmodes" value="dtmf" />
 
-    <!-- entering offerings, main menu -->
-    <menu id="menu_product" scope="dialog">
+    <form id="greeting">
         <prompt>
             Welcome to Forêt Marché!
             <break time="500" />
             Bonjour a Forêt Marché!
             <!-- <audio src="http://www.adline.com/mobile?code=12s4" /> -->
-            <break time="1000" />
+        </prompt>
+
+        <filled>
+            <goto next="#menu_product" />
+        </filled>
+    </form>
+
+    <!-- entering products to sell, main menu -->
+    <menu id="menu_product" scope="dialog">
+        <prompt>
             Which product you want to sell
         </prompt>
         <prompt>
@@ -97,6 +105,8 @@
         </filled>
 
     </form>
+
+    <!-- TODO repeating and confirmation -->
 
     <form id="submission">
         <block>
