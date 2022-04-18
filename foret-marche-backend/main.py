@@ -26,15 +26,13 @@ def analysis():
     print("Json: ", request.json)
     print("Values: ", request.values)
 
-    xmlResponse = """
-    <?xml version="1.0"?>
+    xmlResponse = """<?xml version="1.0"?>
         <response>
             <returncode>200</returncode>
             <message>Successful submitted!</message>
-        </response>
-    """
+        </response>"""
 
-    return Response(xmlResponse, mimetype='text/xml')
+    return Response(xmlResponse, mimetype='application/xml')
 
 if __name__ == '__main__':
     if os.environ['ENV'] and os.environ['ENV'] == 'prod':
