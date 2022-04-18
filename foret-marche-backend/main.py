@@ -26,7 +26,13 @@ def analysis():
     print("Json: ", request.json)
     print("Values: ", request.values)
 
-    xmlResponse = "<prompt>Submission complete!</prompt>"
+    xmlResponse = """
+    <?xml version="1.0"?>
+        <response>
+            <returncode>200</returncode>
+            <message>Successful submitted!</message>
+        </response>
+    """
 
     return Response(xmlResponse, mimetype='text/xml')
 
