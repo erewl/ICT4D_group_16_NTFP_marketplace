@@ -4,16 +4,19 @@
     <property name="inputmodes" value="dtmf" />
 
     <form id="greeting">
-        <prompt>
-            Welcome to Forêt Marché!
-            <break time="500" />
-            Bonjour a Forêt Marché!
-            <!-- <audio src="http://www.adline.com/mobile?code=12s4" /> -->
-        </prompt>
+        <block>
 
-        <filled>
-            <goto next="#menu_product" />
-        </filled>
+            <prompt>
+                Welcome to Forêt Marché!
+                <break time="500" />
+                Bonjour a Forêt Marché!
+                <!-- <audio src="http://www.adline.com/mobile?code=12s4" /> -->
+            </prompt>
+            
+            <filled>
+                <goto next="#menu_product" />
+            </filled>
+        </block>
     </form>
 
     <!-- entering products to sell, main menu -->
