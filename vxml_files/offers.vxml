@@ -16,13 +16,14 @@
     </form>
 
     <!-- TODO language selection: make this configurable by dialog -->
-    <assign name="lang" expr="'en_recordings'" />
+    <var name="lang" expr="'en_recordings'" />
     <!-- <assign name="lang" expr="'fr_recordings'" /> -->
 
 
     <!-- entering products to sell, main menu -->
     <menu id="menu_product" scope="dialog">
         <prompt>
+            <value expr="lang" />
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + lang + '/product_question.mp3'" />
         </prompt>
         <prompt>
