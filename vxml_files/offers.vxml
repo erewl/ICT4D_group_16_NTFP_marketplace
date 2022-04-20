@@ -27,9 +27,6 @@
         <prompt>
             <value expr="lang" />
             <audio src="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/product_question.mp3'"/>
-            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + lang + 'product_question.mp3'">
-                <value expr="lang" />
-            </audio>
         </prompt>
         <prompt>
             <enumerate>
@@ -42,10 +39,7 @@
         </prompt>
 
         <choice event="fluid_product_selection" dtmf="1" message="Shea Butter">
-            Shea Butter
-            <!-- <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + lang + 'product_sheabutter.mp3'">
-                <value expr="lang" />
-            </audio> -->
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/product_sheabutter.mp3'" />
         </choice>
         <choice event="kg_product_selected" dtmf="2" message="Honey">
             Honey
