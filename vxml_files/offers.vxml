@@ -26,6 +26,7 @@
 
         <prompt>
             <value expr="lang" />
+            <audio src="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/product_question.mp3'"/>
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + lang + 'product_question.mp3'">
                 <value expr="lang" />
             </audio>
