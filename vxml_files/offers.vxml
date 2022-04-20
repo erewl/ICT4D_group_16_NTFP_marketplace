@@ -7,18 +7,23 @@
         <block>
 
             <prompt>
-                <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/recordings/welcome_EN.mp3" />
+                <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/welcome.mp3" />
                 <break time="500" />
-                <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/recordings/welcome_NL.mp3" />
+                <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings/welcome.mp3" />
             </prompt>
             <goto next="#menu_product" />
         </block>
     </form>
 
+    <!-- TODO language selection: make this configurable by dialog -->
+    <assign name="lang" expr="'en_recordings'" />
+    <!-- <assign name="lang" expr="'fr_recordings'" /> -->
+
+
     <!-- entering products to sell, main menu -->
     <menu id="menu_product" scope="dialog">
         <prompt>
-            Which product you want to sell
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + lang + '/product_question.mp3'" />
         </prompt>
         <prompt>
             <enumerate>
@@ -30,17 +35,23 @@
             </enumerate>
         </prompt>
 
-        <choice event="fluid_product_selection" dtmf="1" message="Shea Butter">Shea Butter</choice>
-        <choice event="kg_product_selected" dtmf="2" message="Honey">Honey</choice>
-        <choice event="kg_product_selected" dtmf="3" message="Essential Oils">Essential Oils</choice>
+        <choice event="fluid_product_selection" dtmf="1" message="Shea Butter">
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + lang + '/product_sheabutter.mp3'" />
+        </choice>
+        <choice event="kg_product_selected" dtmf="2" message="Honey">
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + lang + '/product_honey.mp3'" />
+        </choice>
+        <choice event="kg_product_selected" dtmf="3" message="Essential Oils">
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + lang + '/product_oils.mp3'" />
+        </choice>
 
         <noinput>
-            No input, we will repeat the product list
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + lang + '/product_noinput.mp3'" />
             <reprompt />
         </noinput>
 
         <nomatch>
-            Sorry, no match has been found with that number
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + lang + '/product_wronginput.mp3'" />
             <reprompt />
         </nomatch>
     </menu>
@@ -110,9 +121,7 @@
     <form id="submission">
         <block>
             <prompt>
-                We are submitting this offer now to our database.
-                <break time="500" />
-                Good Bye!
+                <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + lang + '/submission_goodbye.mp3'" />
             </prompt>
             <!-- <assign name="product" expr="'Shea Butter'" />
             <assign name="units" expr="'Liters'" />
