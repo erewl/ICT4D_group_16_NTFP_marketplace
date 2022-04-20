@@ -26,7 +26,9 @@
 
         <prompt>
             <value expr="lang" />
-            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + lang + 'product_question.mp3'" />
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + lang + 'product_question.mp3'">
+                <value expr="lang" />
+            </audio>
         </prompt>
         <prompt>
             <enumerate>
@@ -39,24 +41,29 @@
         </prompt>
 
         <choice event="fluid_product_selection" dtmf="1" message="Shea Butter">
-            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + lang + 'product_sheabutter.mp3'">
+            Shea Butter
+            <!-- <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + lang + 'product_sheabutter.mp3'">
                 <value expr="lang" />
-            </audio>
+            </audio> -->
         </choice>
         <choice event="kg_product_selected" dtmf="2" message="Honey">
-            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + lang + 'product_honey.mp3'" />
+            Honey
+            <!-- <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + lang + 'product_honey.mp3'" /> -->
         </choice>
         <choice event="kg_product_selected" dtmf="3" message="Essential Oils">
-            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + lang + 'product_oils.mp3'" />
+            Oils
+            <!-- <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + lang + 'product_oils.mp3'" /> -->
         </choice>
 
         <noinput>
-            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + lang + 'product_noinput.mp3'" />
+            fjsdkfjskdlf
+            <!-- <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + lang + 'product_noinput.mp3'" /> -->
             <reprompt />
         </noinput>
 
         <nomatch>
-            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + lang + 'product_wronginput.mp3'" />
+            fjskfjklsdf
+            <!-- <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + lang + 'product_wronginput.mp3'" /> -->
             <reprompt />
         </nomatch>
     </menu>
