@@ -1,9 +1,10 @@
 
    
 import os
+from site import USER_BASE
 
-from flask import Flask, request, render_template, Response
-from sqlalchemy import create_engine, text
+from flask import Flask, request, render_template, jsonify, Response
+from sqlalchemy import create_engine, text, insert
 
 USER = os.getenv('DB_USER')
 PWD = os.getenv('DB_PWD')
@@ -49,6 +50,24 @@ def analysis():
         </response>"""
 
     return Response(xmlResponse, mimetype='application/xml')
+
+@app.route('/api/v1/users', methods=['GET'])
+def get_users():
+    query = text("SELECT * FROM users")
+    users = engine.execute(query)
+    return render_template('index.html', users=users)
+
+@app.route('/api/v1/offers', methods=['GET'])
+def get_offers():
+    query = text("SELECT * FROM offers")
+    offers = engine.execute(query)
+    return render_template('index.html', offers=offers)
+
+@app.route('/api/v1/bids', methods=['GET'])
+def get_bids():
+    query = text("SELECT * FROM bids")
+    bids = engine.execute(query)
+    return render_template('index.html', bids=bids)
 
 if __name__ == '__main__':
     if os.environ['ENV'] and os.environ['ENV'] == 'prod':
