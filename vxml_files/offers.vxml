@@ -22,7 +22,7 @@
         <!-- <choice dtmf="1" next="#english">english </choice>
         <choice dtmf="2" next="#french">french </choice>  -->
         <choice dtmf="1" event="english_selected">english </choice>
-        <choice dtmf="2" event="french_selected">french </choice> 
+        <choice dtmf="2" event="french_selected"> <prompt xml:lang="fr-fr">Bonjour mon ami</prompt> </choice> 
         <nomatch>Please enter a valid number.<reprompt /></nomatch>
         <noinput>Please enter a number.<reprompt /></noinput>
     </menu>   
