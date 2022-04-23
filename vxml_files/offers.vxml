@@ -17,7 +17,7 @@
     </form>
 
      <menu id="language_selection" scope="dialog">
-        <prompt xml:lang=en-gb-emily><enumerate>For<value expr="_prompt"/>,press <value expr="_dtmf"/>.<break time="1000"></enumerate></prompt>
+        <prompt><enumerate>For<value expr="_prompt"/>,press <value expr="_dtmf"/>.<break time="1000"></enumerate></prompt>
         <!-- <choice dtmf="1" next="#english">english </choice>
         <choice dtmf="2" next="#french">french </choice>  -->
         <choice dtmf="1" event="english_selected">english </choice>
@@ -30,7 +30,7 @@
         <prompt>English selected.</prompt>
     </catch>
     <catch event="french_selected">
-        <prompt>French selected.</prompt>
+        <prompt xml:lang=fr-fr>Français sélectionné</prompt>
     </catch>
 
     <!-- TODO language selection: make this configurable by dialog -->
