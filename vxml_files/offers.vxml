@@ -17,14 +17,18 @@
     </form>
 
      <menu id="language_selection" scope="dialog">
-        <prompt><enumerate>For<value expr="_prompt"/>,press <value expr="_dtmf"/>.</enumerate></prompt>
+        <prompt><enumerate><value expr="_prompt"/><value expr="_dtmf"/></enumerate></prompt>
         <!-- <prompt><enumerate>For<value expr="_prompt"/>, press <value expr="_dtmf"/>.</enumerate></prompt> -->
         <!-- <choice dtmf="1" next="#english">english </choice>
         <choice dtmf="2" next="#french">french </choice>  -->
-        <choice dtmf="1" event="english_selected">english </choice>
-        <choice dtmf="2" event="french_selected"> french <prompt xml:lang="fr-fr">français</prompt> </choice> 
-        <nomatch>Please enter a valid number.<reprompt /></nomatch>
-        <noinput>Please enter a number.<reprompt /></noinput>
+        <choice dtmf="1" event="english_selected">For english select 1.</choice>
+        <choice dtmf="2" event="french_selected">pour le français sélectionnez 2</choice> 
+        <!-- <nomatch>Please enter a valid number. S'il vous plait, entrez un nombre valide<reprompt /></nomatch> -->
+        <nomatch>
+        <audio src="http://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/language.mp3"/>
+        <audio src="http://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings/language.mp3"/>
+        <reprompt /></nomatch>
+        <noinput>Please enter a number. Veuillez entrer un nombre<reprompt /></noinput>
     </menu>   
 
     <catch event="english_selected">
@@ -32,8 +36,6 @@
     </catch>
     <catch event="french_selected">
         <prompt xml:lang="fr-fr">Français sélectionné</prompt>
-        <!-- <prompt>French selected.</prompt> -->
-
     </catch>
 
     <!-- TODO language selection: make this configurable by dialog -->
