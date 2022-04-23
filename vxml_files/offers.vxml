@@ -33,7 +33,7 @@
         <reprompt /></noinput>
     </menu>   
 
-    <var name="lang" expr="'en_recordings" />
+    <var name="lang" expr="'en_recordings'" />
 
     <catch event="english_selected">
         <assign name="lang" expr="'en_recordings'" />
