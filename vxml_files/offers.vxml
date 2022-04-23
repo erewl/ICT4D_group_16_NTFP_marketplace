@@ -7,7 +7,6 @@
         <block>
 
             <prompt>
-            1
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/welcome.mp3" />
                 <break time="500" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings/welcome.mp3" />
@@ -18,10 +17,8 @@
     </form>
 
      <menu id="language_selection" scope="dialog">
-        <!-- <prompt xml:lang="en-gb-emily"><enumerate>For<value expr="_prompt"/>,press <value expr="_dtmf"/>.<break time="1000"></enumerate></prompt> -->
-        <!-- <prompt><enumerate><break time="1000">For<value expr="_prompt"/>,press <value expr="_dtmf"/>.</enumerate></prompt> -->
+        <prompt xml:lang="en-gb-emily"><enumerate>For<value expr="_prompt"/>,press <value expr="_dtmf"/>.<break time="1000"/></enumerate></prompt>
         <prompt><enumerate>For<value expr="_prompt"/>, press <value expr="_dtmf"/>.</enumerate></prompt>
-
         <!-- <choice dtmf="1" next="#english">english </choice>
         <choice dtmf="2" next="#french">french </choice>  -->
         <choice dtmf="1" event="english_selected">english </choice>
