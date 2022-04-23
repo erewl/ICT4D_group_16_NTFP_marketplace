@@ -6,7 +6,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            2
+            3
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/welcome.mp3" />
                 <break time="500" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings/welcome.mp3" />
@@ -22,7 +22,7 @@
         <!-- <choice dtmf="1" next="#english">english </choice>
         <choice dtmf="2" next="#french">french </choice>  -->
         <choice dtmf="1" event="english_selected">english </choice>
-        <choice dtmf="2" event="french_selected"><prompt xml:lang="fr-fr">français</prompt> </choice> 
+        <choice dtmf="2" event="french_selected"> french <prompt xml:lang="fr-fr">français</prompt> </choice> 
         <nomatch>Please enter a valid number.<reprompt /></nomatch>
         <noinput>Please enter a number.<reprompt /></noinput>
     </menu>   
