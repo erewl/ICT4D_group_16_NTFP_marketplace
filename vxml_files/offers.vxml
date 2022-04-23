@@ -16,7 +16,6 @@
         </block>
     </form>
 
-    
      <menu id="language_selection" scope="dialog">
         <prompt><enumerate>For<value expr="_prompt"/>,press <value expr="_dtmf"/></enumerate></prompt>
         <!-- <choice dtmf="1" next="#english">english </choice>
