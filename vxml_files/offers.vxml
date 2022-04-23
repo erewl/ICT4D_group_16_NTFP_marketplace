@@ -7,7 +7,6 @@
         <block>
             <prompt>
             8
-            <var name="bb" expr="'/welcome.mp3'" />
                 <!-- <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings' + bb" /> -->
 
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/welcome.mp3" />
