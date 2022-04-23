@@ -8,10 +8,8 @@
     <form id="greeting">
         <block>
             <prompt>
-            12
-                <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings' + '/welcome.mp3'" />
+            13
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + lang + '/welcome.mp3'" />
-                <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/welcome.mp3" />
                 <break time="500" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings/welcome.mp3" />
             </prompt>
@@ -49,15 +47,16 @@
         <goto next="#menu_product" />
     </catch>
 
-    <!-- TODO language selection: make this configurable by dialog -->
-    <!-- <var name="lang" expr="'en_recordings'" /> -->
-    <!-- <assign name="lang" expr="'fr_recordings'" /> -->
-
-
     <!-- entering products to sell, main menu -->
     <menu id="menu_product" scope="dialog">
+        <if cond="lang == 'fr_recordings'"> 
+            <prompt xml:lang="fr-fr">Menu Français</prompt>
+        <elseif cond="lang == 'en_recordings'"/>
+            <prompt>English menu</prompt>
+        </if>
+
+
         <prompt>
-            <value expr="lang" />
             <audio src="http://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/product_question.mp3"/>
         </prompt>
         <prompt>
