@@ -21,11 +21,18 @@
         <prompt><enumerate>For<value expr="_prompt"/>,press <value expr="_dtmf"/></enumerate></prompt>
         <!-- <choice dtmf="1" next="#english">english </choice>
         <choice dtmf="2" next="#french">french </choice>  -->
-        <choice dtmf="1">english </choice>
-        <choice dtmf="2">french </choice> 
+        <choice dtmf="1" event="english_selected">english </choice>
+        <choice dtmf="2" event="french_selected">french </choice> 
         <nomatch>Please enter a valid number.<reprompt /></nomatch>
         <noinput>Please enter a number.<reprompt /></noinput>
     </menu>   
+
+    <catch event="english_selected">
+        <prompt>English selected.</prompt>
+    </catch>
+    <catch event="french_selected">
+        <prompt>French selected.</prompt>
+    </catch>
 
     <!-- TODO language selection: make this configurable by dialog -->
     <var name="lang" expr="'en_recordings'" />
