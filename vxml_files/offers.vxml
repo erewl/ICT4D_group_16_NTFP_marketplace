@@ -31,7 +31,9 @@
         <prompt>English selected.</prompt>
     </catch>
     <catch event="french_selected">
-        <prompt xml:lang="fr-fr">Français sélectionné</prompt>
+        <!-- <prompt xml:lang="fr-fr">Français sélectionné</prompt> -->
+        <prompt>Français sélectionné</prompt>
+
     </catch>
 
     <!-- TODO language selection: make this configurable by dialog -->
