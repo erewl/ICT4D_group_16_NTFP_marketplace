@@ -17,7 +17,15 @@
     </form>
 
     
-        
+     <menu id="lang_selection" scope="dialog">
+        <prompt><enumerate>For<value expr="_prompt"/>,press <value expr="_dtmf"/></enumerate></prompt>
+        <!-- <choice dtmf="1" next="#english">english </choice>
+        <choice dtmf="2" next="#french">french </choice>  -->
+        <choice dtmf="1">english </choice>
+        <choice dtmf="2">french </choice> 
+        <nomatch>Please enter a valid number.<reprompt /></nomatch>
+        <noinput>Please enter a number.<reprompt /></noinput>
+    </menu>   
 
     <!-- TODO language selection: make this configurable by dialog -->
     <var name="lang" expr="'en_recordings'" />
