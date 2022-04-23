@@ -33,8 +33,8 @@
         <prompt>English selected.</prompt>
     </catch>
     <catch event="french_selected">
-        <!-- <prompt xml:lang="fr-fr">Français sélectionné</prompt> -->
-        <prompt>French selected.</prompt>
+        <prompt xml:lang="fr-fr">Français sélectionné</prompt>
+        <!-- <prompt>French selected.</prompt> -->
 
     </catch>
 
