@@ -27,7 +27,7 @@
     </menu>
         
 
-    TODO language selection: make this configurable by dialog
+    <!-- TODO language selection: make this configurable by dialog -->
     <var name="lang" expr="'en_recordings'" />
     <!-- <assign name="lang" expr="'fr_recordings'" /> -->
 
