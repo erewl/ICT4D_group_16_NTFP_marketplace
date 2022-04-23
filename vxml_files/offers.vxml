@@ -17,7 +17,7 @@
     </form>
 
      <menu id="language_selection" scope="dialog">
-        <prompt xml:lang="en-gb"><enumerate>For<value expr="_prompt"/>,press <value expr="_dtmf"/>.<break time="1000"/></enumerate></prompt>
+        <prompt><enumerate>For<value expr="_prompt"/>,press <value expr="_dtmf"/>.</enumerate></prompt>
         <!-- <prompt><enumerate>For<value expr="_prompt"/>, press <value expr="_dtmf"/>.</enumerate></prompt> -->
         <!-- <choice dtmf="1" next="#english">english </choice>
         <choice dtmf="2" next="#french">french </choice>  -->
