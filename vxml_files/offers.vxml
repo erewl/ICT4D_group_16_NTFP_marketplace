@@ -12,12 +12,12 @@
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings/welcome.mp3" />
             </prompt>
             <!-- <goto next="#menu_product" /> -->
-            <goto next="#lang_selection" />
+            <goto next="#language_selection" />
         </block>
     </form>
 
     
-     <menu id="lang_selection" scope="dialog">
+     <menu id="language_selection" scope="dialog">
         <prompt><enumerate>For<value expr="_prompt"/>,press <value expr="_dtmf"/></enumerate></prompt>
         <!-- <choice dtmf="1" next="#english">english </choice>
         <choice dtmf="2" next="#french">french </choice>  -->
