@@ -7,7 +7,8 @@
         <block>
             <prompt>
             5
-                <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/welcome.mp3" />
+                <assign name="lang" expr="'fr_recordings'" />
+                <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/" + "en_recordings" + "/welcome.mp3" />
                 <break time="500" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings/welcome.mp3" />
             </prompt>
@@ -50,8 +51,6 @@
 
     <!-- entering products to sell, main menu -->
     <menu id="menu_product" scope="dialog">
-    Welcome to the <var name="lang"/> menu type
-
         <prompt>
             <value expr="lang" />
             <audio src="http://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/product_question.mp3"/>
