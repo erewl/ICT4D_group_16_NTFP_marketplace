@@ -6,7 +6,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            3
+            5
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/welcome.mp3" />
                 <break time="500" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings/welcome.mp3" />
@@ -17,35 +17,40 @@
     </form>
 
      <menu id="language_selection" scope="dialog">
-        <prompt><enumerate><value expr="_prompt"/><value expr="_dtmf"/></enumerate></prompt>
-        <!-- <prompt><enumerate>For<value expr="_prompt"/>, press <value expr="_dtmf"/>.</enumerate></prompt> -->
-        <!-- <choice dtmf="1" next="#english">english </choice>
-        <choice dtmf="2" next="#french">french </choice>  -->
+        <prompt><enumerate><value expr="_prompt"/></enumerate></prompt>
         <choice dtmf="1" event="english_selected">For english select 1.</choice>
-        <choice dtmf="2" event="french_selected">pour le français sélectionnez 2</choice> 
-        <!-- <nomatch>Please enter a valid number. S'il vous plait, entrez un nombre valide<reprompt /></nomatch> -->
+        <choice dtmf="2" event="french_selected">
+        <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings/lang_select.mp3" />
+        </choice> 
         <nomatch>
-        <audio src="http://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/language.mp3"/>
-        <audio src="http://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings/language.mp3"/>
+        <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/product_wronginput.mp3" />
+        <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings/lang_wronginput.mp3" />
         <reprompt /></nomatch>
-        <noinput>Please enter a number. Veuillez entrer un nombre<reprompt /></noinput>
+        <noinput>
+        <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/product_noinput.mp3" />
+        <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings/product_noinput.mp3" />
+        <reprompt /></noinput>
     </menu>   
 
     <catch event="english_selected">
+        <assign name="lang" expr="'en_recordings'" />
         <prompt>English selected.</prompt>
+        <goto next="#menu_product" />
     </catch>
     <catch event="french_selected">
+        <assign name="lang" expr="'fr_recordings'" />
         <prompt xml:lang="fr-fr">Français sélectionné</prompt>
+        <goto next="#menu_product" />
     </catch>
 
     <!-- TODO language selection: make this configurable by dialog -->
-    <var name="lang" expr="'en_recordings'" />
+    <!-- <var name="lang" expr="'en_recordings'" /> -->
     <!-- <assign name="lang" expr="'fr_recordings'" /> -->
 
 
     <!-- entering products to sell, main menu -->
     <menu id="menu_product" scope="dialog">
-        <var name="lang" expr="'en_recordings/'" />
+    Welcome to the <var name="lang"/> menu type
 
         <prompt>
             <value expr="lang" />
