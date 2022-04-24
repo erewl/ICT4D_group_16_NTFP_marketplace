@@ -1,0 +1,16 @@
+click==8.0.4
+distlib==0.3.4
+filelock==3.4.2
+importlib-metadata==4.10.0
+joblib==1.1.0
+networkx==2.6.3
+nltk==3.7
+numpy==1.21.5
+pdftotext==2.2.2
+platformdirs==2.4.1
+regex==2022.1.18
+six==1.16.0
+tqdm==4.62.3
+typing-extensions==4.0.1
+virtualenv==20.13.0
+zipp==3.7.0
