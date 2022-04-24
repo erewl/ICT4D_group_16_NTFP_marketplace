@@ -16,6 +16,7 @@ class Offers(Base):
     product_name = Column(String(50), nullable=False)
     price = Column(Integer, nullable=False)
     quantity = Column(Integer, nullable=False)
+    unit = Column(String(50), nullable=False)
 
 class Bids(Base):
     __tablename__ = 'bids'

@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS  "users" (
    seller_id serial NOT NULL,
    product_name VARCHAR ( 50 ) NOT NULL,
    price INT NOT NULL,
+   unit VARCHAR ( 50 ) NOT NULL,
    quantity INT NOT NULL, 
       CONSTRAINT fk_seller
       FOREIGN KEY(seller_id) 
@@ -30,4 +31,3 @@ CREATE TABLE IF NOT EXISTS  "users" (
       FOREIGN KEY(buyer_id) 
 	    REFERENCES "users" (user_id)
 );
- 

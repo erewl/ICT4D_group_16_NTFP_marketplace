@@ -6,7 +6,7 @@ from site import USER_BASE
 from flask import Flask, request, render_template, jsonify, Response
 from sqlalchemy import create_engine, text, insert
 
-from postgresql.schemas import Offers, Users, Bids
+#from postgresql.schemas import Offers, Users, Bids
 
 # TODO export to DatabaseConfig class or so
 USER = os.getenv('DB_USER')
@@ -56,13 +56,14 @@ def get_offers():
     offersQuery = engine.execute(query)
     offers = []
     for result in offersQuery:
-        (id, user_id, product, quantity, price) = result
+        (id, user_id, product, quantity, price, unit) = result
         offers.append({
             'id': id,
             'user_id': user_id,
             'product': product,
             'quantity': quantity,
-            'price': price
+            'price': price,
+            'unit': unit
         })
     return jsonify({'data': offers})
 

@@ -25,6 +25,7 @@ function App() {
           <tr>
             <th>Product</th>
             <th>Quanity</th>
+            <th>Unit</th>
             <th>Price</th>
           </tr>
         </thead>
@@ -33,7 +34,8 @@ function App() {
             return <tr>
               <td>{offer.product}</td>
               {/* TODO add quantity unit in table */}
-              <td>{offer.quantity} kg</td>
+              <td>{offer.quantity}</td>
+              <td>{offer.unit}</td>
               <td>{offer.price}</td>
               <td>
                 <button onClick={() => console.log("TODO Edit")}>Edit</button>
