@@ -6,6 +6,8 @@ from site import USER_BASE
 from flask import Flask, request, render_template, jsonify, Response
 from sqlalchemy import create_engine, text, insert
 
+
+# TODO export to DatabaseConfig class or so
 USER = os.getenv('DB_USER')
 PWD = os.getenv('DB_PWD')
 DATABASE = os.getenv('DATABASE')
@@ -13,14 +15,6 @@ HOST = os.getenv('HOST')
 
 engine = create_engine(f'postgresql+psycopg2://{USER}:{PWD}@{HOST}/{DATABASE}')
 conn = engine.connect()
-
-query = text("SELECT * FROM users")
-results = engine.execute(query)
-  
-# View the records
-for record in results:
-    print("\n", record)
-
 
 app = Flask(__name__, static_url_path='/build/')
 # app = Flask(__name__)
@@ -60,8 +54,18 @@ def get_users():
 @app.route('/api/v1/offers', methods=['GET'])
 def get_offers():
     query = text("SELECT * FROM offers")
-    offers = engine.execute(query)
-    return render_template('index.html', offers=offers)
+    offersQuery = engine.execute(query)
+    offers = []
+    for result in offersQuery:
+        (id, user_id, product, quantity, price) = result
+        offers.append({
+            'id': id,
+            'user_id': user_id,
+            'product': product,
+            'quantity': quantity,
+            'price': price
+        })
+    return jsonify({'data': offers})
 
 @app.route('/api/v1/bids', methods=['GET'])
 def get_bids():
