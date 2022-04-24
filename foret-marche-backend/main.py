@@ -17,12 +17,8 @@ engine = create_engine(f'postgresql+psycopg2://{USER}:{PWD}@{HOST}/{DATABASE}')
 conn = engine.connect()
 
 app = Flask(__name__, static_url_path='/build/')
-# app = Flask(__name__)
-# CORS(app)
-
 app = Flask(__name__, static_folder="build/static", template_folder="build")
 
-data = [] # TODO replace with database at some point
 
 @app.route("/", methods=['GET'])
 def hello():
@@ -49,7 +45,7 @@ def analysis():
 def get_users():
     query = text("SELECT * FROM users")
     users = engine.execute(query)
-    return render_template('index.html', users=users)
+    return {}
 
 @app.route('/api/v1/offers', methods=['GET'])
 def get_offers():
@@ -71,7 +67,7 @@ def get_offers():
 def get_bids():
     query = text("SELECT * FROM bids")
     bids = engine.execute(query)
-    return render_template('index.html', bids=bids)
+    return {}
 
 if __name__ == '__main__':
     if os.environ['ENV'] and os.environ['ENV'] == 'prod':
