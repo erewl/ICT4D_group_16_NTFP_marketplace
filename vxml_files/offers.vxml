@@ -62,7 +62,7 @@
             </if>
         </prompt>
 
-        <var name="total" expr="1001">
+        <var name="total" expr="1001"/>
 
         <if cond="total > 1000"> 
             <prompt>This is way too much to spend.</prompt> 
