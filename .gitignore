@@ -1,3 +1,7 @@
 foret-marche-backend/ict4d/*
 foret-marche-frontend/build/*
 foret-marche-frontend/node_modules/*
+
+**/__pycache__/*
+
+.DS_Store

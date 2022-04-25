@@ -1,10 +1,14 @@
 
    
 import os
+from site import USER_BASE
 
-from flask import Flask, request, render_template, Response
-from sqlalchemy import create_engine, text
+from flask import Flask, request, render_template, jsonify, Response
+from sqlalchemy import create_engine, text, insert
 
+from postgresql.schemas import Offers
+
+# TODO export to DatabaseConfig class or so
 USER = os.getenv('DB_USER')
 PWD = os.getenv('DB_PWD')
 DATABASE = os.getenv('DATABASE')
@@ -13,21 +17,9 @@ HOST = os.getenv('HOST')
 engine = create_engine(f'postgresql+psycopg2://{USER}:{PWD}@{HOST}/{DATABASE}')
 conn = engine.connect()
 
-query = text("SELECT * FROM users")
-results = engine.execute(query)
-  
-# View the records
-for record in results:
-    print("\n", record)
-
-
 app = Flask(__name__, static_url_path='/build/')
-# app = Flask(__name__)
-# CORS(app)
-
 app = Flask(__name__, static_folder="build/static", template_folder="build")
 
-data = [] # TODO replace with database at some point
 
 @app.route("/", methods=['GET'])
 def hello():
@@ -36,11 +28,18 @@ def hello():
 @app.route('/api/v1/offers', methods=['POST'])
 def analysis():
     body = request.form
-    print("Args: ", request.args)
-    print("Data: ", request.data)
-    print("Form: ", request.form)
-    print("Json: ", request.json)
-    print("Values: ", request.values)
+    entry = dict(body)
+    print("Form: ", entry)
+
+    insertStatement = Offers.insert().values(
+        # offer_id = entry.,
+        seller_id = 1,
+        product_name = entry['product'],
+        price = entry['price'],
+        quantity = entry['quantity'],
+        unit = entry['units'])
+    result = conn.execute(insertStatement)
+    print(result)
 
     xmlResponse = """<?xml version="1.0"?>
         <response>
@@ -49,6 +48,35 @@ def analysis():
         </response>"""
 
     return Response(xmlResponse, mimetype='application/xml')
+
+@app.route('/api/v1/users', methods=['GET'])
+def get_users():
+    query = text("SELECT * FROM users")
+    users = engine.execute(query)
+    return {}
+
+@app.route('/api/v1/offers', methods=['GET'])
+def get_offers():
+    query = text("SELECT * FROM offers")
+    offersQuery = engine.execute(query)
+    offers = []
+    for result in offersQuery:
+        (id, user_id, product, quantity, price, unit) = result
+        offers.append({
+            'id': id,
+            'user_id': user_id,
+            'product': product,
+            'quantity': quantity,
+            'price': price,
+            'unit': unit
+        })
+    return jsonify({'data': offers})
+
+@app.route('/api/v1/bids', methods=['GET'])
+def get_bids():
+    query = text("SELECT * FROM bids")
+    bids = engine.execute(query)
+    return {}
 
 if __name__ == '__main__':
     if os.environ['ENV'] and os.environ['ENV'] == 'prod':
