@@ -8,7 +8,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            14
+            15
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + lang + '/welcome.mp3'" />
                 <break time="500" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings/welcome.mp3" />
@@ -57,6 +57,7 @@
 
 
         <prompt>
+            <audio src="'http://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + lang + '/product_question.mp3'"
             <audio src="http://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/product_question.mp3"/>
         </prompt>
         <prompt>
