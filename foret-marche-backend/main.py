@@ -4,9 +4,11 @@ import os
 from site import USER_BASE
 
 from flask import Flask, request, render_template, jsonify, Response
-from sqlalchemy import create_engine, text, insert
+from sqlalchemy import create_engine, text, select, join
+from sqlalchemy.orm import Session
+from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 
-from postgresql.schemas import Offers
+from postgresql.schemas import Offers, Users
 
 # TODO export to DatabaseConfig class or so
 USER = os.getenv('DB_USER')
@@ -16,6 +18,7 @@ HOST = os.getenv('HOST')
 
 engine = create_engine(f'postgresql+psycopg2://{USER}:{PWD}@{HOST}/{DATABASE}')
 conn = engine.connect()
+# session = Session(engine)
 
 app = Flask(__name__, static_url_path='/build/')
 app = Flask(__name__, static_folder="build/static", template_folder="build")
@@ -26,20 +29,37 @@ def hello():
     return render_template('index.html')
 
 @app.route('/api/v1/offers', methods=['POST'])
-def analysis():
+def post_offers():
     body = request.form
     entry = dict(body)
-    print("Form: ", entry)
 
-    insertStatement = Offers.insert().values(
-        # offer_id = entry.,
-        seller_id = 1,
-        product_name = entry['product'],
-        price = entry['price'],
-        quantity = entry['quantity'],
-        unit = entry['units'])
-    result = conn.execute(insertStatement)
-    print(result)
+    with Session(engine) as session:
+        callerId = entry['callerId']
+        userId = 1 # base init
+        findUserByPhoneNumber = select(Users).where(Users.phone_number == callerId)
+        try:
+            userResult = session.scalars(findUserByPhoneNumber).one()
+            userId = userResult.user_id
+            print('Found user under id: ', userId, " in the database")
+        except NoResultFound:
+            print('Adding new user to the database')
+            newUser = Users(
+                phone_number = callerId
+            )
+            session.add(newUser)
+            session.commit()
+            userId = newUser.user_id
+
+        newOffer = Offers(
+            seller_id = userId,
+            product_name = entry['product'],
+            price = entry['price'],
+            quantity = entry['quantity'],
+            unit = entry['units']
+        )
+
+        session.add(newOffer)
+        session.commit()
 
     xmlResponse = """<?xml version="1.0"?>
         <response>
@@ -51,25 +71,25 @@ def analysis():
 
 @app.route('/api/v1/users', methods=['GET'])
 def get_users():
-    query = text("SELECT * FROM users")
-    users = engine.execute(query)
+    with Session(engine) as session:
+        query = text("SELECT * FROM users")
+        users = engine.execute(query)
     return {}
 
 @app.route('/api/v1/offers', methods=['GET'])
 def get_offers():
-    query = text("SELECT * FROM offers")
-    offersQuery = engine.execute(query)
     offers = []
-    for result in offersQuery:
-        (id, user_id, product, quantity, price, unit) = result
-        offers.append({
-            'id': id,
-            'user_id': user_id,
-            'product': product,
-            'quantity': quantity,
-            'price': price,
-            'unit': unit
-        })
+    with Session(engine) as session:
+        allOffers = session.query(Offers, Users).join(Users, Offers.seller_id == Users.user_id).all()
+        for offerResult, userResult in allOffers:
+            offers.append({
+                'id': offerResult.offer_id,
+                'sellerNumber': userResult.phone_number,
+                'product': offerResult.product_name,
+                'quantity': offerResult.quantity,
+                'price': offerResult.price,
+                'unit': offerResult.unit,
+            })
     return jsonify({'data': offers})
 
 @app.route('/api/v1/bids', methods=['GET'])
@@ -80,7 +100,7 @@ def get_bids():
 
 if __name__ == '__main__':
     if os.environ['ENV'] and os.environ['ENV'] == 'prod':
-        app.run()
+        app.run(debug=True)
     else:
         host = "localhost"
         port = 8082
