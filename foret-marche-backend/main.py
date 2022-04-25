@@ -6,7 +6,7 @@ from site import USER_BASE
 from flask import Flask, request, render_template, jsonify, Response
 from sqlalchemy import create_engine, text, insert
 
-#from postgresql.schemas import Offers, Users, Bids
+from postgresql.schemas import Offers
 
 # TODO export to DatabaseConfig class or so
 USER = os.getenv('DB_USER')
@@ -28,13 +28,18 @@ def hello():
 @app.route('/api/v1/offers', methods=['POST'])
 def analysis():
     body = request.form
-
     entry = dict(body)
     print("Form: ", entry)
 
-    # statement4 = Offers().insert().values(book_price=100,
-    #                                genre='non-fiction', 
-    #                                book_name='History of the world')
+    insertStatement = Offers.insert().values(
+        # offer_id = entry.,
+        seller_id = 1,
+        product_name = entry['product'],
+        price = entry['price'],
+        quantity = entry['quantity'],
+        unit = entry['units'])
+    result = conn.execute(insertStatement)
+    print(result)
 
     xmlResponse = """<?xml version="1.0"?>
         <response>
