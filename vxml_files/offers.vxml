@@ -9,7 +9,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            27
+            28
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/welcome.mp3'" />
                 <break time="500" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings/welcome.mp3" />
@@ -62,9 +62,14 @@
             </if>
         </prompt>
 
-        <if cond="1 == 1">
-            <prompt>one is one</prompt>
-        </if>
+        <var name="total" expr="1000">
+
+        <if cond="total > 1000"> 
+            <prompt>This is way too much to spend.</prompt> 
+            <throw event="com.xyzcorp.acct.toomuchspent"/> 
+        <else/>
+            <prompt>In the else</prompt>
+        </if> 
 
         <prompt>
             <!-- <audio src="'http://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + lang + '/product_question.mp3'" /> -->
