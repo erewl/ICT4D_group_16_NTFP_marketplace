@@ -40,35 +40,38 @@
     <catch event="english_selected">
         <assign name="language" expr="'en_recordings'" />
         <prompt>English selected.</prompt>
-        <goto next="#menu_product" />
+        <goto next="#customer_type" />
     </catch>
     <catch event="french_selected">
         <assign name="language" expr="'fr_recordings'" />
         <prompt xml:lang="fr-fr">Français sélectionné</prompt>
-        <goto next="#menu_product" />
+        <goto next="#customer_type" />
+    </catch>
+
+    <menu id="customer_type" scope="dialog">
+        <prompt> Do you want to buy or sell a product?</prompt>
+
+        <prompt><enumerate><value expr="_prompt"/></enumerate></prompt>
+        <choice dtmf="1" event="buy_selected">To buy a product, select 1.</choice>
+        <choice dtmf="2" event="sell_selected">To sell a product, select 2.</choice>
+        <nomatch>
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/product_wronginput.mp3'" />
+        <reprompt /></nomatch>
+        <noinput>
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language '/product_noinput.mp3'" />
+        <reprompt /></noinput>
+    </menu>
+
+    <catch event="buy_selected">
+        <prompt>Buy selected</prompt>
+    </catch>
+    <catch event="sell_selected">
+        <prompt>Sell selected</prompt>
+        <goto next="#sell_menu" />
     </catch>
 
     <!-- entering products to sell, main menu -->
-    <menu id="menu_product" scope="dialog">
-
-    <!-- Testing an if/else statement -->
-        <prompt>
-            <if cond="language == 'en_recordings'">
-                English menu
-            <elseif cond="language == fr_recordings"/>
-                French menu
-            <else />
-                <prompt>Condition not working</prompt>
-            </if>
-        </prompt>
-
-        <var name="total" expr="1001"/>
-
-        <if cond="total > 1000"> 
-            <prompt>This is way too much to spend.</prompt> 
-        <else/>
-            <prompt>In the else</prompt>
-        </if> 
+    <menu id="sell_menu" scope="dialog">
 
         <prompt>
             <!-- <audio src="'http://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + lang + '/product_question.mp3'" /> -->
