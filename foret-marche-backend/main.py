@@ -32,6 +32,7 @@ def hello():
 def post_offers():
     body = request.form
     entry = dict(body)
+    print("Data from form: ", entry)
 
     with Session(engine) as session:
         callerId = entry['callerId']
