@@ -51,9 +51,9 @@
 
     <!-- entering products to sell, main menu -->
     <menu id="menu_product" scope="dialog">
-        <if cond="lang == 'fr_recordings'"> 
+        <if cond="language == 'fr_recordings'"> 
             <prompt xml:lang="fr-fr">Menu Français</prompt>
-        <elseif cond="lang == 'en_recordings'"/>
+        <elseif cond="language == 'en_recordings'"/>
             <prompt>English menu</prompt>
         </if>
 
