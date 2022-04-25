@@ -9,7 +9,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            23
+            24
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/welcome.mp3'" />
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/welcome.mp3'" />
                 <break time="500" />
@@ -51,19 +51,15 @@
 
     <!-- entering products to sell, main menu -->
     <menu id="menu_product" scope="dialog">
-        
-        <!-- <if cond="language == 'fr_recordings'"> 
-            <prompt xml:lang="fr-fr">Menu Français</prompt>
-        <elseif cond="language == 'en_recordings'"/>
-            <prompt>English menu</prompt>
-        </if> -->
 
-
+    <!-- Testing an if/else statement -->
+    <filled>
         <if cond="language == 'en_recordings'">
-            Hello english
+            <prompt>English menu</prompt>
         <elseif cond="language == fr_recordings"/>
             <prompt xml:lang="fr-fr">Menu Français</prompt>
         </if>
+    </filled>
 
 
         <prompt>
