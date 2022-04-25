@@ -9,7 +9,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            21
+            22
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/welcome.mp3'" />
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/welcome.mp3'" />
                 <break time="500" />
@@ -52,10 +52,17 @@
     <!-- entering products to sell, main menu -->
     <menu id="menu_product" scope="dialog">
         
-        <if cond="language == 'fr_recordings'"> 
+        <!-- <if cond="language == 'fr_recordings'"> 
             <prompt xml:lang="fr-fr">Menu Français</prompt>
         <elseif cond="language == 'en_recordings'"/>
             <prompt>English menu</prompt>
+        </if> -->
+
+
+        <if cond="language == 'en_recordings'">
+            Hello english
+        <elseif cond="language == fr_recordings"/>
+            <prompt xml:lang="fr-fr">Menu Français</prompt>
         </if>
 
 
@@ -85,13 +92,12 @@
         </choice>
 
         <noinput>
-            <!-- <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/product_noinput.mp3" /> -->
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/product_noinput.mp3'" />
             <reprompt />
         </noinput>
 
         <nomatch>
-            <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/product_wronginput.mp3" />
+            <audio src="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/product_wronginput.mp3'" />
             <reprompt />
         </nomatch>
     </menu>
