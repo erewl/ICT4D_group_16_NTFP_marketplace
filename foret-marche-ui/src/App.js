@@ -27,6 +27,7 @@ function App() {
             <th>Quanity</th>
             <th>Unit</th>
             <th>Price</th>
+            <th>Phone Number</th>
           </tr>
         </thead>
         <tbody>
@@ -37,6 +38,7 @@ function App() {
               <td>{offer.quantity}</td>
               <td>{offer.unit}</td>
               <td>{offer.price}</td>
+              <td>{offer.sellerNumber}</td>
               <td>
                 <button onClick={() => console.log("TODO Edit")}>Edit</button>
                 <button onClick={() => console.log("TODO Remove")}>Remove</button>
