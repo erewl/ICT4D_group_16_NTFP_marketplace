@@ -3,14 +3,15 @@
 
     <property name="inputmodes" value="dtmf" />
 
-    <var name="lang" expr="'en_recordings'" />
+    <var name="language" expr="'en_recordings'" />
+    <assign name="language" expr="'en_recordings'" />
 
     <form id="greeting">
         <block>
             <prompt>
-            19
+            20
                 <!-- <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + lang + '/welcome.mp3'" /> -->
-                <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + 'en_recordings' + '/welcome.mp3'" />
+                <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/welcome.mp3'" />
                 <break time="500" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings/welcome.mp3" />
             </prompt>
