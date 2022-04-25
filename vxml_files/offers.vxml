@@ -9,8 +9,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            26
-                <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/welcome.mp3'" />
+            27
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/welcome.mp3'" />
                 <break time="500" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings/welcome.mp3" />
@@ -59,9 +58,13 @@
             <elseif cond="language == fr_recordings"/>
                 French menu
             <else />
-                <prompt>Condition not working </prompt>
+                <prompt>Condition not working</prompt>
             </if>
         </prompt>
+
+        <if cond="1 == 1">
+            <prompt>one is one</prompt>
+        </if>
 
         <prompt>
             <!-- <audio src="'http://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + lang + '/product_question.mp3'" /> -->
