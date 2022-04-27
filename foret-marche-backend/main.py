@@ -7,6 +7,7 @@ from flask import Flask, request, render_template, jsonify, Response
 from sqlalchemy import create_engine, text, select, join
 from sqlalchemy.orm import Session
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
+from flask_cors import CORS
 
 from postgresql.schemas import Offers, Users
 
@@ -20,8 +21,11 @@ engine = create_engine(f'postgresql+psycopg2://{USER}:{PWD}@{HOST}/{DATABASE}')
 conn = engine.connect()
 # session = Session(engine)
 
-app = Flask(__name__, static_url_path='/build/')
-app = Flask(__name__, static_folder="build/static", template_folder="build")
+#TODO Remove if needed
+#app = Flask(__name__, static_url_path='/build/')
+#app = Flask(__name__, static_folder="build/static", template_folder="build")
+app = Flask(__name__)
+CORS(app)
 
 
 @app.route("/", methods=['GET'])
