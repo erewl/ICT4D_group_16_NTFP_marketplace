@@ -74,5 +74,5 @@ We only want to deploy one folder (where the application is fully bootstrapped) 
 ```
 git checkout main
 git pull origin main
-git subtree push --no-verify --prefix prototype/backend heroku deployment:main
+git subtree push --prefix foret-marche-backend/ heroku main
 ```
