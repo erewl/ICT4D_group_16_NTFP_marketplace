@@ -106,6 +106,7 @@
         <assign name="product" expr="_message" />
         <prompt>
         Selected
+        <var name="product"/>
         <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/' + product + '.mp3'" />
         </prompt>
         <!-- <goto next="#list_offers" /> -->
