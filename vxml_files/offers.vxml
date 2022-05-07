@@ -2,16 +2,16 @@
 <vxml version="2.1" application="http://webhosting.voxeo.net/170418/www/root.vxml">
     
     <script>
-        var movies = new Array(3);
-        movies[0] = new Object();
-        movies[0].audio = "godfather.wav";
-        movies[0].tts = "the godfather";
-        movies[1] = new Object();
-        movies[1].audio = "high_fidelity.wav";
-        movies[1].tts = "high fidelity";
-        movies[2] = new Object();
-        movies[2].audio = "raiders.wav";
-        movies[2].tts = "raiders of the lost ark";
+        var offers = new Array(3);
+        offers[0] = new Object();
+        offers[0].product = "'product_sheabutter'";
+        offers[0].offer = "5 liter for 100 franc"
+        offers[1] = new Object();
+        offers[1].product = "'product_honey'";
+        offers[0].offer = "1 kg for 10 franc"
+        offers[2] = new Object();
+        offers[2].product = "'product_oils'";
+        offers[0].offer = "2 kg for 200 franc"
     </script>
 
     <property name="inputmodes" value="dtmf" />
@@ -23,7 +23,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            38
+            39
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/welcome.mp3'" />
                 <break time="500" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings/welcome.mp3" />
@@ -144,10 +144,10 @@
     <form id="list_offers">
         <field name="offer">
             <prompt>
-                <foreach item="thePrompt" array="movies">
-                    <audio expr="thePrompt.audio">
-                        <value expr="thePrompt.tts"/>
-                    </audio>
+                <foreach item="offer" array="offers">
+                    <if cond="product == offer.product">
+                        <value expr="offer.offer"/>
+                    </if>
                     <break time="300ms"/>
                 </foreach>
             </prompt>
