@@ -10,7 +10,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            30
+            31
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/welcome.mp3'" />
                 <break time="500" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings/welcome.mp3" />
@@ -66,6 +66,7 @@
     <catch event="buy_selected">
         <prompt>Buy selected</prompt>
         <prompt xml:lang="fr-fr">Acheter sélectionné</prompt>
+        <goto next="#buy_menu" />
     </catch>
     <catch event="sell_selected">
         <prompt>Sell selected</prompt>
