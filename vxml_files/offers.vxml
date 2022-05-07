@@ -65,12 +65,12 @@
 
     <catch event="buy_selected">
         <prompt>Buy selected</prompt>
-        <prompt xml:lang="fr-fr">Acheter sélectionné</prompt>
+        <!-- <prompt xml:lang="fr-fr">Acheter sélectionné</prompt> -->
         <goto next="#buy_menu" />
     </catch>
     <catch event="sell_selected">
         <prompt>Sell selected</prompt>
-        <prompt xml:lang="fr-fr">Vendre sélectionné</prompt> 
+        <!-- <prompt xml:lang="fr-fr">Vendre sélectionné</prompt>  -->
         <goto next="#sell_menu" />
     </catch>
 
@@ -104,15 +104,19 @@
             <break time="200" />
         </prompt>
         <assign name="product" expr="_message" />
-        <goto next="#list_offers" />
+        <prompt>
+        Selected
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/' + product + '.mp3'" />
+        </prompt>
+        <!-- <goto next="#list_offers" /> -->
     </catch>
 
-    <menu id="list_offers" scope="dialog">
+    <!-- <menu id="list_offers" scope="dialog">
         <prompt>This is the menu to list offers for
         <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/' + product + '.mp3'" />
         </prompt>
 
-    </menu>
+    </menu> -->
 
 
     <!-- entering products to sell, main menu -->
