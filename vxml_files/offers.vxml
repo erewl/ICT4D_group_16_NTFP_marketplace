@@ -4,6 +4,7 @@
     <property name="inputmodes" value="dtmf" />
 
     <var name="language" expr="'en_recordings'" />
+    <var name="product" expr="'no product selected'" />
     <assign name="language" expr="'en_recordings'" />
 
     <form id="greeting">
@@ -64,11 +65,54 @@
 
     <catch event="buy_selected">
         <prompt>Buy selected</prompt>
+        <prompt xml:lang="fr-fr">Acheter sélectionné</prompt>
     </catch>
     <catch event="sell_selected">
         <prompt>Sell selected</prompt>
+        <prompt xml:lang="fr-fr">Vendre sélectionné</prompt> 
         <goto next="#sell_menu" />
     </catch>
+
+    <menu id="buy_menu" scope="dialog">
+        <prompt>Which product would you like to buy?</prompt>
+        <prompt xml:lang="fr-fr">Quel produit aimeriez-vous acheter?</prompt> 
+        
+        <prompt>
+                <enumerate>
+                    <break time="1000" />
+                    For
+                    <value expr="_prompt" />
+                    , Press
+                    <value expr="_dtmf" />
+                </enumerate>
+        </prompt>
+
+        <choice event="buy_product_selected" dtmf="1" message="'product_sheabutter'">
+            <audio src="http://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/product_sheabutter.mp3" />
+        </choice>
+        <choice event="buy_product_selected" dtmf="2" message="'product_honey'">
+            <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/product_honey.mp3" />
+        </choice>
+        <choice event="buy_product_selected" dtmf="3" message="'product_oils'">
+            <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/product_oils.mp3" />
+        </choice>
+    </menu>
+
+     <catch event="buy_product_selected">
+        <prompt>
+            <break time="200" />
+        </prompt>
+        <assign name="product" expr="_message" />
+        <goto next="#list_offers" />
+    </catch>
+
+    <menu id="list_offers" scope="dialog">
+        <prompt>This is the menu to list offers for
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/' + product + '.mp3'" />
+        </prompt>
+
+    </menu>
+
 
     <!-- entering products to sell, main menu -->
     <menu id="sell_menu" scope="dialog">
