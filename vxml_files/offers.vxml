@@ -10,7 +10,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            32
+            33
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/welcome.mp3'" />
                 <break time="500" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings/welcome.mp3" />
@@ -88,13 +88,13 @@
                 </enumerate>
         </prompt>
 
-        <choice event="buy_product_selected" dtmf="1" message="'product_sheabutter'">
+        <choice event="buy_product_selected" dtmf="1" messageexpr="'product_sheabutter'">
             <audio src="http://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/product_sheabutter.mp3" />
         </choice>
-        <choice event="buy_product_selected" dtmf="2" message="'product_honey'">
+        <choice event="buy_product_selected" dtmf="2" messageexpr="'product_honey'">
             <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/product_honey.mp3" />
         </choice>
-        <choice event="buy_product_selected" dtmf="3" message="'product_oils'">
+        <choice event="buy_product_selected" dtmf="3" messageexpr="'product_oils'">
             <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/product_oils.mp3" />
         </choice>
     </menu>
