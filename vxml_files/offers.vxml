@@ -10,7 +10,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            34
+            35
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/welcome.mp3'" />
                 <break time="500" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings/welcome.mp3" />
@@ -123,10 +123,15 @@
             </enumerate>
         </prompt>
 
-        <choice>Option 1</choice>
-        <choice>Option 2</choice>
+        <choice event="offer_selected">Option 1</choice>
+        <choice event="offer_selected">Option 2</choice>
     </menu>
 
+    <catch event="offer_selected">
+        <prompt>
+            Selected an option. End.
+        </prompt>
+    </catch>
 
     <!-- entering products to sell, main menu -->
     <menu id="sell_menu" scope="dialog">
