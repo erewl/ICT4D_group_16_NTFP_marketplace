@@ -124,7 +124,7 @@
         <goto next="#list_offers" />
     </catch>
 
-    <menu id="list_offers" dtmf="true">
+    <menu id="list_offers_reserve" dtmf="true">
         <prompt>This is the menu to list offers for
         <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/' + product + '.mp3'" />
         </prompt>
@@ -136,16 +136,23 @@
             </enumerate>
         </prompt>
 
-        <!-- <choice event="offer_selected">Option 1</choice>
-        <choice event="offer_selected">Option 2</choice> -->
-            
-        <foreach item="option_iter" array="movies">
-            <choice event="offer_selected">
-                <value expr="option_iter.tts"/>
-            </choice>
-        <foreach>
+        <choice event="offer_selected">Option 1</choice>
+        <choice event="offer_selected">Option 2</choice>
 
     </menu>
+
+    <form id="list_offers">
+        <field name="offer">
+            <prompt>
+                <foreach item="thePrompt" array="movies">
+                    <audio expr="thePrompt.audio">
+                        <value expr="thePrompt.tts"/>
+                    </audio>
+                    <break time="300ms"/>
+                </foreach>
+            </prompt>
+        </field>
+    </form>
 
     <catch event="offer_selected">
         <prompt>
