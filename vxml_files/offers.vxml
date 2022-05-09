@@ -23,7 +23,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            47
+            48
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/welcome.mp3'" />
                 <break time="500" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings/welcome.mp3" />
@@ -144,7 +144,21 @@
 
     <form id="list_offers">
         <field name="offer">
-        <grammar src="builtin:grammar/boolean"/>
+        <grammar mode="dtmf" version="1.0" root="oneToFiveSequence">
+    <rule id="oneToFiveSequence" scope="public" >
+        <one-of>    
+            <item repeat="0-">      
+                <one-of>                
+                    <item>1</item>          
+                    <item>2</item>          
+                    <item>3</item>          
+                    <item>4</item>          
+                    <item>5</item>          
+                </one-of>               
+            </item>                 
+        </one-of>   
+    </rule>
+</grammar>
             <prompt>
                 <foreach item="offer" array="offers">
                 <!-- var product should be: 'product_sheabutter' and offer.product is the var in the array -->
