@@ -169,7 +169,9 @@
                     <break time="300ms"/>
                 </foreach>
             </prompt>
-
+        <filled>          
+        <prompt> You entered <value expr="offer"/></prompt>
+      </filled>     
         </field>
     </form>
 
