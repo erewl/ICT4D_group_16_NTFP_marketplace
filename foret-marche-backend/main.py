@@ -4,10 +4,10 @@ import os
 from site import USER_BASE
 
 from flask import Flask, request, render_template, jsonify, Response
-from sqlalchemy import create_engine, text, select, join
+from sqlalchemy import create_engine, text, select, join, update
 from sqlalchemy.orm import Session
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
-
+from flask_cors import CORS
 from postgresql.schemas import Offers, Users
 
 # TODO export to DatabaseConfig class or so
@@ -20,13 +20,17 @@ engine = create_engine(f'postgresql+psycopg2://{USER}:{PWD}@{HOST}/{DATABASE}')
 conn = engine.connect()
 # session = Session(engine)
 
-app = Flask(__name__, static_url_path='/build/')
-app = Flask(__name__, static_folder="build/static", template_folder="build")
 
+if os.environ['ENV'] and os.environ['ENV'] == 'prod':
+    app = Flask(__name__, static_url_path='/build/')
+    app = Flask(__name__, static_folder="build/static", template_folder="build")
 
-@app.route("/", methods=['GET'])
-def hello():
-    return render_template('index.html')
+    @app.route("/", methods=['GET'])
+    def hello():
+        return render_template('index.html')
+else: 
+    app = Flask(__name__)
+    CORS(app)
 
 @app.route('/api/v1/offers', methods=['POST'])
 def post_offers():
@@ -77,10 +81,30 @@ def get_users():
         users = engine.execute(query)
     return {}
 
+@app.route('/api/v1/offers/<offerId>', methods=['PUT'])
+def update_offer(offerId):
+    with Session(engine) as session:
+        offer = request.json
+        stmt = update(Offers).where(Offers.offer_id == offerId)
+        if(offer['unit']):
+            stmt = stmt.values(unit= offer['unit'])
+        if(offer['price']):
+            stmt = stmt.values(price= offer['price'])
+        if(offer['quantity']):
+            stmt = stmt.values(quantity= offer['quantity'])
+
+        result = session.execute(
+            stmt.execution_options(synchronize_session="fetch")
+        )
+        print(result.rowcount)
+        session.commit()
+        session.flush()
+        return {'message': "Successful update!"}
+
 @app.route('/api/v1/offers', methods=['GET'])
 def get_offers():
-    offers = []
     with Session(engine) as session:
+        offers = []
         allOffers = session.query(Offers, Users).join(Users, Offers.seller_id == Users.user_id).all()
         for offerResult, userResult in allOffers:
             offers.append({
@@ -104,7 +128,7 @@ if __name__ == '__main__':
         app.run(debug=True)
     else:
         host = "localhost"
-        port = 8082
+        port = 5000
         debug = True
         options = {}
         app.run(host, port, debug, options)

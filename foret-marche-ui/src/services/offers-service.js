@@ -8,6 +8,12 @@ class OffersService {
             setResponse(response.data.data)
         });
     }
+
+    updateData = (offer) => {
+        return http.put(`/api/v1/offers/${offer.id}`, offer).then(response => {
+            console.log(response.data)
+        })
+    }
 }
 
 export default new OffersService();
