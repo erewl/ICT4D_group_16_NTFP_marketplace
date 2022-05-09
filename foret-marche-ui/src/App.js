@@ -12,7 +12,7 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Logo from './img/logo_white.png';
-
+import { BrowserRouter as Router,  Switch,  Route,  Link} from "react-router-dom";
 import OffersService from './services/offers-service';
 import { TextField } from '@mui/material';
 
@@ -44,8 +44,8 @@ function App() {
 
   const determineEditButton = (offer) => {
     if (offer && !offer.editing) return <div>
-      <Button sx={{ mr: 2, }} color="success" onClick={() => console.log("TODO BUY")} variant="outlined" > Buy</Button >
-      <Button sx={{ mr: 2, }} color="success" onClick={() => toggleEditState(offer)} variant="outlined">Edit</Button>
+      <Button sx={{ mr: 2 }} color="success" onClick={() => console.log("TODO BUY")} variant="outlined" > Buy</Button >
+      <Button sx={{ mr: 2 }} color="success" onClick={() => toggleEditState(offer)} variant="outlined">Edit</Button>
     </div>
     else
       return <div>
@@ -89,19 +89,27 @@ function App() {
 
   return (
     <div className="App">
-      <Box sx={{ flexGrow: 1, pb: 3 }} >
-        <AppBar position="static" color="success">
-          <Toolbar sx={{ align: "left" }}>
-            <Box
-              component="img"
-              sx={{ height: 50, pr: 1, cursor: "pointer" }}
-              alt="Your logo."
-              src={Logo}
-            />
-            <Typography variant="h3" component="div" align="left" sx={{ flexGrow: 1, fontFamily: 'Monospace', fontSize: 40, cursor: "pointer" }}>
-              Forêt Marché
-            </Typography>
-            <Button color="inherit" sx={{ fontFamily: 'Monospace', fontSize: 20 }} >Login</Button>
+      <Router>
+      <Box sx={{ pb:3 }} >
+        <AppBar position="static" color = "success">
+          <Toolbar>
+            <Box sx={{ display: "flex", justifyContent: "space-between" , width: 1 }}>
+              <Link to="/" style={{textDecoration: 'none'}}>
+                <Box sx={{display: "inline-flex", flexDirection: "row", cursor:"pointer"}}>
+                  <Box
+                    component="img"
+                    sx={{height: 50, pr: 1}}
+                    src={Logo}
+                  />
+                  <Typography variant="h3" component="div" sx={{ fontFamily: 'Monospace', fontSize: 40, color:'white'}}>
+                    Forêt Marché
+                  </Typography>
+                </Box>
+             </Link>
+              <Button color="inherit" sx={{ fontFamily: 'Monospace', fontSize: 20 }} >
+                Login
+              </Button>
+            </Box>
           </Toolbar>
         </AppBar>
       </Box>
@@ -110,7 +118,7 @@ function App() {
       </Box>
       <div style={{ width: '100%' }}>
         <TableContainer align="center">
-          <Table style={{ width: 800 }} stickyHeader>
+          <Table style={{ width: 1000 }} stickyHeader>
             <TableHead>
               {state.offers && columns.map((column) => (
                 <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {column} </Typography></TableCell>
@@ -124,7 +132,7 @@ function App() {
                   <TableCell> {renderEditableCell(offer, 'unit')} </TableCell>
                   <TableCell> {renderEditableCell(offer, 'price')} </TableCell>
                   <TableCell> {renderCell(offer, 'sellerNumber')} </TableCell>
-                  <TableCell>
+                  <TableCell style={{width: 200}}>
                     {determineEditButton(offer)}
                   </TableCell>
                 </TableRow>
@@ -133,6 +141,7 @@ function App() {
           </Table>
         </TableContainer>
       </div>
+      </Router>
     </div>
   );
 }
