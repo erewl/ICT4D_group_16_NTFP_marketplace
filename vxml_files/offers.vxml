@@ -23,7 +23,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            44
+            45
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/welcome.mp3'" />
                 <break time="500" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings/welcome.mp3" />
@@ -141,6 +141,29 @@
 
     </menu> -->
 
+
+    <menu id="list_offers" dtmf="true">
+        <prompt>This is the menu to list offers for
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/' + product + '.mp3'" />
+        </prompt>
+
+        <prompt>
+            <enumerate> For
+                <value expr="_prompt"/>, press
+                <value expr="_dtmf"/>.
+            </enumerate>
+        </prompt>
+
+        <!-- <choice event="offer_selected">Option 1</choice>
+        <choice event="offer_selected">Option 2</choice> -->
+        <foreach item="offer" array="offers">
+            <choice event="offer_selected">
+                <value expr="offer.offer"/>
+            </choice>
+        </foreach>
+
+    </menu>
+<!-- 
     <form id="list_offers">
         <field name="offer">
             <prompt>
@@ -154,7 +177,7 @@
                 </foreach>
             </prompt>
         </field>
-    </form>
+    </form> -->
 
     <catch event="offer_selected">
         <prompt>
