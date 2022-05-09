@@ -5,13 +5,13 @@
         var offers = new Array(3);
         offers[0] = new Object();
         offers[0].product = "product_sheabutter";
-        offers[0].offer = "5 liter for 100 franc"
+        offers[0].offer = "offer of sheabutter"
         offers[1] = new Object();
         offers[1].product = "'product_honey'";
-        offers[0].offer = "1 kg for 10 franc"
+        offers[1].offer = "offer of honey"
         offers[2] = new Object();
         offers[2].product = "'product_oils'";
-        offers[0].offer = "2 kg for 200 franc"
+        offers[2].offer = "offer of oil"
     </script>
 
     <property name="inputmodes" value="dtmf" />
@@ -23,7 +23,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            41
+            42
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/welcome.mp3'" />
                 <break time="500" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings/welcome.mp3" />
@@ -145,9 +145,13 @@
         <field name="offer">
             <prompt>
                 <foreach item="offer" array="offers">
-                    <!-- <if cond="product == offer.product"> -->
+                <!-- var product should be: 'product_sheabutter' and offer.product is the var in the array -->
+                    <!-- <if cond="product == offer.product">
                         <value expr="offer.offer"/>
-                    <!-- </if> -->
+                    </if> -->
+                    <if cond="product == 'product_sheabutter'">
+                        <value expr="offer.offer"/>
+                    </if>
                     <break time="300ms"/>
                 </foreach>
             </prompt>
