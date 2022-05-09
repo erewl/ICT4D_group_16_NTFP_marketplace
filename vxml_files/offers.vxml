@@ -4,7 +4,7 @@
     <script>
         var offers = new Array(3);
         offers[0] = new Object();
-        offers[0].product = "'product_sheabutter'";
+        offers[0].product = "product_sheabutter";
         offers[0].offer = "5 liter for 100 franc"
         offers[1] = new Object();
         offers[1].product = "'product_honey'";
