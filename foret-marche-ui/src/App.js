@@ -47,7 +47,11 @@ function App() {
       <Button sx={{ mr: 2, }} color="success" onClick={() => console.log("TODO BUY")} variant="outlined" > Buy</Button >
       <Button sx={{ mr: 2, }} color="success" onClick={() => toggleEditState(offer)} variant="outlined">Edit</Button>
     </div>
-    else return <Button sx={{ mr: 2, }} color="success" onClick={() => toggleEditState(offer)} variant="outlined">Save</Button>
+    else
+      return <div>
+        <Button sx={{ mr: 2, }} color="success" onClick={() => console.log("TODO BUY")} variant="outlined" > Delete</Button >
+        <Button sx={{ mr: 2, }} color="success" onClick={() => toggleEditState(offer)} variant="outlined">Save</Button>
+      </div>
 
   }
 
@@ -119,7 +123,7 @@ function App() {
                   <TableCell> {renderEditableCell(offer, 'quantity')} </TableCell>
                   <TableCell> {renderEditableCell(offer, 'unit')} </TableCell>
                   <TableCell> {renderEditableCell(offer, 'price')} </TableCell>
-                  <TableCell> {renderEditableCell(offer, 'sellerNumber')} </TableCell>
+                  <TableCell> {renderCell(offer, 'sellerNumber')} </TableCell>
                   <TableCell>
                     {determineEditButton(offer)}
                   </TableCell>
