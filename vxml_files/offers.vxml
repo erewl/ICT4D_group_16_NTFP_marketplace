@@ -147,15 +147,11 @@
         <grammar mode="dtmf" version="1.0" root="oneToFiveSequence">
     <rule id="oneToFiveSequence" scope="public" >
         <one-of>    
-            <item repeat="0-">      
-                <one-of>                
                     <item>1</item>          
                     <item>2</item>          
                     <item>3</item>          
                     <item>4</item>          
                     <item>5</item>          
-                </one-of>               
-            </item>                 
         </one-of>   
     </rule>
 </grammar>
