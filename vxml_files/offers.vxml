@@ -23,7 +23,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            46
+            47
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/welcome.mp3'" />
                 <break time="500" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings/welcome.mp3" />
@@ -144,7 +144,7 @@
 
     <form id="list_offers">
         <field name="offer">
-        <!-- <grammar src="builtin:grammar/boolean"/> -->
+        <grammar src="builtin:grammar/boolean"/>
             <prompt>
                 <foreach item="offer" array="offers">
                 <!-- var product should be: 'product_sheabutter' and offer.product is the var in the array -->
@@ -155,17 +155,6 @@
                     <break time="300ms"/>
                 </foreach>
             </prompt>
-
-            <grammar mode="voice" type="application/srgs+xml" root="ROOT">
-        <rule id="ROOT">
-          <one-of>
-            <item>The Godfather</item>
-            <item>High Fidelity</item>
-            <item>Raiders of The Lost Ark</item>
-          </one-of>
-        </rule>
-      </grammar>
-
 
         </field>
     </form>
