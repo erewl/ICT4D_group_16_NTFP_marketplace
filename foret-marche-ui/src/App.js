@@ -43,7 +43,7 @@ function App() {
     if (offer && offer.editing) editText = 'Save'
 
     // TODO group EDIT & BUY, and SAVE properly
-    let f = < Button sx = {{ mr: 2, }} color = "success" onClick = {() => console.log("TODO BUY")} variant = "outlined" > Buy</Button >
+    let f = < Button sx={{ mr: 2, }} color="success" onClick={() => console.log("TODO BUY")} variant="outlined" > Buy</Button >
 
     return <Button sx={{ mr: 2, }} color="success" onClick={() => toggleEditState(offer)} variant="outlined">{editText}</Button>
   }
@@ -52,13 +52,32 @@ function App() {
 
   const renderCell = (offer, attribute) => {
     let content = offer[attribute]
+    return <Typography sx={commonStyle}>
+      {content}
+    </Typography>
+  }
+
+  const renderEditableCell = (offer, attribute) => {
+    let content = offer[attribute]
     if (!offer.editing)
       return <Typography sx={commonStyle}>
         {content}
       </Typography>
     else
-      return <TextField sx={commonStyle} defaultValue={content} />
+      return <TextField sx={commonStyle} onChange={event => updateOffer(event, offer, attribute)} defaultValue={content} />
   }
+
+  const updateOffer = (event, offer, attribute) => {
+    console.log("Update offer's " + attribute + " to: " + event.target.value);
+    let offerCopy = offer
+    offerCopy[attribute] = event.target.value
+    let offersCopy = state.offers
+    offersCopy = offersCopy.map(o => {
+      if (o.id === offerCopy.id) return offerCopy
+      else return o
+    })
+    setState({...state, offers: offersCopy})
+  };
 
   return (
     <div className="App">
@@ -93,10 +112,10 @@ function App() {
               {state.offers && state.offers.map((offer) => {
                 return <TableRow>
                   <TableCell> {renderCell(offer, 'product')} </TableCell>
-                  <TableCell> {renderCell(offer, 'quantity')} </TableCell>
-                  <TableCell> {renderCell(offer, 'unit')} </TableCell>
-                  <TableCell> {renderCell(offer, 'price')} </TableCell>
-                  <TableCell> {renderCell(offer, 'sellerNumber')} </TableCell>
+                  <TableCell> {renderEditableCell(offer, 'quantity')} </TableCell>
+                  <TableCell> {renderEditableCell(offer, 'unit')} </TableCell>
+                  <TableCell> {renderEditableCell(offer, 'price')} </TableCell>
+                  <TableCell> {renderEditableCell(offer, 'sellerNumber')} </TableCell>
                   <TableCell>
                     {determineEditButton(offer)}
                   </TableCell>
