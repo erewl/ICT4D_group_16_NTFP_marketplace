@@ -24,11 +24,15 @@ function App() {
 
   const update = s => {
     let offers = s.map(offer => ({ ...offer, editing: false }))
+    offers.sort((a, b) => b.id - a.id)
     setState({ ...state, offers: offers })
   }
 
   const toggleEditState = (offer) => {
     let offersCopy = state.offers
+    if (offer.editing) { // when editing is being toggled from true -> false: we are saving data
+      OffersService.updateData(offer)
+    }
     offersCopy.find(o => o.id === offer.id).editing = !offersCopy.find(o => o.id === offer.id).editing
     setState({ ...state, offers: offersCopy })
   }
@@ -39,13 +43,12 @@ function App() {
   }, []);
 
   const determineEditButton = (offer) => {
-    let editText = 'Edit'
-    if (offer && offer.editing) editText = 'Save'
+    if (offer && !offer.editing) return <div>
+      <Button sx={{ mr: 2, }} color="success" onClick={() => console.log("TODO BUY")} variant="outlined" > Buy</Button >
+      <Button sx={{ mr: 2, }} color="success" onClick={() => toggleEditState(offer)} variant="outlined">Edit</Button>
+    </div>
+    else return <Button sx={{ mr: 2, }} color="success" onClick={() => toggleEditState(offer)} variant="outlined">Save</Button>
 
-    // TODO group EDIT & BUY, and SAVE properly
-    let f = < Button sx={{ mr: 2, }} color="success" onClick={() => console.log("TODO BUY")} variant="outlined" > Buy</Button >
-
-    return <Button sx={{ mr: 2, }} color="success" onClick={() => toggleEditState(offer)} variant="outlined">{editText}</Button>
   }
 
   const commonStyle = { fontFamily: 'Monospace', fontSize: 18 }
@@ -68,15 +71,16 @@ function App() {
   }
 
   const updateOffer = (event, offer, attribute) => {
-    console.log("Update offer's " + attribute + " to: " + event.target.value);
     let offerCopy = offer
-    offerCopy[attribute] = event.target.value
     let offersCopy = state.offers
+
+    offerCopy[attribute] = event.target.value
+    // find existing offer and replace with updated offer in the offers-array
     offersCopy = offersCopy.map(o => {
       if (o.id === offerCopy.id) return offerCopy
       else return o
     })
-    setState({...state, offers: offersCopy})
+    setState({ ...state, offers: offersCopy })
   };
 
   return (

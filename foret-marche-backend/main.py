@@ -4,7 +4,7 @@ import os
 from site import USER_BASE
 
 from flask import Flask, request, render_template, jsonify, Response
-from sqlalchemy import create_engine, text, select, join
+from sqlalchemy import create_engine, text, select, join, update
 from sqlalchemy.orm import Session
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 from flask_cors import CORS
@@ -81,10 +81,30 @@ def get_users():
         users = engine.execute(query)
     return {}
 
+@app.route('/api/v1/offers/<offerId>', methods=['PUT'])
+def update_offer(offerId):
+    with Session(engine) as session:
+        offer = request.json
+        stmt = update(Offers).where(Offers.offer_id == offerId)
+        if(offer['unit']):
+            stmt = stmt.values(unit= offer['unit'])
+        if(offer['price']):
+            stmt = stmt.values(price= offer['price'])
+        if(offer['quantity']):
+            stmt = stmt.values(quantity= offer['quantity'])
+
+        result = session.execute(
+            stmt.execution_options(synchronize_session="fetch")
+        )
+        print(result.rowcount)
+        session.commit()
+        session.flush()
+        return {'message': "Successful update!"}
+
 @app.route('/api/v1/offers', methods=['GET'])
 def get_offers():
-    offers = []
     with Session(engine) as session:
+        offers = []
         allOffers = session.query(Offers, Users).join(Users, Offers.seller_id == Users.user_id).all()
         for offerResult, userResult in allOffers:
             offers.append({
