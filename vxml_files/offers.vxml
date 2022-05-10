@@ -26,7 +26,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            63
+            64
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/welcome.mp3'" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/welcome.mp3" />
             </prompt>
@@ -98,8 +98,35 @@
         <goto next="#sell_menu" />
     </catch>
 
-    <menu id="buy_menu" scope="dialog">
-        <prompt><break time="200" />
+
+<menu id="buy_menu" scope="dialog">
+        <prompt><break time="200" />Which product would you like to buy?</prompt>
+        <prompt xml:lang="fr-fr">Quel produit aimeriez-vous acheter?</prompt> 
+        
+        <prompt>
+                <enumerate>
+                    <break time="1000" />
+                    For
+                    <value expr="_prompt" />
+                    , Press
+                    <value expr="_dtmf" />
+                </enumerate>
+        </prompt>
+        <choice event="buy_product_selected" dtmf="1" messageexpr="'product_sheabutter'">
+            <audio src="http://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/product_sheabutter.mp3" />
+        </choice>
+        <choice event="buy_product_selected" dtmf="2" messageexpr="'product_honey'">
+            <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/product_honey.mp3" />
+        </choice>
+        <choice event="buy_product_selected" dtmf="3" messageexpr="'product_oils'">
+            <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/product_oils.mp3" />
+        </choice>
+    </menu>
+
+
+    <!-- <menu id="buy_menu" scope="dialog">
+        <prompt>
+            <break time="200" />
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language '/select_product_to_buy.mp3'" />
         </prompt>
         <prompt>
@@ -125,7 +152,7 @@
             <!-- <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/essential_oils.mp3'" /> -->
             3
         </choice>
-    </menu>
+    </menu> -->
 
      <catch event="buy_product_selected">
         <prompt>
