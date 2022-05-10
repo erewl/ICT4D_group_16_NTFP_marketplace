@@ -204,9 +204,10 @@
                     <assign name="iterator" expr="1" />
                     <foreach item="offer" array="offers">
                         <if cond="product == offer.product">
-                            <if cond="iterator == offer_selection">
+                            <!-- <if cond="iterator == offer_selection">
                                 <value expr="offer.offer"/>
-                            </if>
+                            </if> -->
+                            hello
                             <assign name="iterator" expr="iterator + 1" />
                         </if>
                     </foreach>
