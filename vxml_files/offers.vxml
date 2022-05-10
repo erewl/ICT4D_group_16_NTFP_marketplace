@@ -26,7 +26,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            64
+            65
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/welcome.mp3'" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/welcome.mp3" />
             </prompt>
@@ -99,9 +99,10 @@
     </catch>
 
 
-<menu id="buy_menu" scope="dialog">
-        <prompt><break time="200" />Which product would you like to buy?</prompt>
-        <prompt xml:lang="fr-fr">Quel produit aimeriez-vous acheter?</prompt> 
+    <menu id="buy_menu" scope="dialog">
+        <prompt><break time="200" />
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/select_product_to_buy.mp3'" />
+        </prompt>
         
         <prompt>
                 <enumerate>
@@ -113,13 +114,13 @@
                 </enumerate>
         </prompt>
         <choice event="buy_product_selected" dtmf="1" messageexpr="'product_sheabutter'">
-            <audio src="http://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/product_sheabutter.mp3" />
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/shea_butter.mp3'" />
         </choice>
         <choice event="buy_product_selected" dtmf="2" messageexpr="'product_honey'">
-            <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/product_honey.mp3" />
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/honey.mp3'" />
         </choice>
         <choice event="buy_product_selected" dtmf="3" messageexpr="'product_oils'">
-            <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/product_oils.mp3" />
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/essential_oils.mp3'" />
         </choice>
     </menu>
 
