@@ -8,7 +8,7 @@ from sqlalchemy import create_engine, text, select, join, update
 from sqlalchemy.orm import Session
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 from flask_cors import CORS
-from postgresql.schemas import Offers, Users
+from postgresql.schemas import Offers, Users, Bids
 
 # TODO export to DatabaseConfig class or so
 USER = os.getenv('DB_USER')
@@ -119,9 +119,18 @@ def get_offers():
 
 @app.route('/api/v1/bids', methods=['GET'])
 def get_bids():
-    query = text("SELECT * FROM bids")
-    bids = engine.execute(query)
-    return {}
+    with Session(engine) as session:
+        bids = []
+        allBids = session.query(Bids).all()
+        print(allBids)
+        for bidResult in allBids:
+            bids.append({
+                'offer': bidResult.offer_id,
+                'buyer': bidResult.buyer_id,
+                'seller': bidResult.seller_id,
+                'quantity': bidResult.quantity,
+            })
+    return jsonify({'data': bids})
 
 if __name__ == '__main__':
     if os.environ['ENV'] and os.environ['ENV'] == 'prod':

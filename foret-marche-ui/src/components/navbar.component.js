@@ -34,6 +34,11 @@ export default class Navbar extends Component {
                   <Button color="inherit" sx={{ fontFamily: 'Monospace', fontSize: 20 }} >
                     Sell
                   </Button>
+                  <Link to="/" style={{textDecoration: 'none'}}>
+                    <Button color="inherit" sx={{ fontFamily: 'Monospace', fontSize: 20, color: "white"}} >
+                      Offers
+                    </Button>
+                  </Link>  
                   <Link to="/bids" style={{textDecoration: 'none'}}>
                     <Button color="inherit" sx={{ fontFamily: 'Monospace', fontSize: 20, color: "white"}} >
                       Bids
