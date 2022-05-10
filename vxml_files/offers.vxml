@@ -26,7 +26,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            2
+            3
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/welcome.mp3'" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/welcome.mp3" />
             </prompt>
@@ -202,7 +202,7 @@
                 <prompt>
                     <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/selected.mp3'" />
                     <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + offer_selection + '.mp3'" />
-                    <assign name="iterator" expr="1" />
+                    <!-- <assign name="iterator" expr="1" /> -->
                     <foreach item="offer" array="offers">
                         <if cond="product == offer.product">
                             <!-- <if cond="iterator == offer_selection">
@@ -211,6 +211,9 @@
                             Check
                             <value expr="iterator"/>
                             <value expr="offer_selection"/>
+                            <if cond="offer_selection == iterator">
+                                Yes
+                            </if>
                             <assign name="iterator" expr="iterator + 1" />
                         </if>
                     </foreach>
