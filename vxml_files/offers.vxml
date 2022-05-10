@@ -26,7 +26,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            61
+            62
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/welcome.mp3'" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/welcome.mp3" />
             </prompt>
@@ -103,13 +103,15 @@
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language '/select_product_to_buy.mp3'" />
         </prompt>
         <prompt>
-                <enumerate>
-                    <break time="1000" />
-                    <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/for.mp3'" />
-                    <value expr="_prompt" />
-                    <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/select.mp3'" />
-                    <value expr="_dtmf" />
-                </enumerate>
+            <enumerate>
+                <break time="1000" />
+                <!-- <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/for.mp3'" /> -->
+                For
+                <value expr="_prompt" />
+                , press
+                <!-- <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/select.mp3'" /> -->
+                <value expr="_dtmf" />
+            </enumerate>
         </prompt>
         <choice event="buy_product_selected" dtmf="1" messageexpr="'shea_butter'">
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/shea_butter.mp3'" />
