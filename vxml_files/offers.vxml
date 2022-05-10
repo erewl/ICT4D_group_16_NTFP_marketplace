@@ -28,7 +28,6 @@
             <prompt>
             55
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/welcome.mp3'" />
-                <break time="100" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/welcome.mp3" />
             </prompt>
             <!-- <goto next="#menu_product" /> -->
@@ -57,12 +56,12 @@
     <var name="lang" expr="'en_recordings'" />
 
     <catch event="english_selected">
-        <assign name="language" expr="'en_recordings'" />
+        <assign name="language" expr="'en_recordings2'" />
         <prompt>English selected.</prompt>
         <goto next="#customer_type" />
     </catch>
     <catch event="french_selected">
-        <assign name="language" expr="'fr_recordings'" />
+        <assign name="language" expr="'fr_recordings2'" />
         <prompt xml:lang="fr-fr">Français sélectionné</prompt>
         <goto next="#customer_type" />
     </catch>
@@ -71,13 +70,17 @@
         <prompt> Do you want to buy or sell a product?</prompt>
 
         <prompt><enumerate><value expr="_prompt"/></enumerate></prompt>
-        <choice dtmf="1" event="buy_selected">To buy a product, select 1.</choice>
-        <choice dtmf="2" event="sell_selected">To sell a product, select 2.</choice>
+            <choice dtmf="1" event="buy_selected">
+                <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/buy_product_select.mp3'" />
+            </choice>
+            <choice dtmf="2" event="sell_selected">
+                <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/sell_product_select.mp3'" />
+            </choice>
         <nomatch>
-        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/product_wronginput.mp3'" />
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/no_option_match.mp3'" />
         <reprompt /></nomatch>
         <noinput>
-        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language '/product_noinput.mp3'" />
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language '/question_repeat.mp3'" />
         <reprompt /></noinput>
     </menu>
 
