@@ -26,9 +26,9 @@
     <form id="greeting">
         <block>
             <prompt>
-            54
+            55
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/welcome.mp3'" />
-                <break time="500" />
+                <break time="100" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/welcome.mp3" />
             </prompt>
             <!-- <goto next="#menu_product" /> -->
@@ -38,17 +38,19 @@
 
      <menu id="language_selection" scope="dialog">
         <prompt><enumerate><value expr="_prompt"/></enumerate></prompt>
-        <choice dtmf="1" event="english_selected">For english select 1.</choice>
+        <choice dtmf="1" event="english_selected">
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/select_english.mp3'" />
+        </choice>
         <choice dtmf="2" event="french_selected">
-        <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings/lang_select.mp3" />
+        <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/select_french.mp3" />
         </choice> 
         <nomatch>
-        <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/product_wronginput.mp3" />
-        <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings/lang_wronginput.mp3" />
+        <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/no_option_match.mp3" />
+        <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/no_option_match.mp3" />
         <reprompt /></nomatch>
         <noinput>
-        <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/product_noinput.mp3" />
-        <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings/product_noinput.mp3" />
+        <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/question_repeat.mp3" />
+        <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/question_repeat.mp3" />
         <reprompt /></noinput>
     </menu>   
 
