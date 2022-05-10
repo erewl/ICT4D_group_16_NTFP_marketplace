@@ -163,8 +163,8 @@
     </catch>
 -->
 
-    <var name="iterator" expr="1" />
-    <assign name="iterator" expr="1" />
+    <!-- <var name="iterator" expr="1" />
+    <assign name="iterator" expr="1" /> -->
     <!-- <var name="selected_offer" expr="'none chosen'" />
     <assign name="selected_offer" expr="'none chosen'" /> -->
 
