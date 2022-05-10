@@ -139,46 +139,46 @@
         <choice event="offer_selected">Option 1</choice>
         <choice event="offer_selected">Option 2</choice>
 
-    </menu>
+    </menu> 
      <catch event="offer_selected">
         <prompt>
             Selected an option. End.
         </prompt>
     </catch>
- -->
+-->
 
 
     <form id="list_offers">
         <field name="offer_selection">
-        <grammar version="1.0" xml:lang="en-US" root="keypress" 
-         mode="dtmf" scope="document">
-    <rule id="keypress" scope = "public">
-      <one-of>
-          <item> 1 </item>
-          <item> 2 </item>
-          <item> 3 </item>
-          <item> 4 </item>
-          <item> 5 </item>
-          <item> 6 </item>
-          <item> 7 </item>
-          <item> 8 </item>
-          <item> 9 </item>
-          <item> 0 </item>
-      </one-of>
-    </rule>
-</grammar>
-            <prompt>
-                <foreach item="offer" array="offers">
-                    <if cond="product == offer.product">
-                        <value expr="offer.offer"/>
-                    </if>
-                    <break time="300ms"/>
-                </foreach>
-            </prompt>
+        <grammar version="1.0" root="keypress" mode="dtmf" >
+            <rule id="keypress" scope = "public">
+            <one-of>
+                <item> 1 </item>
+                <item> 2 </item>
+                <item> 3 </item>
+                <item> 4 </item>
+                <item> 5 </item>
+                <item> 6 </item>
+                <item> 7 </item>
+                <item> 8 </item>
+                <item> 9 </item>
+                <item> 0 </item>
+            </one-of>
+            </rule>
+        </grammar>
+
+        <prompt>
+            <foreach item="offer" array="offers">
+                <if cond="product == offer.product">
+                    <value expr="offer.offer"/>
+                </if>
+                <break time="300ms"/>
+            </foreach>
+        </prompt>
 
         <filled>          
-        <prompt> You entered <value expr="offer_selection"/></prompt>
-      </filled>     
+            <prompt> You entered <value expr="offer_selection"/></prompt>
+        </filled>     
         </field>
     </form>
 
