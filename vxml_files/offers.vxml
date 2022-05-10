@@ -26,7 +26,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            84
+            85
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/welcome.mp3'" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/welcome.mp3" />
             </prompt>
@@ -170,7 +170,34 @@
 
     <form id="list_offers">
         <field name="offer_selection">
-        <!-- <grammar version="1.0" root="keypress" mode="dtmf" >
+            <grammar version="1.0" root="keypress" mode="dtmf" >
+                <rule id="keypress" scope="public">
+                    <one-of>
+                        <item> 1 </item>
+                        <item> 2 </item>
+                        <item> 3 </item>
+                        <item> 4 </item>
+                        <item> 5 </item>
+                        <item> 6 </item>
+                        <item> 7 </item>
+                        <item> 8 </item>
+                        <item> 9 </item>
+                        <item> 0 </item>
+                    </one-of>
+                </rule>
+            </grammar>
+            <prompt>
+                Hello.
+            </prompt>
+        </field>
+    </form>
+
+
+
+
+    <!-- <form id="list_offers">
+        <field name="offer_selection">
+        <grammar version="1.0" root="keypress" mode="dtmf" >
             <rule id="keypress" scope="public">
                 <one-of>
                     <item> 1 </item>
@@ -185,31 +212,12 @@
                     <item> 0 </item>
                 </one-of>
             </rule>
-        </grammar> -->
-        <grammar mode="dtmf" version="1.0" root="oneToFiveSequence">
-
-    <rule id="onetofive">
-        <one-of>    
-            <item>1</item>
-            <item>2</item>
-            <item>3</item>
-            <item>4</item>
-            <item>5</item>
-        </one-of>   
-    </rule>
-
-    <rule id="oneToFiveSequence" scope="public" >
-        <one-of>    
-            <item repeat="0-">
-                <ruleref uri="#onetofive"/>
-            </item>     
-        </one-of>   
-    </rule>
-</grammar>
+        </grammar>
+       
         
         <prompt>
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language '/select_product_to_buy.mp3'" />
-            <!-- <foreach item="offer" array="offers">
+            <foreach item="offer" array="offers">
                 <if cond="product == offer.product">
                     <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + iterator + '.mp3'" />
                     <break time="500ms"/>
@@ -219,23 +227,23 @@
                     <break time="500ms"/>
                 </if>
                 <break time="300ms"/>
-            </foreach> -->
+            </foreach>
         </prompt>
 
-        <!-- <noinput>
+        <noinput>
         <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language '/product_list_repeat.mp3'" />
         <assign name="iterator" expr="1" />
-        </noinput> -->
+        </noinput>
 
         <filled>          
             <prompt> 
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/selected.mp3'" />
-            <!-- <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + offer_selection + '.mp3'" /> -->
-            <!-- <value expr="selected_offer.offer"/> -->
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + offer_selection + '.mp3'" />
+            <value expr="selected_offer.offer"/>
             </prompt>
         </filled>     
         </field>
-    </form>
+    </form> -->
 
    
     <!-- entering products to sell, main menu -->
