@@ -23,7 +23,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            50
+            51
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/welcome.mp3'" />
                 <break time="500" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings/welcome.mp3" />
@@ -166,8 +166,9 @@
             </one-of>
             </rule>
         </grammar>
-
+        <var name="iterator" expr="0" />
         <prompt>
+            <value expr="iterator"/>
             <foreach item="offer" array="offers">
                 <if cond="product == offer.product">
                     <value expr="offer.offer"/>
