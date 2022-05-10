@@ -26,7 +26,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            72
+            73
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/welcome.mp3'" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/welcome.mp3" />
             </prompt>
@@ -183,7 +183,7 @@
                     <item> 8 </item>
                     <item> 9 </item>
                 </one-of>
-                </rule>
+            </rule>
         </grammar>
         
         <prompt>
@@ -201,10 +201,10 @@
             </foreach>
         </prompt>
 
-        <noinput>
+        <!-- <noinput>
         <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language '/product_list_repeat.mp3'" />
         <assign name="iterator" expr="1" />
-        </noinput>
+        </noinput> -->
 
         <filled>          
             <prompt> 
