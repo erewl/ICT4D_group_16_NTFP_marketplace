@@ -26,7 +26,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            57
+            58
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/welcome.mp3'" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/welcome.mp3" />
             </prompt>
@@ -70,7 +70,7 @@
         <prompt> 
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/buy_or_sell_product.mp3'" />
         </prompt>
-        <prompt><enumerate><value expr="_prompt"/></enumerate></prompt>
+        <prompt><enumerate><value expr="_prompt" /></enumerate></prompt>
             <choice dtmf="1" event="buy_selected">
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/buy_product_select.mp3'" />
             </choice>
@@ -129,8 +129,7 @@
         <assign name="product" expr="_message" />
         <prompt>
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language '/selected.mp3'" />
-            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + product + '.mp3'" />
-        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/' + product + '.mp3'" />
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + product + '.mp3'" />
         </prompt>
         <goto next="#list_offers" />
     </catch>
