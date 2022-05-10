@@ -26,7 +26,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            65
+            66
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/welcome.mp3'" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/welcome.mp3" />
             </prompt>
@@ -107,9 +107,9 @@
         <prompt>
                 <enumerate>
                     <break time="1000" />
-                    For
+                    <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/for.mp3'" />
                     <value expr="_prompt" />
-                    , Press
+                    <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/select.mp3'" />
                     <value expr="_dtmf" />
                 </enumerate>
         </prompt>
