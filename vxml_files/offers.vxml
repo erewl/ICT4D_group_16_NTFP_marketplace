@@ -26,7 +26,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            73
+            74
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/welcome.mp3'" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/welcome.mp3" />
             </prompt>
@@ -193,7 +193,7 @@
                     <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + iterator + '.mp3'" />
                     <break time="500ms"/>
                     <value expr="offer.offer"/>
-                    <assign name="selected_offer" expr="offer" />
+                    <!-- <assign name="selected_offer" expr="offer" /> -->
                     <assign name="iterator" expr="iterator + 1" />
                     <break time="500ms"/>
                 </if>
