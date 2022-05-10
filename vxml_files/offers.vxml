@@ -26,7 +26,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            71
+            72
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/welcome.mp3'" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/welcome.mp3" />
             </prompt>
@@ -173,22 +173,21 @@
         <grammar version="1.0" root="keypress" mode="dtmf" >
             <rule id="keypress" scope = "public">
                 <one-of>
-                    <item repeat="0-">    
-                        <item> 1 </item>
-                        <item> 2 </item>
-                        <item> 3 </item>
-                        <item> 4 </item>
-                        <item> 5 </item>
-                        <item> 6 </item>
-                        <item> 7 </item>
-                        <item> 8 </item>
-                        <item> 9 </item>
-                    </item> 
+                    <item> 1 </item>
+                    <item> 2 </item>
+                    <item> 3 </item>
+                    <item> 4 </item>
+                    <item> 5 </item>
+                    <item> 6 </item>
+                    <item> 7 </item>
+                    <item> 8 </item>
+                    <item> 9 </item>
                 </one-of>
                 </rule>
         </grammar>
         
         <prompt>
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language '/select_product_to_buy.mp3'" />
             <foreach item="offer" array="offers">
                 <if cond="product == offer.product">
                     <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + iterator + '.mp3'" />
@@ -201,6 +200,11 @@
                 <break time="300ms"/>
             </foreach>
         </prompt>
+
+        <noinput>
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language '/product_list_repeat.mp3'" />
+        <assign name="iterator" expr="1" />
+        </noinput>
 
         <filled>          
             <prompt> 
