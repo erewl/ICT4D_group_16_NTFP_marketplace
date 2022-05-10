@@ -26,7 +26,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            62
+            63
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/welcome.mp3'" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/welcome.mp3" />
             </prompt>
@@ -114,13 +114,16 @@
             </enumerate>
         </prompt>
         <choice event="buy_product_selected" dtmf="1" messageexpr="'shea_butter'">
-            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/shea_butter.mp3'" />
+            <!-- <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/shea_butter.mp3'" /> -->
+            1
         </choice>
         <choice event="buy_product_selected" dtmf="2" messageexpr="'honey'">
-            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/honey.mp3'" />
+            <!-- <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/honey.mp3'" /> -->
+            2
         </choice>
         <choice event="buy_product_selected" dtmf="3" messageexpr="'essential_oils'">
-            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/essential_oils.mp3'" />
+            <!-- <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/essential_oils.mp3'" /> -->
+            3
         </choice>
     </menu>
 
