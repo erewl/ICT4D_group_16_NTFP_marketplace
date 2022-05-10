@@ -26,7 +26,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            5
+            6
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/welcome.mp3'" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/welcome.mp3" />
             </prompt>
@@ -191,7 +191,7 @@
                 </prompt>
                 <if cond="selected_offer == 'none chosen'">
                     <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/no_product_match.mp3'" />
-                    <reprompt />
+                    <goto next="#list_offers" />
                 <else />
                     <goto next="#confirm_buy" />
                 </if>
@@ -226,6 +226,12 @@
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/select.mp3'" />
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/2.mp3'" />
         </choice>
+         <nomatch>
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/no_option_match.mp3'" />
+        <reprompt /></nomatch>
+        <noinput>
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language '/question_repeat.mp3'" />
+        <reprompt /></noinput>
     </menu>
 
     <catch event="confirm_buy_yes">
