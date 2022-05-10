@@ -165,8 +165,8 @@
 
     <var name="iterator" expr="1" />
     <assign name="iterator" expr="1" />
-    <var name="selected_offer" expr="none chosen" />
-    <assign name="selected_offer" expr="none chosen" />
+    <var name="selected_offer" expr="'none chosen'" />
+    <assign name="selected_offer" expr="'none chosen'" />
 
     <form id="list_offers">
         <field name="offer_selection">
@@ -206,7 +206,7 @@
             <prompt> 
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/selected.mp3'" />
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + offer_selection + '.mp3'" />
-            <value expr="selected_offer.offer"/>
+            <!-- <value expr="selected_offer.offer"/> -->
             </prompt>
         </filled>     
         </field>
