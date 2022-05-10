@@ -26,7 +26,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            96
+            97
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/welcome.mp3'" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/welcome.mp3" />
             </prompt>
@@ -164,9 +164,9 @@
 -->
 
     <var name="iterator" expr="1" />
-    <assign name="iterator" expr="1" />
+    <!-- <assign name="iterator" expr="1" /> -->
     <var name="selected_offer" expr="'none chosen'" />
-    <assign name="selected_offer" expr="'none chosen'" />
+    <!-- <assign name="selected_offer" expr="'none chosen'" /> -->
 
     <form id="list_offers">
         <field name="offer_selection">
@@ -205,6 +205,7 @@
                 <prompt>
                     <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/selected.mp3'" />
                     <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + offer_selection + '.mp3'" />
+                    <value expr="selected_offer" />
                 </prompt>
             </filled>
 
