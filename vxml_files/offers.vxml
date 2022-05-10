@@ -26,7 +26,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            70
+            71
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/welcome.mp3'" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/welcome.mp3" />
             </prompt>
@@ -128,9 +128,6 @@
         </choice>
     </menu>
 
-
-    
-
      <catch event="buy_product_selected">
         <prompt>
             <break time="200" />
@@ -168,24 +165,27 @@
 
     <var name="iterator" expr="1" />
     <assign name="iterator" expr="1" />
+    <var name="selected_offer" expr="none chosen" />
+    <assign name="selected_offer" expr="none chosen" />
 
     <form id="list_offers">
         <field name="offer_selection">
         <grammar version="1.0" root="keypress" mode="dtmf" >
             <rule id="keypress" scope = "public">
-            <one-of>
-                <item> 1 </item>
-                <item> 2 </item>
-                <item> 3 </item>
-                <item> 4 </item>
-                <item> 5 </item>
-                <item> 6 </item>
-                <item> 7 </item>
-                <item> 8 </item>
-                <item> 9 </item>
-                <item> 0 </item>
-            </one-of>
-            </rule>
+                <one-of>
+                    <item repeat="0-">    
+                        <item> 1 </item>
+                        <item> 2 </item>
+                        <item> 3 </item>
+                        <item> 4 </item>
+                        <item> 5 </item>
+                        <item> 6 </item>
+                        <item> 7 </item>
+                        <item> 8 </item>
+                        <item> 9 </item>
+                    </item> 
+                </one-of>
+                </rule>
         </grammar>
         
         <prompt>
@@ -194,6 +194,7 @@
                     <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + iterator + '.mp3'" />
                     <break time="500ms"/>
                     <value expr="offer.offer"/>
+                    <assign name="selected_offer" expr="offer" />
                     <assign name="iterator" expr="iterator + 1" />
                     <break time="500ms"/>
                 </if>
@@ -204,8 +205,8 @@
         <filled>          
             <prompt> 
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/selected.mp3'" />
-            <value expr="offer_selection"/>
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + offer_selection + '.mp3'" />
+            <value expr="selected_offer.offer"/>
             </prompt>
         </filled>     
         </field>
