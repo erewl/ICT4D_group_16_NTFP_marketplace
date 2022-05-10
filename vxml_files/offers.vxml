@@ -209,6 +209,7 @@
                             </if>
                             <assign name="iterator" expr="iterator + 1" />
                         </if>
+                    </foreach>
                 </prompt>
             </filled>
 
