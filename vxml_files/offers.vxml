@@ -26,7 +26,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            4
+            5
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/welcome.mp3'" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/welcome.mp3" />
             </prompt>
@@ -140,29 +140,6 @@
         <goto next="#list_offers" />
     </catch>
 
-    <!-- <menu id="list_offers_reserve" dtmf="true">
-        <prompt>This is the menu to list offers for
-        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/' + product + '.mp3'" />
-        </prompt>
-
-        <prompt>
-            <enumerate> For
-                <value expr="_prompt"/>, press
-                <value expr="_dtmf"/>.
-            </enumerate>
-        </prompt>
-
-        <choice event="offer_selected">Option 1</choice>
-        <choice event="offer_selected">Option 2</choice>
-
-    </menu> 
-     <catch event="offer_selected">
-        <prompt>
-            Selected an option. End.
-        </prompt>
-    </catch>
--->
-
     <var name="iterator" expr="1" />
     <var name="selected_offer" expr="'none chosen'" />
     <form id="list_offers">
@@ -212,6 +189,12 @@
                     </foreach>
                     <value expr="selected_offer.offer"/>
                 </prompt>
+                <if cond="selected_offer == 'none chosen'">
+                    <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/no_product_match.mp3'" />
+                    <reprompt />
+                <else />
+                    <goto next="#confirm_buy" />
+                </if>
             </filled>
 
              <noinput>
@@ -222,58 +205,42 @@
         </field>
     </form>
 
-
-
-
-    <!-- <form id="list_offers">
-        <field name="offer_selection">
-        <grammar version="1.0" root="keypress" mode="dtmf" >
-            <rule id="keypress" scope="public">
-                <one-of>
-                    <item> 1 </item>
-                    <item> 2 </item>
-                    <item> 3 </item>
-                    <item> 4 </item>
-                    <item> 5 </item>
-                    <item> 6 </item>
-                    <item> 7 </item>
-                    <item> 8 </item>
-                    <item> 9 </item>
-                    <item> 0 </item>
-                </one-of>
-            </rule>
-        </grammar>
-       
-        
+     <menu id="confirm_buy" scope="dialog">
         <prompt>
-            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language '/select_product_to_buy.mp3'" />
-            <foreach item="offer" array="offers">
-                <if cond="product == offer.product">
-                    <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + iterator + '.mp3'" />
-                    <break time="500ms"/>
-                    <value expr="offer.offer"/>
-                    <assign name="selected_offer" expr="offer" />
-                    <assign name="iterator" expr="iterator + 1" />
-                    <break time="500ms"/>
-                </if>
-                <break time="300ms"/>
-            </foreach>
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/are_you_sure_buy.mp3'" />
+        <value expr="selected_offer.offer"/>
+            <enumerate>
+                <break time="1000" />
+                <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/for.mp3'" />
+                <value expr="_prompt" />
+            </enumerate>
         </prompt>
 
-        <noinput>
-        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language '/product_list_repeat.mp3'" />
-        <assign name="iterator" expr="1" />
-        </noinput>
+        <choice event="confirm_buy_yes" dtmf="1" messageexpr="'shea_butter'">
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/yes.mp3'" />
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/select.mp3'" />
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/1.mp3'" />
+        </choice>
+        <choice event="confirm_buy_no" dtmf="2" messageexpr="'honey'">
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/no.mp3'" />
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/select.mp3'" />
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/2.mp3'" />
+        </choice>
+    </menu>
 
-        <filled>          
-            <prompt> 
-            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/selected.mp3'" />
-            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + offer_selection + '.mp3'" />
-            <value expr="selected_offer.offer"/>
-            </prompt>
-        </filled>     
-        </field>
-    </form> -->
+    <catch event="confirm_buy_yes">
+        <prompt>
+            <break time="200" />
+        </prompt>
+        <!-- Do the database stuff here -->
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/submit_success.mp3'" />
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/thanks_for_using.mp3'" />
+    </catch>
+
+    <catch event="confirm_buy_no">
+        <goto next="#customer_type" />
+    </catch>
+
 
    
     <!-- entering products to sell, main menu -->
