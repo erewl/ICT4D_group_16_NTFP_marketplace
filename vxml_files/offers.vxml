@@ -7,10 +7,10 @@
         offers[0].product = "product_sheabutter";
         offers[0].offer = "offer of sheabutter"
         offers[1] = new Object();
-        offers[1].product = "'product_honey'";
+        offers[1].product = "product_honey";
         offers[1].offer = "offer of honey"
         offers[2] = new Object();
-        offers[2].product = "'product_oils'";
+        offers[2].product = "product_oils";
         offers[2].offer = "offer of oil"
     </script>
 
@@ -23,7 +23,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            49
+            50
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/welcome.mp3'" />
                 <break time="500" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings/welcome.mp3" />
@@ -139,43 +139,50 @@
         <choice event="offer_selected">Option 1</choice>
         <choice event="offer_selected">Option 2</choice>
 
-    </menu> -->
+    </menu>
+     <catch event="offer_selected">
+        <prompt>
+            Selected an option. End.
+        </prompt>
+    </catch>
+ -->
 
 
     <form id="list_offers">
-        <field name="offer">
-        <grammar mode="dtmf" version="1.0" root="oneToFiveSequence">
-    <rule id="oneToFiveSequence" scope="public" >
-        <one-of>    
-                    <item>1</item>          
-                    <item>2</item>          
-                    <item>3</item>          
-                    <item>4</item>          
-                    <item>5</item>          
-        </one-of>   
+        <field name="offer_selection">
+        <grammar version="1.0" xml:lang="en-US" root="keypress" 
+         mode="dtmf" scope="document">
+    <rule id="keypress" scope = "public">
+      <one-of>
+          <item> 1 </item>
+          <item> 2 </item>
+          <item> 3 </item>
+          <item> 4 </item>
+          <item> 5 </item>
+          <item> 6 </item>
+          <item> 7 </item>
+          <item> 8 </item>
+          <item> 9 </item>
+          <item> 0 </item>
+      </one-of>
     </rule>
 </grammar>
             <prompt>
                 <foreach item="offer" array="offers">
-                <!-- var product should be: 'product_sheabutter' and offer.product is the var in the array both are EMCAScript expressions. -->
                     <if cond="product == offer.product">
                         <value expr="offer.offer"/>
                     </if>
                     <break time="300ms"/>
                 </foreach>
             </prompt>
+
         <filled>          
-        <prompt> You entered <value expr="offer"/></prompt>
+        <prompt> You entered <value expr="offer_selection"/></prompt>
       </filled>     
         </field>
     </form>
 
-    <catch event="offer_selected">
-        <prompt>
-            Selected an option. End.
-        </prompt>
-    </catch>
-
+   
     <!-- entering products to sell, main menu -->
     <menu id="sell_menu" scope="dialog">
 
