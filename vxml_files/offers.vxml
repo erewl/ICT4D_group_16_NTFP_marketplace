@@ -105,20 +105,20 @@
         <prompt>
                 <enumerate>
                     <break time="1000" />
-                    <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language '/for.mp3'" />
+                    <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/for.mp3'" />
                     <value expr="_prompt" />
-                    <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language '/select.mp3'" />
+                    <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/select.mp3'" />
                     <value expr="_dtmf" />
                 </enumerate>
         </prompt>
         <choice event="buy_product_selected" dtmf="1" messageexpr="'shea_butter'">
-            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language '/shea_butter.mp3'" />
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/shea_butter.mp3'" />
         </choice>
         <choice event="buy_product_selected" dtmf="2" messageexpr="'honey'">
-            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language '/honey.mp3'" />
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/honey.mp3'" />
         </choice>
         <choice event="buy_product_selected" dtmf="3" messageexpr="'essential_oils'">
-            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language '/essential_oils.mp3'" />
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/essential_oils.mp3'" />
         </choice>
     </menu>
 
@@ -128,7 +128,7 @@
         </prompt>
         <assign name="product" expr="_message" />
         <prompt>
-            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language '/selected.mp3'" />
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/selected.mp3'" />
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + product + '.mp3'" />
         </prompt>
         <goto next="#list_offers" />
