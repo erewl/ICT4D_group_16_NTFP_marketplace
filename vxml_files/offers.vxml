@@ -26,7 +26,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            6
+            7
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/welcome.mp3'" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/welcome.mp3" />
             </prompt>
@@ -57,12 +57,10 @@
 
     <catch event="english_selected">
         <assign name="language" expr="'en_recordings2'" />
-        <!-- <prompt>English selected.</prompt> -->
         <goto next="#customer_type" />
     </catch>
     <catch event="french_selected">
         <assign name="language" expr="'fr_recordings2'" />
-        <!-- <prompt xml:lang="fr-fr">Français sélectionné</prompt> -->
         <goto next="#customer_type" />
     </catch>
 
@@ -191,6 +189,8 @@
                 </prompt>
                 <if cond="selected_offer == 'none chosen'">
                     <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/no_product_match.mp3'" />
+                    <assign name="iterator" expr="1" />
+                    <assign name="selected_offer" expr="'none chosen'" />
                     <goto next="#list_offers" />
                 <else />
                     <goto next="#confirm_buy" />
@@ -244,6 +244,7 @@
     </catch>
 
     <catch event="confirm_buy_no">
+        <break time="500" />
         <goto next="#customer_type" />
     </catch>
 
@@ -264,17 +265,17 @@
             </enumerate>
         </prompt>
 
-        <choice event="fluid_product_selection" dtmf="1" message="Shea Butter">
+        <choice event="fluid_product_selection" dtmf="1" message="shea_butter">
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/shea_butter.mp3'" />
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/select.mp3'" />
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/1.mp3'" />
         </choice>
-        <choice event="kg_product_selected" dtmf="2" message="Honey">
+        <choice event="kg_product_selected" dtmf="2" message="honey">
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/honey.mp3'" />
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/select.mp3'" />
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/2.mp3'" />
         </choice>
-        <choice event="kg_product_selected" dtmf="3" message="Essential Oils">
+        <choice event="kg_product_selected" dtmf="3" message="essential_oils">
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/essential_oils.mp3'" />
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/select.mp3'" />
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/3.mp3'" />
@@ -317,11 +318,11 @@
         <field name="form_quantity" type="number">
             <prompt>
                 How many
+                <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language '/how_many.mp3'" />
                 <value expr="units" />
-                of
-                <value expr="product" />
-                ?
-                Enter the quantity and press hash
+                <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language '/of.mp3'" />
+                <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + product + '.mp3'" />                
+                <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language '/enter_quantity.mp3'" />
             </prompt>
 
             <filled>
@@ -332,6 +333,7 @@
 
         <field name="form_price" type="number">
             <prompt>
+
                 How much is the <value expr="units" />
                 price for
                 <value expr="product" />
