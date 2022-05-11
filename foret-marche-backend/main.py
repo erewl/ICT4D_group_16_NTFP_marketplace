@@ -121,10 +121,15 @@ def get_bids():
         bids = []
         buyer = aliased(Users)
         seller = aliased(Users)
-        allBids = session.query(Bids, buyer, seller).join(buyer, Bids.buyer_id == buyer.user_id).join(seller, Bids.seller_id == seller.user_id).all()
-        for bidResult, buyerResult, sellerResult in allBids:
+        allBids = session.query(Bids, buyer, seller, Offers)\
+            .join(buyer, Bids.buyer_id == buyer.user_id)\
+            .join(seller, Bids.seller_id == seller.user_id)\
+            .join(Offers, Bids.offer_id == Offers.offer_id)\
+            .all()
+        for bidResult, buyerResult, sellerResult, offerResult in allBids:
             bids.append({
-                'offer': bidResult.offer_id,
+                'offerId': bidResult.offer_id,
+                'product': offerResult.product_name,
                 'buyer': buyerResult.phone_number,
                 'seller': sellerResult.phone_number,
                 'quantity': bidResult.quantity,
