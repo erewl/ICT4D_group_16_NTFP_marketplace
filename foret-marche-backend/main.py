@@ -3,9 +3,10 @@
 import os
 from site import USER_BASE
 
-from flask import Flask, request, render_template, jsonify, Response
+from flask import Flask, request, jsonify, render_template, Response
 from sqlalchemy import create_engine, text, select, join, update
 from sqlalchemy.orm import Session
+from sqlalchemy.orm.util import aliased
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 from flask_cors import CORS
 from postgresql.schemas import Offers, Users, Bids
@@ -18,8 +19,6 @@ HOST = os.getenv('HOST')
 
 engine = create_engine(f'postgresql+psycopg2://{USER}:{PWD}@{HOST}/{DATABASE}')
 conn = engine.connect()
-# session = Session(engine)
-
 
 if os.environ['ENV'] and os.environ['ENV'] == 'prod':
     app = Flask(__name__, static_url_path='/build/')
@@ -98,7 +97,6 @@ def update_offer(offerId):
         )
         print(result.rowcount)
         session.commit()
-        session.flush()
         return {'message': "Successful update!"}
 
 @app.route('/api/v1/offers', methods=['GET'])
@@ -121,20 +119,21 @@ def get_offers():
 def get_bids():
     with Session(engine) as session:
         bids = []
-        allBids = session.query(Bids).all()
-        print(allBids)
-        for bidResult in allBids:
+        buyer = aliased(Users)
+        seller = aliased(Users)
+        allBids = session.query(Bids, buyer, seller).join(buyer, Bids.buyer_id == buyer.user_id).join(seller, Bids.seller_id == seller.user_id).all()
+        for bidResult, buyerResult, sellerResult in allBids:
             bids.append({
                 'offer': bidResult.offer_id,
-                'buyer': bidResult.buyer_id,
-                'seller': bidResult.seller_id,
+                'buyer': buyerResult.phone_number,
+                'seller': sellerResult.phone_number,
                 'quantity': bidResult.quantity,
             })
     return jsonify({'data': bids})
 
 if __name__ == '__main__':
     if os.environ['ENV'] and os.environ['ENV'] == 'prod':
-        app.run(debug=True)
+        app.run(debug=False)
     else:
         host = "localhost"
         port = 5000
