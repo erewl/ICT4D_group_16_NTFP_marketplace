@@ -10,8 +10,9 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import OffersService from '../services/offers-service';
 import { TextField } from '@mui/material';
+import {withTranslation} from 'react-i18next';
 
-export default function Offers () {
+function Offers ({ t },props)  {
     const [state, setState] = React.useState({ offers: [] })
 
     const columns = ['Product', 'Quantity', 'Unit', 'Price', 'Phone Number']
@@ -38,8 +39,8 @@ export default function Offers () {
 
     const determineEditButton = (offer) => {
       if (offer && !offer.editing) return <div>
-        <Button sx={{ mr: 2 }} color="success" onClick={() => console.log("TODO BUY")} variant="outlined" > Buy</Button >
-        <Button sx={{ mr: 2 }} color="success" onClick={() => toggleEditState(offer)} variant="outlined">Edit</Button>
+        <Button sx={{ mr: 2 }} color="success" onClick={() => console.log("TODO BUY")} variant="outlined" > {t('offers.buy')}  </Button >
+        <Button sx={{ mr: 2 }} color="success" onClick={() => toggleEditState(offer)} variant="outlined">{t('offers.edit')}  </Button>
       </div>
       else
         return <div>
@@ -83,16 +84,18 @@ export default function Offers () {
  
     return (
     <div>
-        <Box sx={{ py: 4 }}>
-        <Typography variant="h3" component="div" sx={{ fontFamily: 'Monospace', fontWeight: 'medium' }}> Products for Sale </Typography>
+      <Box sx={{ py: 4 }}>
+        <Typography variant="h3" component="div" sx={{ fontFamily: 'Monospace', fontWeight: 'medium' }}> {t('offers.products_for_sale')} </Typography>
       </Box>
       <div style={{ width: '100%' }}>
         <TableContainer align="center">
-          <Table style={{ width: 1000 }} stickyHeader>
+          <Table style={{ width: 1100 }} stickyHeader>
             <TableHead>
-              {state.offers && columns.map((column) => (
-                <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {column} </Typography></TableCell>
-              ))}
+                <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('offers.product')}  </Typography></TableCell>
+                <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('offers.quantity')}  </Typography></TableCell>
+                <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('offers.unit')}  </Typography></TableCell>
+                <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('offers.price')}  </Typography></TableCell>
+                <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('offers.phone_number')}  </Typography></TableCell>
             </TableHead>
             <TableBody>
               {state.offers && state.offers.map((offer) => {
@@ -102,7 +105,7 @@ export default function Offers () {
                   <TableCell> {renderEditableCell(offer, 'unit')} </TableCell>
                   <TableCell> {renderEditableCell(offer, 'price')} </TableCell>
                   <TableCell> {renderCell(offer, 'sellerNumber')} </TableCell>
-                  <TableCell style={{width: 200}}>
+                  <TableCell style={{width: 250}}>
                     {determineEditButton(offer)}
                   </TableCell>
                 </TableRow>
@@ -115,3 +118,4 @@ export default function Offers () {
 
     );
   }
+  export default withTranslation()(Offers);

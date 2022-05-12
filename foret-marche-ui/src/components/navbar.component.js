@@ -5,9 +5,11 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Logo from '../img/logo_white.png';
+import {withTranslation} from 'react-i18next';
 
-export default function Navbar(props) {
 
+
+function Navbar({ t },props) {
   return (
     <Box sx={{ pb: 3 }} >
       <AppBar position="static" color="success">
@@ -27,16 +29,16 @@ export default function Navbar(props) {
 
             <Box>
               <Button color="inherit" sx={{ fontFamily: 'Monospace', fontSize: 20 }} >
-                Sell
+              {t('navbar.language')}
               </Button>
               <Button onClick={() => props.changeTab('offers')} color="inherit" sx={{ fontFamily: 'Monospace', fontSize: 20, color: "white" }} >
-                Offers
+              {t('navbar.offers')}
               </Button>
               <Button onClick={() => props.changeTab('bids')} color="inherit" sx={{ fontFamily: 'Monospace', fontSize: 20, color: "white" }} >
-                Bids
+              {t('navbar.bids')}
               </Button>
               <Button color="inherit" sx={{ fontFamily: 'Monospace', fontSize: 20 }} >
-                Login
+              {t('navbar.login')}
               </Button>
             </Box>
           </Box>
@@ -46,3 +48,5 @@ export default function Navbar(props) {
 
   );
 }
+
+export default withTranslation()(Navbar);
