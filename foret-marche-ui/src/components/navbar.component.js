@@ -1,21 +1,37 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import MenuItem from "@mui/material/MenuItem";
+import Menu from "@mui/material/Menu";
 import Logo from '../img/logo_white.png';
-import {withTranslation} from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 
 
 
-function Navbar({ t },props) {
+export default function Navbar(props) {
+  const { t, i18n } = useTranslation(); 
+  const lngs = {
+    en: { nativeName: 'English' },
+    fr: { nativeName: 'Français' },
+    nl: { nativeName: 'Nederlands' }
+  };
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <Box sx={{ pb: 3 }} >
       <AppBar position="static" color="success">
         <Toolbar>
           <Box sx={{ display: "flex", justifyContent: "space-between", width: 1 }}>
-
             <Box sx={{ display: "inline-flex", flexDirection: "row", cursor: "pointer" }}>
               <Box
                 component="img"
@@ -26,10 +42,54 @@ function Navbar({ t },props) {
                 Forêt Marché
               </Typography>
             </Box>
-
             <Box>
+              <Button 
+                onClick={handleClick}
+                size="small"
+                sx={{ ml: 2 , fontFamily: 'Monospace', fontSize: 20}}
+                aria-controls={open ? "language" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined } color="inherit" >
+                  {t('navbar.language')}
+              </Button>
+              <Menu
+                anchorEl={anchorEl}
+                id="language"
+                open={open}
+                onClose={handleClose}
+                onClick={handleClose}
+                PaperProps={{
+                  elevation: 0,
+                  sx: {
+                    overflow: "visible",
+                    filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                    "& .MuiAvatar-root": {
+                      width: 32,
+                      height: 32,
+                      ml: -0.5,
+                      mr: 1
+                    },
+                    "&:before": {
+                      content: '""',
+                      display: "block",
+                      position: "absolute",
+                      top: 0,
+                      right: 14,
+                      width: 10,
+                      height: 10,
+                      zIndex: 0
+                    }
+                  }
+                }}
+                transformOrigin={{ horizontal: "right", vertical: "top" }}
+                anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+              >
+                <MenuItem sx={{fontWeight: i18n.resolvedLanguage === 'en' ? 'bold' : 'normal'}} type="submit" onClick={() => {i18n.changeLanguage('en');}}>English</MenuItem>
+                <MenuItem sx={{fontWeight: i18n.resolvedLanguage === 'nl' ? 'bold' : 'normal'}} type="submit" onClick={() => {i18n.changeLanguage('nl');}}>Nederlands</MenuItem>
+                <MenuItem sx={{fontWeight: i18n.resolvedLanguage === 'fr' ? 'bold' : 'normal'}} type="submit" onClick={() => {i18n.changeLanguage('fr');}}>Français</MenuItem>
+              </Menu>
               <Button color="inherit" sx={{ fontFamily: 'Monospace', fontSize: 20 }} >
-              {t('navbar.language')}
+              {t('navbar.sell')}
               </Button>
               <Button onClick={() => props.changeTab('offers')} color="inherit" sx={{ fontFamily: 'Monospace', fontSize: 20, color: "white" }} >
               {t('navbar.offers')}
@@ -48,5 +108,3 @@ function Navbar({ t },props) {
 
   );
 }
-
-export default withTranslation()(Navbar);

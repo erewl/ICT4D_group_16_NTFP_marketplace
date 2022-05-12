@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -10,12 +10,12 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import OffersService from '../services/offers-service';
 import { TextField } from '@mui/material';
-import {withTranslation} from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 
-function Offers ({ t },props)  {
+export default function Offers (props)  {
+    const { t } = useTranslation();
+
     const [state, setState] = React.useState({ offers: [] })
-
-    const columns = ['Product', 'Quantity', 'Unit', 'Price', 'Phone Number']
 
     const update = s => {
       let offers = s.map(offer => ({ ...offer, editing: false }))
@@ -39,8 +39,8 @@ function Offers ({ t },props)  {
 
     const determineEditButton = (offer) => {
       if (offer && !offer.editing) return <div>
-        <Button sx={{ mr: 2 }} color="success" onClick={() => console.log("TODO BUY")} variant="outlined" > {t('offers.buy')}  </Button >
-        <Button sx={{ mr: 2 }} color="success" onClick={() => toggleEditState(offer)} variant="outlined">{t('offers.edit')}  </Button>
+        <Button sx={{ mr: 2 }} color="success" onClick={() => console.log("TODO BUY")} variant="outlined" > {t('buttons.buy')}  </Button >
+        <Button sx={{ mr: 2 }} color="success" onClick={() => toggleEditState(offer)} variant="outlined">{t('buttons.edit')}  </Button>
       </div>
       else
         return <div>
@@ -117,5 +117,4 @@ function Offers ({ t },props)  {
       </div>
 
     );
-  }
-  export default withTranslation()(Offers);
+}

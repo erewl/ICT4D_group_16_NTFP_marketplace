@@ -8,7 +8,7 @@ i18n
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
     debug: true,
-    fallbackLng: 'fr',
+    fallbackLng: 'en',
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
     },
@@ -29,8 +29,6 @@ i18n
                     unit: 'Unit',
                     price: 'Price',
                     phone_number: 'Phone Number',
-                    buy: 'buy',
-                    edit: 'edit'
                   },
                   bids: {
                       bids:'Bids',
@@ -39,10 +37,16 @@ i18n
                       quantity: 'Quantity',
                       seller: 'Seller',
                       buyer: 'Buyer',
-                      approve: 'approve',
                       edit: 'edit'
+                  },
+                  buttons: {
+                    buy: 'buy',
+                    edit: 'edit',
+                    approve: 'approve',
+                    yes: 'yes',
+                    no: 'no'
                   }
-                }
+            }
         },
         nl: {
             translation: {
@@ -60,20 +64,23 @@ i18n
                     unit: 'Eenheid',
                     price: 'Prijs',
                     phone_number: 'Telefoonnummer',
-                    buy: 'koop',
-                    edit: 'bewerk'
                   },
                   bids: {
-                      bids:'Bids',
-                      offer: 'Offer',
+                      bids:'Biedingen',
+                      offer: 'Bod',
                       product: 'Product',
-                      quantity: 'Quantity',
-                      seller: 'Seller',
-                      buyer: 'Buyer',
-                      approve: 'approve',
-                      edit: 'edit'
+                      quantity: 'Kwantiteit',
+                      seller: 'Verkoper',
+                      buyer: 'Koper'
+                  },
+                  buttons: {
+                    buy: 'koop',
+                    edit: 'bewerk',
+                    approve: 'goedkeuren',
+                    yes: 'ja',
+                    no: 'nee'
                   }
-                }
+            }
         },
         fr: {
             translation: {
@@ -91,20 +98,24 @@ i18n
                     unit: 'Unité',
                     price: 'Prix',
                     phone_number: 'Numéro de Téléphone',
-                    buy: 'Acheter',
-                    edit: 'Éditer'
                   },
                   bids: {
-                      bids:'Bids',
-                      offer: 'Offer',
-                      product: 'Product',
-                      quantity: 'Quantity',
-                      seller: 'Seller',
-                      buyer: 'Buyer',
-                      approve: 'approve',
-                      edit: 'edit'
+                      bids:'Enchères',
+                      offer: 'Offre',
+                      product: 'Produit',
+                      quantity: 'Quantité',
+                      seller: 'Marchand',
+                      buyer: 'Acheteur',
+                  },
+                  buttons:{
+                    buy: 'Acheter',
+                    edit: 'Éditer',
+                    approve: 'approuver',
+                    yes: 'oui',
+                    no: 'no'
                   }
-                }
+
+            }
         } 
     }
 });
