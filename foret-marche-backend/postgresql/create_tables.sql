@@ -31,3 +31,20 @@ CREATE TABLE IF NOT EXISTS  "users" (
       FOREIGN KEY(buyer_id) 
 	    REFERENCES "users" (user_id)
 );
+
+ CREATE TABLE IF NOT EXISTS "sales" (
+   sale_id serial PRIMARY KEY,
+   offer_id serial NOT NULL,
+   seller_id serial NOT NULL,
+   buyer_id serial NOT NULL,
+   quantity INT NOT NULL, 
+      CONSTRAINT fk_offer
+      FOREIGN KEY(offer_id) 
+	    REFERENCES "offers" (offer_id),
+      CONSTRAINT fk_seller
+      FOREIGN KEY(seller_id) 
+	    REFERENCES "users" (user_id),
+      CONSTRAINT fk_buyer
+      FOREIGN KEY(buyer_id) 
+	    REFERENCES "users" (user_id)
+);
