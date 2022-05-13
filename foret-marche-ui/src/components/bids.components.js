@@ -10,10 +10,12 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import bidsService from '../services/bids-service';
 import { TextField } from '@mui/material';
+import {useTranslation} from 'react-i18next';
 
 export default function Bids() {
   const [state, setState] = React.useState({ bids: [] })
-  const columns = ['Offer', 'Product', 'Seller', 'Buyer', 'Quantity']
+
+  const { t, i18n } = useTranslation(); 
 
   const update = s => {
     let bids = s.map(bid => ({ ...bid, editing: false }))
@@ -37,13 +39,13 @@ export default function Bids() {
 
   const determineEditButton = (bid) => {
     if (bid && !bid.editing) return <div>
-      <Button sx={{ mr: 2 }} color="success" onClick={() => console.log("TODO BUY")} variant="outlined" > Approve</Button >
-      <Button sx={{ mr: 2 }} color="success" onClick={() => toggleEditState(bid)} variant="outlined">Edit</Button>
+      <Button sx={{ mr: 2 }} color="success" onClick={() => console.log("TODO BUY")} variant="outlined" > {t('buttons.approve')} </Button >
+      <Button sx={{ mr: 2 }} color="success" onClick={() => toggleEditState(bid)} variant="outlined">{t('buttons.edit')} </Button>
     </div>
     else
       return <div>
-        <Button sx={{ mr: 2, }} color="success" onClick={() => console.log("TODO BUY")} variant="outlined" > No</Button >
-        <Button sx={{ mr: 2, }} color="success" onClick={() => toggleEditState(bid)} variant="outlined">Yes</Button>
+        <Button sx={{ mr: 2, }} color="success" onClick={() => console.log("TODO BUY")} variant="outlined" > {t('buttons.edit')} </Button >
+        <Button sx={{ mr: 2, }} color="success" onClick={() => toggleEditState(bid)} variant="outlined">{t('buttons.edit')} </Button>
       </div>
 
   }
@@ -54,6 +56,21 @@ export default function Bids() {
     let content = bid[attribute]
     return <Typography sx={commonStyle}>
       {content}
+    </Typography>
+  }
+
+  const productTranslation = (product, lng) => {
+    if (product == "Shea Butter" && lng == "fr") {
+      var product_name = "Beurre de Karité";
+    } else if (product == "Honey" && lng == "fr") {
+      var product_name = "Miel";
+    } else if (product == "Honey" && lng == "nl"){
+      var product_name = "Honing";
+    } else {
+      var product_name = product;
+    }
+    return <Typography sx={commonStyle}>
+      {product_name}
     </Typography>
   }
 
@@ -82,26 +99,28 @@ export default function Bids() {
 
   return (
     <div>
-      <Box sx={{ py: 4 }}>
-        <Typography variant="h3" align="center" component="div" sx={{ fontFamily: 'Monospace', fontWeight: 'medium' }}> Bids </Typography>
+      <Box sx={{ py: 4 }} align="center">
+        <Typography variant="h3" align="center" component="div" sx={{ fontFamily: 'Monospace', fontWeight: 'medium' }}> {t('bids.bids')}  </Typography>
       </Box>
       <div style={{ width: '100%' }}>
         <TableContainer align="center">
-          <Table style={{ width: 1000 }} stickyHeader>
+          <Table style={{ width: 1100 }} stickyHeader>
             <TableHead>
-              {state.bids && columns.map((column) => (
-                <TableCell key={ column }> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {column} </Typography></TableCell>
-              ))}
+                <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('bids.offer')}  </Typography></TableCell>
+                <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('bids.product')}  </Typography></TableCell>
+                <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('bids.seller')}  </Typography></TableCell>
+                <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('bids.buyer')}  </Typography></TableCell>
+                <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('bids.quantity')}  </Typography></TableCell>
             </TableHead>
             <TableBody>
               {state.bids && state.bids.map((bid) => {
                 return <TableRow key={bid.offerId} >
                   <TableCell> {renderCell(bid, 'offerId')} </TableCell>
-                  <TableCell> {renderCell(bid, 'product')} </TableCell>
+                  <TableCell> {productTranslation(bid['product'], i18n.resolvedLanguage)} </TableCell>
                   <TableCell> {renderEditableCell(bid, 'seller')} </TableCell>
                   <TableCell> {renderEditableCell(bid, 'buyer')} </TableCell>
                   <TableCell> {renderEditableCell(bid, 'quantity')} </TableCell>
-                  <TableCell style={{ width: 200 }}>
+                  <TableCell style={{ width: 300 }}>
                     {determineEditButton(bid)}
                   </TableCell>
                 </TableRow>
