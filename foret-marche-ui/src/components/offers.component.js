@@ -13,7 +13,7 @@ import { TextField } from '@mui/material';
 import {useTranslation} from 'react-i18next';
 
 export default function Offers (props)  {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
 
     const [state, setState] = React.useState({ offers: [] })
 
@@ -69,6 +69,21 @@ export default function Offers (props)  {
         return <TextField sx={commonStyle} onChange={event => updateOffer(event, offer, attribute)} defaultValue={content} />
     }
 
+    const productTranslation = (product, lng) => {
+      if (product == "Shea Butter" && lng == "fr") {
+        var product_name = "Beurre de Karité";
+      } else if (product == "Honey" && lng == "fr") {
+        var product_name = "Miel";
+      } else if (product == "Honey" && lng == "nl"){
+        var product_name = "Honing";
+      } else {
+        var product_name = product;
+      }
+      return <Typography sx={commonStyle}>
+        {product_name}
+      </Typography>
+    }
+
     const updateOffer = (event, offer, attribute) => {
       let offerCopy = offer
       let offersCopy = state.offers
@@ -100,7 +115,7 @@ export default function Offers (props)  {
             <TableBody>
               {state.offers && state.offers.map((offer) => {
                 return <TableRow>
-                  <TableCell> {renderCell(offer, 'product')} </TableCell>
+                  <TableCell> {productTranslation(offer['product'], i18n.resolvedLanguage)} </TableCell>
                   <TableCell> {renderEditableCell(offer, 'quantity')} </TableCell>
                   <TableCell> {renderEditableCell(offer, 'unit')} </TableCell>
                   <TableCell> {renderEditableCell(offer, 'price')} </TableCell>
