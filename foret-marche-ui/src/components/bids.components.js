@@ -15,7 +15,7 @@ import {useTranslation} from 'react-i18next';
 export default function Bids() {
   const [state, setState] = React.useState({ bids: [] })
 
-  const { t } = useTranslation(); 
+  const { t, i18n } = useTranslation(); 
 
   const update = s => {
     let bids = s.map(bid => ({ ...bid, editing: false }))
@@ -56,6 +56,21 @@ export default function Bids() {
     let content = bid[attribute]
     return <Typography sx={commonStyle}>
       {content}
+    </Typography>
+  }
+
+  const productTranslation = (product, lng) => {
+    if (product == "Shea Butter" && lng == "fr") {
+      var product_name = "Beurre de Karité";
+    } else if (product == "Honey" && lng == "fr") {
+      var product_name = "Miel";
+    } else if (product == "Honey" && lng == "nl"){
+      var product_name = "Honing";
+    } else {
+      var product_name = product;
+    }
+    return <Typography sx={commonStyle}>
+      {product_name}
     </Typography>
   }
 
@@ -101,7 +116,7 @@ export default function Bids() {
               {state.bids && state.bids.map((bid) => {
                 return <TableRow key={bid.offerId} >
                   <TableCell> {renderCell(bid, 'offerId')} </TableCell>
-                  <TableCell> {renderCell(bid, 'product')} </TableCell>
+                  <TableCell> {productTranslation(bid['product'], i18n.resolvedLanguage)} </TableCell>
                   <TableCell> {renderEditableCell(bid, 'seller')} </TableCell>
                   <TableCell> {renderEditableCell(bid, 'buyer')} </TableCell>
                   <TableCell> {renderEditableCell(bid, 'quantity')} </TableCell>
