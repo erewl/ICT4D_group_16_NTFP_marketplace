@@ -48,16 +48,21 @@ const determineLanguage = () => {
     }
 }
 
-const handleSubmit = event => {
-    event.preventDefault();
-    const offer = {"product": product, "quantity": quantity, "units": unit, "price": price, "session.callerid": phoneNumber}
-    OffersService.setData(offer)
+  const submit = e => {
+    e.preventDefault()
+    let offer = new FormData()
+    offer.append("product",product);
+    offer.append("quantity",quantity);
+    offer.append("price",price);
+    offer.append("session.callerid",phoneNumber);
+    offer.append("units",unit);
+    OffersService.setData(offer);
     setProduct("");
     setQuantity("");
     setUnit("");
     setPrice("");
     setPhoneNumber("");
-  };
+  }
 
   return (
     <div>
@@ -65,7 +70,7 @@ const handleSubmit = event => {
             <Typography variant="h3" component="div" sx={{ fontFamily: 'Monospace', fontWeight: 'medium' }}> {t('offers.sell_a_product')} </Typography>
         </Box>
         <Box sx={{mt:3}} align="center">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={submit}>
                 <div> 
                     <Typography sx={{fontSize: 12, my: 1, fontFamily: 'Monospace'}}> {t('offers.product')} </Typography>
                     <TextField

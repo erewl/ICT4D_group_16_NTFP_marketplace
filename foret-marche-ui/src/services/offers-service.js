@@ -16,7 +16,7 @@ class OffersService {
     }
 
     setData = (offer) => {
-        return http.post(`/api/v1/offers/`, offer).then(response => {
+        return http.post('/api/v1/offers', offer).then(response => {
             console.log(response.data)
         })
     }
