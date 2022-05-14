@@ -24,6 +24,7 @@ i18n
                   },
                   offers: {
                     products_for_sale: 'Products for Sale',
+                    sell_a_product: 'Sell a Product',
                     product: 'Product',
                     quantity: 'Quantity',
                     unit: 'Unit',
@@ -44,7 +45,8 @@ i18n
                     edit: 'edit',
                     approve: 'approve',
                     yes: 'yes',
-                    no: 'no'
+                    no: 'no',
+                    submit: 'submit'
                   }
             }
         },
@@ -59,6 +61,7 @@ i18n
                   },
                   offers: {
                     products_for_sale: 'Producten te Koop',
+                    sell_a_product: 'Verkoop een Product',
                     product: 'Product',
                     quantity: 'Hoeveelheid',
                     unit: 'Eenheid',
@@ -78,7 +81,8 @@ i18n
                     edit: 'bewerk',
                     approve: 'goedkeuren',
                     yes: 'ja',
-                    no: 'nee'
+                    no: 'nee',
+                    submit: 'verzenden'
                   }
             }
         },
@@ -93,6 +97,7 @@ i18n
                   },
                   offers: {
                     products_for_sale: 'Produits à Vendre',
+                    sell_a_product: 'Vendre un Produit',
                     product: 'Produit',
                     quantity: 'Quantité',
                     unit: 'Unité',
@@ -112,7 +117,8 @@ i18n
                     edit: 'Éditer',
                     approve: 'approuver',
                     yes: 'oui',
-                    no: 'no'
+                    no: 'no',
+                    submit: 'envoyer'
                   }
 
             }
