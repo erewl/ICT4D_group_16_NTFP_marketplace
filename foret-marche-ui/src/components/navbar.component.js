@@ -33,7 +33,7 @@ export default function Navbar(props) {
       <AppBar position="static" color="success">
         <Toolbar>
           <Box sx={{ display: "flex", justifyContent: "space-between", width: 1 }}>
-            <Box sx={{ display: "inline-flex", flexDirection: "row", cursor: "pointer" }}>
+            <Box onClick={() => props.changeTab('offers')} sx={{ display: "inline-flex", flexDirection: "row", cursor: "pointer" }}>
               <Box
                 component="img"
                 sx={{ height: 50, pr: 1 }}
