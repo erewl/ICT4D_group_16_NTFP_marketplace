@@ -1,136 +1,135 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <vxml version="2.1" application="http://webhosting.voxeo.net/170418/www/root.vxml">
     
-    <script>
-    var offers2 = JSON.parse('[{
-		"id": 23,
-		"price": 20,
-		"product": "Shea Butter",
-		"quantity": 100,
-		"sellerNumber": "123123123",
-		"unit": "liters"
-	}, {
-		"id": 24,
-		"price": 20,
-		"product": "Shea Butter",
-		"quantity": 100,
-		"sellerNumber": "123124125",
-		"unit": "liters"
-	}, {
-		"id": 25,
-		"price": 3,
-		"product": "Shea Butter",
-		"quantity": 80,
-		"sellerNumber": "31623730705",
-		"unit": "liters"
-	}, {
-		"id": 2,
-		"price": 10,
-		"product": "Honey",
-		"quantity": 2,
-		"sellerNumber": "0618181818",
-		"unit": "kilogram"
-	}, {
-		"id": 20,
-		"price": 999,
-		"product": "Shea Butter",
-		"quantity": 100,
-		"sellerNumber": "123123123",
-		"unit": "liters"
-	}, {
-		"id": 22,
-		"price": 1,
-		"product": "Shea Butter",
-		"quantity": 2,
-		"sellerNumber": "123123123",
-		"unit": "kilograms"
-	}, {
-		"id": 19,
-		"price": 1,
-		"product": "Shea Butter",
-		"quantity": 200000,
-		"sellerNumber": "0618181818",
-		"unit": "liters"
-	}, {
-		"id": 1,
-		"price": 5,
-		"product": "Shea Butter",
-		"quantity": 10,
-		"sellerNumber": "0618181818",
-		"unit": "liters"
-	}, {
-		"id": 27,
-		"price": 7,
-		"product": "Shea Butter",
-		"quantity": 10,
-		"sellerNumber": "31642674758",
-		"unit": "liters"
-	}, {
-		"id": 26,
-		"price": 5,
-		"product": "Honey",
-		"quantity": 29,
-		"sellerNumber": "0618181818",
-		"unit": "kilogram"
-	}, {
-		"id": 28,
-		"price": 159,
-		"product": "Shea Butter",
-		"quantity": 69,
-		"sellerNumber": "31643784494",
-		"unit": "liters"
-	}, {
-		"id": 21,
-		"price": 999,
-		"product": "Shea Butter",
-		"quantity": 100000,
-		"sellerNumber": "123123123",
-		"unit": "liters"
-	}, {
-		"id": 29,
-		"price": 20,
-		"product": "Shea Butter",
-		"quantity": 100,
-		"sellerNumber": "3167777777",
-		"unit": "liters"
-	}, {
-		"id": 30,
-		"price": 34,
-		"product": "Sesame Oil",
-		"quantity": 15,
-		"sellerNumber": "3167777777",
-		"unit": "litres"
-	}, {
-		"id": 31,
-		"price": 20,
-		"product": "Nuts",
-		"quantity": 1,
-		"sellerNumber": "3167777777",
-		"unit": "kilogram"
-	}, {
-		"id": 32,
-		"price": 20,
-		"product": "Nuts",
-		"quantity": 1,
-		"sellerNumber": "3167777777",
-		"unit": "kilogram"
-	}, {
-		"id": 33,
-		"price": 40,
-		"product": "Honey",
-		"quantity": 12,
-		"sellerNumber": "31643784494",
-		"unit": "litres"
-	}, {
-		"id": 34,
-		"price": 23,
-		"product": "Sesame Oil",
-		"quantity": 11,
-		"sellerNumber": "123123123",
-		"unit": "litres"
-	}]
-')
-    </script>
+    <!-- <script>
+   var offers2 = JSON.parse([{
+	"id": 23,
+	"price": 20,
+	"product": "Shea Butter",
+	"quantity": 100,
+	"sellerNumber": "123123123",
+	"unit": "liters"
+}, {
+	"id": 24,
+	"price": 20,
+	"product": "Shea Butter",
+	"quantity": 100,
+	"sellerNumber": "123124125",
+	"unit": "liters"
+}, {
+	"id": 25,
+	"price": 3,
+	"product": "Shea Butter",
+	"quantity": 80,
+	"sellerNumber": "31623730705",
+	"unit": "liters"
+}, {
+	"id": 2,
+	"price": 10,
+	"product": "Honey",
+	"quantity": 2,
+	"sellerNumber": "0618181818",
+	"unit": "kilogram"
+}, {
+	"id": 20,
+	"price": 999,
+	"product": "Shea Butter",
+	"quantity": 100,
+	"sellerNumber": "123123123",
+	"unit": "liters"
+}, {
+	"id": 22,
+	"price": 1,
+	"product": "Shea Butter",
+	"quantity": 2,
+	"sellerNumber": "123123123",
+	"unit": "kilograms"
+}, {
+	"id": 19,
+	"price": 1,
+	"product": "Shea Butter",
+	"quantity": 200000,
+	"sellerNumber": "0618181818",
+	"unit": "liters"
+}, {
+	"id": 1,
+	"price": 5,
+	"product": "Shea Butter",
+	"quantity": 10,
+	"sellerNumber": "0618181818",
+	"unit": "liters"
+}, {
+	"id": 27,
+	"price": 7,
+	"product": "Shea Butter",
+	"quantity": 10,
+	"sellerNumber": "31642674758",
+	"unit": "liters"
+}, {
+	"id": 26,
+	"price": 5,
+	"product": "Honey",
+	"quantity": 29,
+	"sellerNumber": "0618181818",
+	"unit": "kilogram"
+}, {
+	"id": 28,
+	"price": 159,
+	"product": "Shea Butter",
+	"quantity": 69,
+	"sellerNumber": "31643784494",
+	"unit": "liters"
+}, {
+	"id": 21,
+	"price": 999,
+	"product": "Shea Butter",
+	"quantity": 100000,
+	"sellerNumber": "123123123",
+	"unit": "liters"
+}, {
+	"id": 29,
+	"price": 20,
+	"product": "Shea Butter",
+	"quantity": 100,
+	"sellerNumber": "3167777777",
+	"unit": "liters"
+}, {
+	"id": 30,
+	"price": 34,
+	"product": "Sesame Oil",
+	"quantity": 15,
+	"sellerNumber": "3167777777",
+	"unit": "litres"
+}, {
+	"id": 31,
+	"price": 20,
+	"product": "Nuts",
+	"quantity": 1,
+	"sellerNumber": "3167777777",
+	"unit": "kilogram"
+}, {
+	"id": 32,
+	"price": 20,
+	"product": "Nuts",
+	"quantity": 1,
+	"sellerNumber": "3167777777",
+	"unit": "kilogram"
+}, {
+	"id": 33,
+	"price": 40,
+	"product": "Honey",
+	"quantity": 12,
+	"sellerNumber": "31643784494",
+	"unit": "litres"
+}, {
+	"id": 34,
+	"price": 23,
+	"product": "Sesame Oil",
+	"quantity": 11,
+	"sellerNumber": "123123123",
+	"unit": "litres"
+}]);
+    </script> -->
 
     <script>
         var offers = new Array(3);
@@ -148,11 +147,143 @@
         offers[3].offer = "second offer of sheabutter"
     </script>
 
+    <script>
+        var offerstext = '[{
+	"id": 23,
+	"price": 20,
+	"product": "Shea Butter",
+	"quantity": 100,
+	"sellerNumber": "123123123",
+	"unit": "liters"
+}, {
+	"id": 24,
+	"price": 20,
+	"product": "Shea Butter",
+	"quantity": 100,
+	"sellerNumber": "123124125",
+	"unit": "liters"
+}, {
+	"id": 25,
+	"price": 3,
+	"product": "Shea Butter",
+	"quantity": 80,
+	"sellerNumber": "31623730705",
+	"unit": "liters"
+}, {
+	"id": 2,
+	"price": 10,
+	"product": "Honey",
+	"quantity": 2,
+	"sellerNumber": "0618181818",
+	"unit": "kilogram"
+}, {
+	"id": 20,
+	"price": 999,
+	"product": "Shea Butter",
+	"quantity": 100,
+	"sellerNumber": "123123123",
+	"unit": "liters"
+}, {
+	"id": 22,
+	"price": 1,
+	"product": "Shea Butter",
+	"quantity": 2,
+	"sellerNumber": "123123123",
+	"unit": "kilograms"
+}, {
+	"id": 19,
+	"price": 1,
+	"product": "Shea Butter",
+	"quantity": 200000,
+	"sellerNumber": "0618181818",
+	"unit": "liters"
+}, {
+	"id": 1,
+	"price": 5,
+	"product": "Shea Butter",
+	"quantity": 10,
+	"sellerNumber": "0618181818",
+	"unit": "liters"
+}, {
+	"id": 27,
+	"price": 7,
+	"product": "Shea Butter",
+	"quantity": 10,
+	"sellerNumber": "31642674758",
+	"unit": "liters"
+}, {
+	"id": 26,
+	"price": 5,
+	"product": "Honey",
+	"quantity": 29,
+	"sellerNumber": "0618181818",
+	"unit": "kilogram"
+}, {
+	"id": 28,
+	"price": 159,
+	"product": "Shea Butter",
+	"quantity": 69,
+	"sellerNumber": "31643784494",
+	"unit": "liters"
+}, {
+	"id": 21,
+	"price": 999,
+	"product": "Shea Butter",
+	"quantity": 100000,
+	"sellerNumber": "123123123",
+	"unit": "liters"
+}, {
+	"id": 29,
+	"price": 20,
+	"product": "Shea Butter",
+	"quantity": 100,
+	"sellerNumber": "3167777777",
+	"unit": "liters"
+}, {
+	"id": 30,
+	"price": 34,
+	"product": "Sesame Oil",
+	"quantity": 15,
+	"sellerNumber": "3167777777",
+	"unit": "litres"
+}, {
+	"id": 31,
+	"price": 20,
+	"product": "Nuts",
+	"quantity": 1,
+	"sellerNumber": "3167777777",
+	"unit": "kilogram"
+}, {
+	"id": 32,
+	"price": 20,
+	"product": "Nuts",
+	"quantity": 1,
+	"sellerNumber": "3167777777",
+	"unit": "kilogram"
+}, {
+	"id": 33,
+	"price": 40,
+	"product": "Honey",
+	"quantity": 12,
+	"sellerNumber": "31643784494",
+	"unit": "litres"
+}, {
+	"id": 34,
+	"price": 23,
+	"product": "Sesame Oil",
+	"quantity": 11,
+	"sellerNumber": "123123123",
+	"unit": "litres"
+}]'
+    </script
+
     <property name="inputmodes" value="dtmf" />
 
     <var name="language" expr="'en_recordings'" />
     <var name="product" expr="'no product selected'" />
     <assign name="language" expr="'en_recordings'" />
+
+    <var name="language" expr="JSON.parse(offerstext)" />
 
     <form id="greeting">
         <block>
