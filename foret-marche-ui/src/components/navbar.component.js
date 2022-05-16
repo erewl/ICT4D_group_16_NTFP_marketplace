@@ -9,11 +9,10 @@ import Menu from "@mui/material/Menu";
 import Logo from '../img/logo_white.png';
 import {useTranslation} from 'react-i18next';
 import LanguageIcon from '@mui/icons-material/Language';
-
-
 import useToken from '../util/useToken.util';
 import LoginModal from './login.component';
 import authService from '../services/auth-service';
+import { UserContext } from '../context/UserContext';
 
 export default function Navbar(props) {
   const { t, i18n } = useTranslation();
@@ -31,8 +30,12 @@ export default function Navbar(props) {
     setAnchorEl(null);
   };
 
-  const { token, removeToken, setToken } = useToken();
-  console.log("Token " + token);
+  const [context, setContext] = React.useContext(UserContext);
+
+  const removeToken = () => {
+    localStorage.removeItem("token");
+    setContext({...context, token: ''})
+  }
 
   const [modalOpen, setModalOpen] = React.useState(false);
 
@@ -107,7 +110,7 @@ export default function Navbar(props) {
               <Button onClick={() => props.changeTab('bids')} color="inherit" sx={{ fontFamily: 'Monospace', fontSize: 20, color: "white" }} >
               {t('navbar.bids')}
               </Button>
-              {!token || token === null || token === undefined ? 
+              {!context.token && context.token !== '' ? 
                 <>
                   <Button color="inherit" onClick={() => setModalOpen(true)} sx={{ fontFamily: 'Monospace', fontSize: 20 }} >
                   {t('navbar.login')}

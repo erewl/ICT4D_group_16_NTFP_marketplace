@@ -4,14 +4,13 @@ class AuthService {
 
     loginUser = (credentials, callback) => {
         return http.post(`/api/v1/auth/login`, credentials).then(response => {
-            console.log(response)
-            return callback(response.data.accesstoken)
+            callback(response.data.access_token)
         })
     }
 
     logoutUser = (callback) => {
         return http.post(`/api/v1/auth/logout`).then(response => {
-            console.log(response)
+            console.log(response.data)
             callback()
         })
     }

@@ -4,11 +4,11 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import { TextField } from '@mui/material';
 import AuthService from '../services/auth-service';
-import useToken from '../util/useToken.util';
+import { UserContext } from '../context/UserContext';
 
 export default function LoginModal(props) {
 
-    const { setToken } = useToken();
+    const [context, setContext] = React.useContext(UserContext);
 
     const userRef = React.useRef('admin')
     const pwdRef = React.useRef('admin')
@@ -27,7 +27,9 @@ export default function LoginModal(props) {
     };
 
     const loginUser = () => {
-        AuthService.loginUser({ user: userRef.current.value, password: pwdRef.current.value }, setToken)
+        AuthService.loginUser({ user: userRef.current.value, password: pwdRef.current.value }, token => {
+            setContext({ ...context, token: token })
+        })
         props.setClose()
     }
 

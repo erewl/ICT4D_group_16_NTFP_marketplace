@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -11,14 +11,14 @@ import Typography from '@mui/material/Typography';
 import OffersService from '../services/offers-service';
 import { TextField } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import useToken  from '../util/useToken.util';
+import { UserContext } from '../context/UserContext';
 
 export default function Offers(props) {
     const { t, i18n } = useTranslation();
 
     const [state, setState] = React.useState({ offers: [] })
 
-    const { token, removeToken, setToken } = useToken();
+    const [context, setContext] = useContext(UserContext);
 
     const update = s => {
         let offers = s.map(offer => ({ ...offer, editing: false }))
@@ -37,18 +37,22 @@ export default function Offers(props) {
 
     // useEffect is being run before and after each render of the site, to limit the API call only to when no data is in the frontend, the if-clause is introduced
     React.useEffect(() => {
-        let response = OffersService.fetchData(update);
+        OffersService.fetchData(update);
     }, []);
 
     const determineEditButton = (offer) => {
         if (offer && !offer.editing) return <div>
             <Button sx={{ mr: 2 }} color="success" onClick={() => console.log("TODO BUY")} variant="outlined" > {t('buttons.buy')}  </Button >
-            <Button sx={{ mr: 2 }} color="success" onClick={() => toggleEditState(offer)} variant="outlined">{t('buttons.edit')}  </Button>
+            {context.token && context.token !== '' && <Button sx={{ mr: 2 }} color="success" onClick={() => toggleEditState(offer)} variant="outlined">{t('buttons.edit')}  </Button>}
         </div>
         else
             return <div>
-                <Button sx={{ mr: 2, }} color="success" onClick={() => console.log("TODO BUY")} variant="outlined" > Delete</Button >
-                <Button sx={{ mr: 2, }} color="success" onClick={() => toggleEditState(offer)} variant="outlined">Save</Button>
+                {context.token && context.token !== '' &&
+                    <>
+                        <Button sx={{ mr: 2, }} color="success" onClick={() => console.log("delete")} variant="outlined" > Delete</Button >
+                        <Button sx={{ mr: 2, }} color="success" onClick={() => toggleEditState(offer)} variant="outlined">Save</Button>
+                    </>
+                }
             </div>
 
     }
