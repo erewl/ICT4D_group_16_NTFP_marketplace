@@ -10,12 +10,15 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import bidsService from '../services/bids-service';
 import { TextField } from '@mui/material';
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
+import { UserContext } from '../context/UserContext';
 
 export default function Bids() {
   const [state, setState] = React.useState({ bids: [] })
 
-  const { t, i18n } = useTranslation(); 
+  const [context, setContext] = React.useContext(UserContext);
+
+  const { t, i18n } = useTranslation();
 
   const update = s => {
     let bids = s.map(bid => ({ ...bid, editing: false }))
@@ -26,7 +29,7 @@ export default function Bids() {
   const toggleEditState = (bid) => {
     let bidsCopy = state.bids
     if (bid.editing) { // when editing is being toggled from true -> false: we are saving data
-      bidsService.updateData(bid)
+      bidsService.updateData(bid, context.token)
     }
     bidsCopy.find(o => o.id === bid.id).editing = !bidsCopy.find(o => o.id === bid.id).editing
     setState({ ...state, bids: bidsCopy })
@@ -40,12 +43,18 @@ export default function Bids() {
   const determineEditButton = (bid) => {
     if (bid && !bid.editing) return <div>
       <Button sx={{ mr: 2 }} color="success" onClick={() => console.log("TODO BUY")} variant="outlined" > {t('buttons.approve')} </Button >
-      <Button sx={{ mr: 2 }} color="success" onClick={() => toggleEditState(bid)} variant="outlined">{t('buttons.edit')} </Button>
-    </div>
+      {context.token && context.token !== '' &&
+        < Button sx={{ mr: 2 }} color="success" onClick={() => toggleEditState(bid)} variant="outlined">{t('buttons.edit')} </Button>
+      }
+    </div >
     else
       return <div>
-        <Button sx={{ mr: 2, }} color="success" onClick={() => console.log("TODO BUY")} variant="outlined" > {t('buttons.edit')} </Button >
-        <Button sx={{ mr: 2, }} color="success" onClick={() => toggleEditState(bid)} variant="outlined">{t('buttons.edit')} </Button>
+        {context.token && context.token !== '' &&
+          <>
+            <Button sx={{ mr: 2, }} color="success" onClick={() => console.log("TODO BUY")} variant="outlined" > {t('buttons.edit')} </Button >
+            <Button sx={{ mr: 2, }} color="success" onClick={() => toggleEditState(bid)} variant="outlined">{t('buttons.edit')} </Button>
+          </>
+        }
       </div>
 
   }
@@ -64,7 +73,7 @@ export default function Bids() {
       var product_name = "Beurre de Karité";
     } else if (product == "Honey" && lng == "fr") {
       var product_name = "Miel";
-    } else if (product == "Honey" && lng == "nl"){
+    } else if (product == "Honey" && lng == "nl") {
       var product_name = "Honing";
     } else {
       var product_name = product;
@@ -106,11 +115,11 @@ export default function Bids() {
         <TableContainer align="center">
           <Table style={{ width: 1100 }} stickyHeader>
             <TableHead>
-                <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('bids.offer')}  </Typography></TableCell>
-                <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('bids.product')}  </Typography></TableCell>
-                <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('bids.seller')}  </Typography></TableCell>
-                <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('bids.buyer')}  </Typography></TableCell>
-                <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('bids.quantity')}  </Typography></TableCell>
+              <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('bids.offer')}  </Typography></TableCell>
+              <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('bids.product')}  </Typography></TableCell>
+              <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('bids.seller')}  </Typography></TableCell>
+              <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('bids.buyer')}  </Typography></TableCell>
+              <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('bids.quantity')}  </Typography></TableCell>
             </TableHead>
             <TableBody>
               {state.bids && state.bids.map((bid) => {

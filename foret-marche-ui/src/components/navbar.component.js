@@ -9,11 +9,12 @@ import Menu from "@mui/material/Menu";
 import Logo from '../img/logo_white.png';
 import {useTranslation} from 'react-i18next';
 import LanguageIcon from '@mui/icons-material/Language';
-
-
+import LoginModal from './login.component';
+import authService from '../services/auth-service';
+import { UserContext } from '../context/UserContext';
 
 export default function Navbar(props) {
-  const { t, i18n } = useTranslation(); 
+  const { t, i18n } = useTranslation();
   const lngs = {
     en: { nativeName: 'English' },
     fr: { nativeName: 'Français' },
@@ -27,6 +28,15 @@ export default function Navbar(props) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const [context, setContext] = React.useContext(UserContext);
+
+  const removeToken = () => {
+    localStorage.removeItem("token");
+    setContext({...context, token: null})
+  }
+
+  const [modalOpen, setModalOpen] = React.useState(false);
 
   return (
     <Box sx={{ pb: 3 }} >
@@ -99,9 +109,20 @@ export default function Navbar(props) {
               <Button onClick={() => props.changeTab('bids')} color="inherit" sx={{ fontFamily: 'Monospace', fontSize: 20, color: "white" }} >
               {t('navbar.bids')}
               </Button>
-              <Button color="inherit" sx={{ fontFamily: 'Monospace', fontSize: 20 }} >
-              {t('navbar.login')}
-              </Button>
+              {!context.token && context.token !== ''? 
+                <>
+                  <Button color="inherit" onClick={() => setModalOpen(true)} sx={{ fontFamily: 'Monospace', fontSize: 20 }} >
+                  {t('navbar.login')}
+                  </Button>
+                  {modalOpen &&
+                    <LoginModal open={true} setClose={() => setModalOpen(false) } setOpen={() => setModalOpen(true)} />
+                  }
+                </> :
+                <Button color="inherit" onClick={() => authService.logoutUser(removeToken) } sx={{ fontFamily: 'Monospace', fontSize: 20 }}>
+                  {t('navbar.logout')}
+                </Button>
+              }
+              
             </Box>
           </Box>
         </Toolbar>
