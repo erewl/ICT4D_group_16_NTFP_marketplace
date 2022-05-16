@@ -14,7 +14,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            10
+            11
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/welcome.mp3'" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/welcome.mp3" />
             </prompt>
@@ -154,17 +154,20 @@
                     <break time="500ms"/>
                     <value expr="offer.price"/>
                     <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/franc.mp3'" />
+                    <break time="500ms"/>
                     Per
                     <value expr="offer.unit" />
-                    <break time="200ms"/>
+                    <break time="500ms"/>
                     Availability:
                     <value expr="offer.quantity" />
+                    <break time="500ms"/>
                     <value expr="offer.unit" />
                     <assign name="iterator" expr="iterator + 1" />
                     <break time="500ms"/>
                 </if>
                 <break time="300ms"/>
             </foreach>
+            End list
             </prompt>
 
             <filled>
@@ -173,7 +176,7 @@
                     <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/selected.mp3'" />
                     <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + offer_selection + '.mp3'" />
                     <foreach item="offer" array="offers">
-                        <if cond="product == offer.product`_lower">
+                        <if cond="product == offer.product_lower">
                             <if cond="offer_selection == iterator">
                                 <assign name="selected_offer" expr="offer"/>
                             </if>
@@ -264,6 +267,7 @@
             <break time="200" />
         </prompt>
         <!-- Do the database stuff here -->
+        <value expr="selected_offer.id"/>
         <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/submit_success.mp3'" />
         <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/thanks_for_using.mp3'" />
     </catch>
