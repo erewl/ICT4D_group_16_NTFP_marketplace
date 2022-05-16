@@ -28,3 +28,11 @@ class Bids(Base):
      seller_id = Column( Integer, ForeignKey("users.user_id"))
      buyer_id = Column( Integer, ForeignKey("users.user_id"))
      quantity = Column( Integer, nullable=False)
+
+class Sales(Base):
+     __tablename__ = "sales"
+     sale_id = Column(Integer, primary_key=True, autoincrement=True)
+     offer_id = Column( Integer, ForeignKey("offers.offer_id"))
+     seller_id = Column( Integer, ForeignKey("users.user_id"))
+     buyer_id = Column( Integer, ForeignKey("users.user_id"))
+     quantity = Column( Integer, nullable=False)

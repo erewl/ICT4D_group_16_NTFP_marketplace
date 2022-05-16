@@ -143,6 +143,23 @@ def get_bids():
             })
     return jsonify({'data': bids})
 
+@app.route(f'{api_prefix}offers/<offerId>', methods=['DELETE'])
+@jwt_required()
+def delete_offer(offerId):
+    with Session(engine) as session:
+        session.query(Offers).filter(Offers.offer_id==offerId).delete()
+        session.query(Bids).filter(Bids.offer_id==offerId).delete()
+        session.commit()
+        return {'message': "Successfully deleted offer and associated bids"}
+
+@app.route(f'{api_prefix}bids/<bidId>', methods=['DELETE'])
+@jwt_required()
+def delete_offer(bidId):
+    with Session(engine) as session:
+        session.query(Bids).filter(Bids.bid_id==bidId).delete()
+        session.commit()
+        return {'message': "Successfully deleted bids"}
+
 
 app.config["JWT_SECRET_KEY"] = "please-remember-to-change-me"
 jwt = JWTManager(app)
