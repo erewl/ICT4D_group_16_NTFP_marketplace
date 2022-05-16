@@ -14,7 +14,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            15
+            16
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/welcome.mp3'" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/welcome.mp3" />
             </prompt>
@@ -277,6 +277,7 @@
         </prompt>
         <!-- Do the database stuff here -->
         <value expr="selected_offer.id"/>
+        <data name="submission_response" src="http://forest-marche.herokuapp.com/api/v1/bids" method="post" fetchtimeout="10s" namelist="selected_offer.id buy_quantity session.callerid" />
         <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/submit_success.mp3'" />
         <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/thanks_for_using.mp3'" />
     </catch>
