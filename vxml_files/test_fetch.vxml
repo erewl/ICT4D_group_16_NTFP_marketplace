@@ -10,7 +10,7 @@
             <var name="offers" expr="JSON.parse(offerrequest)['data']"/>
 
             <prompt>
-            2
+            3
             Hello world!
             <foreach item="offer" array="offers">
                 <value expr="offer.product"/>
