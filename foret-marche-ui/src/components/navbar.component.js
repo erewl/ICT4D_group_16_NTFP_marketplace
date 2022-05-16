@@ -36,14 +36,6 @@ export default function Navbar(props) {
 
   const [modalOpen, setModalOpen] = React.useState(false);
 
-  const [e, setE] = React.useState('');
-  console.log("TEST " + e)
-
-  const toggle = () => {
-    setModalOpen(false)
-    setE('')
-  }
-
   return (
     <Box sx={{ pb: 3 }} >
       <AppBar position="static" color="success">
