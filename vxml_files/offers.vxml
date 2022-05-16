@@ -14,7 +14,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            14
+            15
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/welcome.mp3'" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/welcome.mp3" />
             </prompt>
@@ -206,7 +206,7 @@
 
     <var name="buy_quantity" expr="0" />
     <form id="buy_details">
-        <field name="buy_quantity" type="number">
+        <field name="buy_quantity_form" type="number">
             <prompt>
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/how_many.mp3'" />
                 <value expr="selected_offer.unit" />
@@ -217,7 +217,9 @@
             </prompt>
 
             <filled>
-                <assign name="buy_quantity" expr="buy_quantity" />
+                <assign name="buy_quantity" expr="buy_quantity_form" />
+                Selected:
+                <value expr="buy_quantity" />
                 <goto next="#confirm_buy" />
             </filled>
         </field>
