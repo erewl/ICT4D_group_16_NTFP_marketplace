@@ -4,19 +4,19 @@
 
 <!-- <property name="inputmodes" value="dtmf" /> -->
 
-<data name="offerrequest" src="http://forest-marche.herokuapp.com/api/v1/offers"/>
+<data name="offerrequest" src="http://forest-marche.herokuapp.com/api/v1/offers" method="get"/>
  <form>
         <block>
-            <var name="offers" expr="JSON.parse(offerrequest.documentElement).data"/>
+            <var name="offers" expr="offerrequest"/>
 
             <prompt>
-            4
+            5
             Hello world!
-            <foreach item="offer" array="offers">
+            <!-- <foreach item="offer" array="offers">
                 <value expr="offer.product"/>
                 <value expr="offer.quantity"/>
-            </foreach>
-
+            </foreach> -->
+            <value expr="offerrequest" />
             </prompt>
             <!-- <goto next="#menu_product" /> -->
         </block>
