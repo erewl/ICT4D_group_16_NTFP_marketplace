@@ -14,7 +14,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            12
+            13
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/welcome.mp3'" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/welcome.mp3" />
             </prompt>
@@ -209,10 +209,10 @@
             <prompt>
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language '/how_many.mp3'" />
                 <value expr="selected_offer.unit" />
-                <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language '/of.mp3'" />
+                <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/of.mp3'" />
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + selected_offer.product_lower + '.mp3'" />     
                 Would you like to buy?           
-                <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language '/enter_quantity.mp3'" />
+                <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/enter_quantity.mp3'" />
             </prompt>
 
             <filled>
@@ -264,7 +264,7 @@
         <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/no_option_match.mp3'" />
         <reprompt /></nomatch>
         <noinput>
-        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language '/question_repeat.mp3'" />
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/question_repeat.mp3'" />
         <reprompt /></noinput>
     </menu>
 
