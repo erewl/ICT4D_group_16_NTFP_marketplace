@@ -9,7 +9,6 @@ import Menu from "@mui/material/Menu";
 import Logo from '../img/logo_white.png';
 import {useTranslation} from 'react-i18next';
 import LanguageIcon from '@mui/icons-material/Language';
-import useToken from '../util/useToken.util';
 import LoginModal from './login.component';
 import authService from '../services/auth-service';
 import { UserContext } from '../context/UserContext';
