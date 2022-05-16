@@ -14,7 +14,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            9
+            10
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/welcome.mp3'" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/welcome.mp3" />
             </prompt>
@@ -154,6 +154,12 @@
                     <break time="500ms"/>
                     <value expr="offer.price"/>
                     <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/franc.mp3'" />
+                    Per
+                    <value expr="offer.unit" />
+                    <break time="200ms"/>
+                    Availability:
+                    <value expr="offer.quantity" />
+                    <value expr="offer.unit" />
                     <assign name="iterator" expr="iterator + 1" />
                     <break time="500ms"/>
                 </if>
@@ -194,10 +200,40 @@
         </field>
     </form>
 
+
+    <var name="buy_quantity" expr="0" />
+    <form id="buy_details">
+        <field name="buy_quantity" type="number">
+            <prompt>
+                <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language '/how_many.mp3'" />
+                <value expr="selected_offer.unit" />
+                <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language '/of.mp3'" />
+                <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + selected_offer.product_lower + '.mp3'" />     
+                Would you like to buy?           
+                <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language '/enter_quantity.mp3'" />
+            </prompt>
+
+            <filled>
+                <assign name="buy_quantity" expr="buy_quantity" />
+                 <goto next="#confirm_buy" />
+            </filled>
+        </field>
+    </form>
+
      <menu id="confirm_buy" scope="dialog">
         <prompt>
         <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/are_you_sure_buy.mp3'" />
-        <value expr="selected_offer.offer"/>
+        <value expr="buy_quantity"/>
+        <value expr="selected_offer.unit"/>
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/of.mp3'" />
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + selected_offer.product_lower + '.mp3'" />
+        For 
+        <value expr="selected_offer.price"/>
+        Per
+        <value expr="selected_offer.unit"/>
+        By confirming you consent to you phone number being shared with Foret marchet.
+        
+        <break time="200ms"/>
             <enumerate>
                 <break time="1000" />
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/for.mp3'" />
