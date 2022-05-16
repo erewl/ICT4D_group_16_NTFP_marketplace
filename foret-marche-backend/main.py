@@ -107,7 +107,6 @@ def update_offer(offerId):
         return {'message': "Successful update!"}
 
 @app.route(f'{api_prefix}offers', methods=['GET'])
-@jwt_required()
 def get_offers():
     with Session(engine) as session:
         offers = []
@@ -159,20 +158,11 @@ def create_token():
     response = {"access_token":access_token}
     return response
 
-@app.route(f'{api_prefix}logout', methods=["POST"])
+@app.route(f'{api_prefix}auth/logout', methods=["POST"])
 def logout():
     response = jsonify({"msg": "logout successful"})
     unset_jwt_cookies(response)
     return response
-
-@app.route(f'{api_prefix}profile')
-def my_profile():
-    response_body = {
-        "name": "Nagato",
-        "about" :"Hello! I'm a full stack developer that loves python and javascript"
-    }
-
-    return response_body
 
 if __name__ == '__main__':
     if os.environ['ENV'] and os.environ['ENV'] == 'prod':

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function useToken() {
+export default function useToken() {
 
     function getToken() {
         const userToken = localStorage.getItem('token');
@@ -26,5 +26,3 @@ function useToken() {
     }
 
 }
-
-export default useToken;

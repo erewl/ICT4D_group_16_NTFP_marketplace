@@ -12,9 +12,11 @@ import LanguageIcon from '@mui/icons-material/Language';
 
 
 import useToken from '../util/useToken.util';
+import LoginModal from './login.component';
+import authService from '../services/auth-service';
 
 export default function Navbar(props) {
-  const { t, i18n } = useTranslation(); 
+  const { t, i18n } = useTranslation();
   const lngs = {
     en: { nativeName: 'English' },
     fr: { nativeName: 'Français' },
@@ -30,6 +32,17 @@ export default function Navbar(props) {
   };
 
   const { token, removeToken, setToken } = useToken();
+  console.log("Token " + token);
+
+  const [modalOpen, setModalOpen] = React.useState(false);
+
+  const [e, setE] = React.useState('');
+  console.log("TEST " + e)
+
+  const toggle = () => {
+    setModalOpen(false)
+    setE('')
+  }
 
   return (
     <Box sx={{ pb: 3 }} >
@@ -102,11 +115,16 @@ export default function Navbar(props) {
               <Button onClick={() => props.changeTab('bids')} color="inherit" sx={{ fontFamily: 'Monospace', fontSize: 20, color: "white" }} >
               {t('navbar.bids')}
               </Button>
-              {token && token !== token && token !== undefined ? 
-                <Button color="inherit" onClick={ setToken } sx={{ fontFamily: 'Monospace', fontSize: 20 }} >
+              {!token || token === null || token === undefined ? 
+                <>
+                  <Button color="inherit" onClick={() => setModalOpen(true)} sx={{ fontFamily: 'Monospace', fontSize: 20 }} >
                   {t('navbar.login')}
-                </Button> :
-                <Button>
+                  </Button>
+                  {modalOpen &&
+                    <LoginModal open={true} setClose={() => setModalOpen(false) } setOpen={() => setModalOpen(true)} />
+                  }
+                </> :
+                <Button color="inherit" onClick={() => authService.logoutUser(removeToken) } sx={{ fontFamily: 'Monospace', fontSize: 20 }}>
                   {t('navbar.logout')}
                 </Button>
               }
