@@ -8,6 +8,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Logo from '../img/logo_white.png';
 import {useTranslation} from 'react-i18next';
+import LanguageIcon from '@mui/icons-material/Language';
 
 
 
@@ -32,7 +33,7 @@ export default function Navbar(props) {
       <AppBar position="static" color="success">
         <Toolbar>
           <Box sx={{ display: "flex", justifyContent: "space-between", width: 1 }}>
-            <Box sx={{ display: "inline-flex", flexDirection: "row", cursor: "pointer" }}>
+            <Box onClick={() => props.changeTab('offers')} sx={{ display: "inline-flex", flexDirection: "row", cursor: "pointer" }}>
               <Box
                 component="img"
                 sx={{ height: 50, pr: 1 }}
@@ -50,6 +51,7 @@ export default function Navbar(props) {
                 aria-controls={open ? "language" : undefined}
                 aria-haspopup="true"
                 aria-expanded={open ? "true" : undefined } color="inherit" >
+                  <LanguageIcon sx={{mr:1}} />
                   {t('navbar.language')}
               </Button>
               <Menu
@@ -88,7 +90,7 @@ export default function Navbar(props) {
                 <MenuItem sx={{fontWeight: i18n.resolvedLanguage === 'nl' ? 'bold' : 'normal'}} type="submit" onClick={() => {i18n.changeLanguage('nl');}}>Nederlands</MenuItem>
                 <MenuItem sx={{fontWeight: i18n.resolvedLanguage === 'fr' ? 'bold' : 'normal'}} type="submit" onClick={() => {i18n.changeLanguage('fr');}}>Français</MenuItem>
               </Menu>
-              <Button color="inherit" sx={{ fontFamily: 'Monospace', fontSize: 20 }} >
+              <Button onClick={() => props.changeTab('sell')} color="inherit" sx={{ fontFamily: 'Monospace', fontSize: 20 }} >
               {t('navbar.sell')}
               </Button>
               <Button onClick={() => props.changeTab('offers')} color="inherit" sx={{ fontFamily: 'Monospace', fontSize: 20, color: "white" }} >

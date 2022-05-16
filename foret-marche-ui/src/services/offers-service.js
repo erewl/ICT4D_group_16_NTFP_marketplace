@@ -14,6 +14,12 @@ class OffersService {
             console.log(response.data)
         })
     }
+
+    setData = (offer) => {
+        return http.post('/api/v1/offers', offer).then(response => {
+            console.log(response.data)
+        })
+    }
 }
 
 export default new OffersService();

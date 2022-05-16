@@ -70,13 +70,22 @@ export default function Offers (props)  {
     }
 
     const productTranslation = (product, lng) => {
-      if (product == "Shea Butter" && lng == "fr") {
+      if (product === "Shea Butter" && lng === "fr") {
         var product_name = "Beurre de Karité";
-      } else if (product == "Honey" && lng == "fr") {
+      } else if (product === "Honey" && lng === "fr") {
         var product_name = "Miel";
-      } else if (product == "Honey" && lng == "nl"){
+      } else if (product === "Honey" && lng === "nl"){
         var product_name = "Honing";
-      } else {
+      } else if (product === "Sesame Oil" && lng === "nl"){
+        var product_name = "Sesamolie";
+      } else if (product === "Sesame Oil" && lng === "fr"){
+        var product_name = "Huile de Sésame";
+      } else if (product === "Nuts" && lng === "nl"){
+        var product_name = "Noten";
+      } else if (product === "Nuts" && lng === "fr"){
+        var product_name = "Des Noisettes";
+      }
+       else {
         var product_name = product;
       }
       return <Typography sx={commonStyle}>
@@ -104,12 +113,12 @@ export default function Offers (props)  {
       </Box>
       <div style={{ width: '100%' }}>
         <TableContainer align="center">
-          <Table style={{ width: 1100 }} stickyHeader>
+          <Table style={{ width: 1200 }} stickyHeader>
             <TableHead>
                 <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('offers.product')}  </Typography></TableCell>
                 <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('offers.quantity')}  </Typography></TableCell>
                 <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('offers.unit')}  </Typography></TableCell>
-                <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('offers.price')}  </Typography></TableCell>
+                <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('offers.price')} <Box component="span" sx={{fontSize:14}}>(CFA)</Box>  </Typography></TableCell>
                 <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('offers.phone_number')}  </Typography></TableCell>
             </TableHead>
             <TableBody>

@@ -3,6 +3,7 @@ import './App.css';
 import Navbar from "./components/navbar.component"
 import Offers from "./components/offers.component"
 import Bids from "./components/bids.components"
+import Sell from "./components/sell.components"
 
 function App() {
 
@@ -17,6 +18,9 @@ function App() {
       }
       {state.selected && state.selected === 'bids' &&
         <Bids />
+      }
+      {state.selected && state.selected === 'sell' &&
+        <Sell />
       }
     </div>
   );
