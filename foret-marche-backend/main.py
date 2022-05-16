@@ -114,6 +114,7 @@ def get_offers():
                 'id': offerResult.offer_id,
                 'sellerNumber': userResult.phone_number,
                 'product': offerResult.product_name,
+                'product_lower': offerResult.product_name.replace(" ", "_").lower(),
                 'quantity': offerResult.quantity,
                 'price': offerResult.price,
                 'unit': offerResult.unit,
@@ -135,6 +136,7 @@ def get_bids():
             bids.append({
                 'offerId': bidResult.offer_id,
                 'product': offerResult.product_name,
+                'product_lower': offerResult.product_name.replace(" ", "_").lower(),
                 'buyer': buyerResult.phone_number,
                 'seller': sellerResult.phone_number,
                 'quantity': bidResult.quantity,
