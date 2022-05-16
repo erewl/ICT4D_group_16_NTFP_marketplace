@@ -143,7 +143,7 @@ export default function Offers(props) {
                                     <TableCell> {renderEditableCell(offer, 'unit')} </TableCell>
                                     <TableCell> {renderEditableCell(offer, 'price')} </TableCell>
                                     <TableCell> {renderCell(offer, 'sellerNumber')} </TableCell>
-                                    <TableCell style={{ width: 250 }}>
+                                    <TableCell style={{ width: context.token && context.token !== '' ? 250: 125 }}>
                                         {determineEditButton(offer)}
                                     </TableCell>
                                 </TableRow>
