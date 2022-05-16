@@ -2,10 +2,141 @@
 <vxml version="2.1" application="http://webhosting.voxeo.net/170418/www/root.vxml">
     
     <script>
+    var offers2 = JSON.parse('[{
+		"id": 23,
+		"price": 20,
+		"product": "Shea Butter",
+		"quantity": 100,
+		"sellerNumber": "123123123",
+		"unit": "liters"
+	}, {
+		"id": 24,
+		"price": 20,
+		"product": "Shea Butter",
+		"quantity": 100,
+		"sellerNumber": "123124125",
+		"unit": "liters"
+	}, {
+		"id": 25,
+		"price": 3,
+		"product": "Shea Butter",
+		"quantity": 80,
+		"sellerNumber": "31623730705",
+		"unit": "liters"
+	}, {
+		"id": 2,
+		"price": 10,
+		"product": "Honey",
+		"quantity": 2,
+		"sellerNumber": "0618181818",
+		"unit": "kilogram"
+	}, {
+		"id": 20,
+		"price": 999,
+		"product": "Shea Butter",
+		"quantity": 100,
+		"sellerNumber": "123123123",
+		"unit": "liters"
+	}, {
+		"id": 22,
+		"price": 1,
+		"product": "Shea Butter",
+		"quantity": 2,
+		"sellerNumber": "123123123",
+		"unit": "kilograms"
+	}, {
+		"id": 19,
+		"price": 1,
+		"product": "Shea Butter",
+		"quantity": 200000,
+		"sellerNumber": "0618181818",
+		"unit": "liters"
+	}, {
+		"id": 1,
+		"price": 5,
+		"product": "Shea Butter",
+		"quantity": 10,
+		"sellerNumber": "0618181818",
+		"unit": "liters"
+	}, {
+		"id": 27,
+		"price": 7,
+		"product": "Shea Butter",
+		"quantity": 10,
+		"sellerNumber": "31642674758",
+		"unit": "liters"
+	}, {
+		"id": 26,
+		"price": 5,
+		"product": "Honey",
+		"quantity": 29,
+		"sellerNumber": "0618181818",
+		"unit": "kilogram"
+	}, {
+		"id": 28,
+		"price": 159,
+		"product": "Shea Butter",
+		"quantity": 69,
+		"sellerNumber": "31643784494",
+		"unit": "liters"
+	}, {
+		"id": 21,
+		"price": 999,
+		"product": "Shea Butter",
+		"quantity": 100000,
+		"sellerNumber": "123123123",
+		"unit": "liters"
+	}, {
+		"id": 29,
+		"price": 20,
+		"product": "Shea Butter",
+		"quantity": 100,
+		"sellerNumber": "3167777777",
+		"unit": "liters"
+	}, {
+		"id": 30,
+		"price": 34,
+		"product": "Sesame Oil",
+		"quantity": 15,
+		"sellerNumber": "3167777777",
+		"unit": "litres"
+	}, {
+		"id": 31,
+		"price": 20,
+		"product": "Nuts",
+		"quantity": 1,
+		"sellerNumber": "3167777777",
+		"unit": "kilogram"
+	}, {
+		"id": 32,
+		"price": 20,
+		"product": "Nuts",
+		"quantity": 1,
+		"sellerNumber": "3167777777",
+		"unit": "kilogram"
+	}, {
+		"id": 33,
+		"price": 40,
+		"product": "Honey",
+		"quantity": 12,
+		"sellerNumber": "31643784494",
+		"unit": "litres"
+	}, {
+		"id": 34,
+		"price": 23,
+		"product": "Sesame Oil",
+		"quantity": 11,
+		"sellerNumber": "123123123",
+		"unit": "litres"
+	}]
+')
+    </script>
+
+    <script>
         var offers = new Array(3);
         offers[0] = new Object();
         offers[0].product = "shea_butter";
-        offers[0].offer = "offer of sheabutter"
+        offers[0].offer = "offer of sheabutter";
         offers[1] = new Object();
         offers[1].product = "honey";
         offers[1].offer = "offer of honey"
@@ -26,7 +157,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            7
+            8
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/welcome.mp3'" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/welcome.mp3" />
             </prompt>
@@ -109,7 +240,7 @@
                     <value expr="_prompt" />
                 </enumerate>
         </prompt>
-        <choice event="buy_product_selected" dtmf="1" messageexpr="'shea_butter'">
+        <choice event="buy_product_selected" dtmf="1" messageexpr="'Shea Butter'">
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/shea_butter.mp3'" />
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/select.mp3'" />
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/1.mp3'" />
@@ -160,11 +291,11 @@
             </grammar>
             <prompt>
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/select_product_to_buy.mp3'" />
-                <foreach item="offer" array="offers">
+                <foreach item="offer" array="offers2">
                 <if cond="product == offer.product">
                     <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + iterator + '.mp3'" />
                     <break time="500ms"/>
-                    <value expr="offer.offer"/>
+                    <value expr="offer.quantity"/>
                     <assign name="iterator" expr="iterator + 1" />
                     <break time="500ms"/>
                 </if>
@@ -177,7 +308,7 @@
                 <prompt>
                     <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/selected.mp3'" />
                     <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + offer_selection + '.mp3'" />
-                    <foreach item="offer" array="offers">
+                    <foreach item="offer" array="offers2">
                         <if cond="product == offer.product">
                             <if cond="offer_selection == iterator">
                                 <assign name="selected_offer" expr="offer"/>
@@ -185,7 +316,7 @@
                             <assign name="iterator" expr="iterator + 1" />
                         </if>
                     </foreach>
-                    <value expr="selected_offer.offer"/>
+                    <value expr="selected_offer.quantity"/>
                 </prompt>
                 <if cond="selected_offer == 'none chosen'">
                     <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/no_product_match.mp3'" />
@@ -208,7 +339,7 @@
      <menu id="confirm_buy" scope="dialog">
         <prompt>
         <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/are_you_sure_buy.mp3'" />
-        <value expr="selected_offer.offer"/>
+        <value expr="selected_offer.quantity"/>
             <enumerate>
                 <break time="1000" />
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/for.mp3'" />
@@ -216,12 +347,12 @@
             </enumerate>
         </prompt>
 
-        <choice event="confirm_buy_yes" dtmf="1" messageexpr="'shea_butter'">
+        <choice event="confirm_buy_yes" dtmf="1" messageexpr="'yes'">
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/yes.mp3'" />
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/select.mp3'" />
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/1.mp3'" />
         </choice>
-        <choice event="confirm_buy_no" dtmf="2" messageexpr="'honey'">
+        <choice event="confirm_buy_no" dtmf="2" messageexpr="'no'">
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/no.mp3'" />
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/select.mp3'" />
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/2.mp3'" />
