@@ -20,6 +20,7 @@ i18n
                     offers: 'offers',
                     bids: 'bids',
                     login: 'login',
+                    logout: 'logout',
                     language: 'language'
                   },
                   offers: {
@@ -57,6 +58,7 @@ i18n
                     offers: 'kopen',
                     bids: 'biedingen',
                     login: 'log in',
+                    logout: 'log out',
                     language: 'taal'
                   },
                   offers: {
@@ -93,6 +95,7 @@ i18n
                     offers: 'acheter',
                     bids: 'enchères',
                     login: 'login',
+                    logout: 'logout',
                     language: 'langue'
                   },
                   offers: {
@@ -117,7 +120,7 @@ i18n
                     edit: 'Éditer',
                     approve: 'approuver',
                     yes: 'oui',
-                    no: 'no',
+                    no: 'non',
                     submit: 'envoyer'
                   }
 

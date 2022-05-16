@@ -10,6 +10,10 @@ from sqlalchemy.orm.util import aliased
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 from flask_cors import CORS
 from postgresql.schemas import Offers, Users, Bids
+from datetime import datetime, timedelta, timezone
+from flask_jwt_extended import create_access_token,get_jwt,get_jwt_identity, \
+                               unset_jwt_cookies, jwt_required, JWTManager
+
 
 # TODO export to DatabaseConfig class or so
 USER = os.getenv('DB_USER')
@@ -19,6 +23,8 @@ HOST = os.getenv('HOST')
 
 engine = create_engine(f'postgresql+psycopg2://{USER}:{PWD}@{HOST}/{DATABASE}')
 conn = engine.connect()
+
+api_prefix = '/api/v1/'
 
 if os.environ['ENV'] and os.environ['ENV'] == 'prod':
     app = Flask(__name__, static_url_path='/build/')
@@ -31,7 +37,7 @@ else:
     app = Flask(__name__)
     CORS(app)
 
-@app.route('/api/v1/offers', methods=['POST'])
+@app.route(f'{api_prefix}offers', methods=['POST'])
 def post_offers():
     body = request.form
     entry = dict(body)
@@ -73,14 +79,15 @@ def post_offers():
 
     return Response(xmlResponse, mimetype='application/xml')
 
-@app.route('/api/v1/users', methods=['GET'])
+@app.route(f'{api_prefix}users', methods=['GET'])
+@jwt_required()
 def get_users():
     with Session(engine) as session:
         query = text("SELECT * FROM users")
         users = engine.execute(query)
     return {}
 
-@app.route('/api/v1/offers/<offerId>', methods=['PUT'])
+@app.route(f'{api_prefix}offers/<offerId>', methods=['PUT'])
 def update_offer(offerId):
     with Session(engine) as session:
         offer = request.json
@@ -99,7 +106,8 @@ def update_offer(offerId):
         session.commit()
         return {'message': "Successful update!"}
 
-@app.route('/api/v1/offers', methods=['GET'])
+@app.route(f'{api_prefix}offers', methods=['GET'])
+@jwt_required()
 def get_offers():
     with Session(engine) as session:
         offers = []
@@ -115,7 +123,7 @@ def get_offers():
             })
     return jsonify({'data': offers})
 
-@app.route('/api/v1/bids', methods=['GET'])
+@app.route(f'{api_prefix}bids', methods=['GET'])
 def get_bids():
     with Session(engine) as session:
         bids = []
@@ -135,6 +143,36 @@ def get_bids():
                 'quantity': bidResult.quantity,
             })
     return jsonify({'data': bids})
+
+
+app.config["JWT_SECRET_KEY"] = "please-remember-to-change-me"
+jwt = JWTManager(app)
+
+@app.route(f'{api_prefix}auth/login', methods=["POST"])
+def create_token():
+    user = request.json.get("user", None)
+    password = request.json.get("password", None)
+    if user != "admin" or password != "admin":
+        return {"msg": "Unknown user or wrong password"}, 401
+
+    access_token = create_access_token(identity=user)
+    response = {"access_token":access_token}
+    return response
+
+@app.route(f'{api_prefix}logout', methods=["POST"])
+def logout():
+    response = jsonify({"msg": "logout successful"})
+    unset_jwt_cookies(response)
+    return response
+
+@app.route(f'{api_prefix}profile')
+def my_profile():
+    response_body = {
+        "name": "Nagato",
+        "about" :"Hello! I'm a full stack developer that loves python and javascript"
+    }
+
+    return response_body
 
 if __name__ == '__main__':
     if os.environ['ENV'] and os.environ['ENV'] == 'prod':

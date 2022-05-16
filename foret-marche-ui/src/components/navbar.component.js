@@ -11,6 +11,7 @@ import {useTranslation} from 'react-i18next';
 import LanguageIcon from '@mui/icons-material/Language';
 
 
+import useToken from '../util/useToken.util';
 
 export default function Navbar(props) {
   const { t, i18n } = useTranslation(); 
@@ -27,6 +28,8 @@ export default function Navbar(props) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const { token, removeToken, setToken } = useToken();
 
   return (
     <Box sx={{ pb: 3 }} >
@@ -99,9 +102,15 @@ export default function Navbar(props) {
               <Button onClick={() => props.changeTab('bids')} color="inherit" sx={{ fontFamily: 'Monospace', fontSize: 20, color: "white" }} >
               {t('navbar.bids')}
               </Button>
-              <Button color="inherit" sx={{ fontFamily: 'Monospace', fontSize: 20 }} >
-              {t('navbar.login')}
-              </Button>
+              {token && token !== token && token !== undefined ? 
+                <Button color="inherit" onClick={ setToken } sx={{ fontFamily: 'Monospace', fontSize: 20 }} >
+                  {t('navbar.login')}
+                </Button> :
+                <Button>
+                  {t('navbar.logout')}
+                </Button>
+              }
+              
             </Box>
           </Box>
         </Toolbar>
