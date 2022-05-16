@@ -29,7 +29,7 @@ export default function Offers(props) {
     const toggleEditState = (offer) => {
         let offersCopy = state.offers
         if (offer.editing) { // when editing is being toggled from true -> false: we are saving data
-            OffersService.updateData(offer)
+            OffersService.updateData(offer, context.token)
         }
         offersCopy.find(o => o.id === offer.id).editing = !offersCopy.find(o => o.id === offer.id).editing
         setState({ ...state, offers: offersCopy })

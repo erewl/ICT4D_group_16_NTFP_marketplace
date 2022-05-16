@@ -29,7 +29,7 @@ export default function Bids() {
   const toggleEditState = (bid) => {
     let bidsCopy = state.bids
     if (bid.editing) { // when editing is being toggled from true -> false: we are saving data
-      bidsService.updateData(bid)
+      bidsService.updateData(bid, context.token)
     }
     bidsCopy.find(o => o.id === bid.id).editing = !bidsCopy.find(o => o.id === bid.id).editing
     setState({ ...state, bids: bidsCopy })

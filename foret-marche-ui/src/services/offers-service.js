@@ -9,8 +9,13 @@ class OffersService {
         });
     }
 
-    updateData = (offer) => {
-        return http.put(`/api/v1/offers/${offer.id}`, offer).then(response => {
+    updateData = (offer, token) => {
+        let config = {
+            headers: {
+                Authorization: 'Bearer ' + token
+            }
+        }
+        return http.put(`/api/v1/offers/${offer.id}`, offer, config).then(response => {
             console.log(response.data)
         })
     }

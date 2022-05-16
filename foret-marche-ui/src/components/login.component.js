@@ -29,6 +29,7 @@ export default function LoginModal(props) {
     const loginUser = () => {
         AuthService.loginUser({ user: userRef.current.value, password: pwdRef.current.value }, token => {
             setContext({ ...context, token: token })
+            localStorage.setItem('token', token)
         })
         props.setClose()
     }

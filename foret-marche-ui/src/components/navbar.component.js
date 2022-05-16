@@ -34,7 +34,7 @@ export default function Navbar(props) {
 
   const removeToken = () => {
     localStorage.removeItem("token");
-    setContext({...context, token: ''})
+    setContext({...context, token: null})
   }
 
   const [modalOpen, setModalOpen] = React.useState(false);
@@ -110,7 +110,7 @@ export default function Navbar(props) {
               <Button onClick={() => props.changeTab('bids')} color="inherit" sx={{ fontFamily: 'Monospace', fontSize: 20, color: "white" }} >
               {t('navbar.bids')}
               </Button>
-              {!context.token && context.token !== '' ? 
+              {!context.token && context.token !== ''? 
                 <>
                   <Button color="inherit" onClick={() => setModalOpen(true)} sx={{ fontFamily: 'Monospace', fontSize: 20 }} >
                   {t('navbar.login')}

@@ -80,7 +80,6 @@ def post_offers():
     return Response(xmlResponse, mimetype='application/xml')
 
 @app.route(f'{api_prefix}users', methods=['GET'])
-@jwt_required()
 def get_users():
     with Session(engine) as session:
         query = text("SELECT * FROM users")
@@ -88,6 +87,7 @@ def get_users():
     return {}
 
 @app.route(f'{api_prefix}offers/<offerId>', methods=['PUT'])
+@jwt_required()
 def update_offer(offerId):
     with Session(engine) as session:
         offer = request.json

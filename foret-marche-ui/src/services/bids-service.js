@@ -9,8 +9,13 @@ class BidsService {
         });
     }
 
-    updateData = (bid) => {
-        return http.put(`/api/v1/bids/${bid.id}`, bid).then(response => {
+    updateData = (bid, token) => {
+        let config = {
+            headers: {
+                Authorization: 'Bearer ' + token
+            }
+        }
+        return http.put(`/api/v1/bids/${bid.id}`, bid, config).then(response => {
             console.log(response.data)
         })
     }
