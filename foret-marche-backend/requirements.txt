@@ -15,7 +15,6 @@ MarkupSafe==2.1.1
 networkx==2.6.3
 nltk==3.7
 numpy==1.21.5
-pdftotext==2.2.2
 platformdirs==2.4.1
 psycopg2==2.9.3
 PyJWT==2.4.0
