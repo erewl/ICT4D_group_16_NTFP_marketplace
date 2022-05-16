@@ -7,10 +7,10 @@
 <data name="offerrequest" src="http://forest-marche.herokuapp.com/api/v1/offers" method="get"/>
  <form>
         <block>
-            <var name="offers" expr="offerrequest"/>
+            <var name="offers" expr="offerrequest.data"/>
 
             <prompt>
-            8
+            9
             Hello world!
             <foreach item="offer" array="offers">
                 <value expr="offer.product"/>
