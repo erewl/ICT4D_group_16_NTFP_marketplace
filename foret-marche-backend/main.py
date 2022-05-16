@@ -1,5 +1,3 @@
-
-   
 import os
 from site import USER_BASE
 
@@ -147,14 +145,14 @@ def get_bids():
 @jwt_required()
 def delete_offer(offerId):
     with Session(engine) as session:
-        session.query(Offers).filter(Offers.offer_id==offerId).delete()
         session.query(Bids).filter(Bids.offer_id==offerId).delete()
+        session.query(Offers).filter(Offers.offer_id==offerId).delete()
         session.commit()
         return {'message': "Successfully deleted offer and associated bids"}
 
 @app.route(f'{api_prefix}bids/<bidId>', methods=['DELETE'])
 @jwt_required()
-def delete_offer(bidId):
+def delete_bid(bidId):
     with Session(engine) as session:
         session.query(Bids).filter(Bids.bid_id==bidId).delete()
         session.commit()
