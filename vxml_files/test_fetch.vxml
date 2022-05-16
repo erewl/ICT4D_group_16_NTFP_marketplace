@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version="2.1" application="http://webhosting.voxeo.net/170418/www/root.vxml">
+
+
+<property name="inputmodes" value="dtmf" />
+
+
+ <form id="greeting">
+        <block>
+            <prompt>
+            9
+                <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/welcome.mp3'" />
+                <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/welcome.mp3" />
+            </prompt>
+            <!-- <goto next="#menu_product" /> -->
+        </block>
+    </form>
+
+
+</vxml>
