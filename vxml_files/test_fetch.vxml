@@ -10,7 +10,7 @@
             <var name="offers" expr="offerrequest.data"/>
 
             <prompt>
-            9
+            10
             Hello world!
             <foreach item="offer" array="offers">
                 <value expr="offer.product"/>
