@@ -14,7 +14,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            13
+            14
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/welcome.mp3'" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/welcome.mp3" />
             </prompt>
@@ -158,6 +158,7 @@
                     Per
                     <value expr="offer.unit" />
                     <break time="1000ms"/>
+                    <break time="1000ms"/>
                     Availability:
                     <value expr="offer.quantity" />
                     <break time="1000ms"/>
@@ -207,7 +208,7 @@
     <form id="buy_details">
         <field name="buy_quantity" type="number">
             <prompt>
-                <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language '/how_many.mp3'" />
+                <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/how_many.mp3'" />
                 <value expr="selected_offer.unit" />
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/of.mp3'" />
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + selected_offer.product_lower + '.mp3'" />     
