@@ -9,9 +9,11 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import OffersService from '../services/offers-service';
+import BidsService from '../services/bids-service';
 import { TextField } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { UserContext } from '../context/UserContext';
+import Modal from '@mui/material/Modal';
 
 export default function Offers(props) {
     const { t, i18n } = useTranslation();
@@ -19,6 +21,10 @@ export default function Offers(props) {
     const [state, setState] = React.useState({ offers: [] })
 
     const [context, setContext] = useContext(UserContext);
+
+    const [quantity, setQuantity] = React.useState("");
+    const [phoneNumber, setPhoneNumber] = React.useState("");
+    const [modalOpen, setModalOpen] = React.useState(false);
 
     const update = s => {
         let offers = s.map(offer => ({ ...offer, editing: false }))
@@ -48,14 +54,54 @@ export default function Offers(props) {
         }))
     }
 
+    const submit = (offer) => {
+        console.log(offer);
+        let bid = new FormData()
+        bid.append("offer_id",offer.id);
+        bid.append("quantity", quantity);
+        bid.append("session.callerid",phoneNumber);
+        setQuantity("");
+        setPhoneNumber("");
+        BidsService.setData(bid);
+      }
+
     // useEffect is being run before and after each render of the site, to limit the API call only to when no data is in the frontend, the if-clause is introduced
     React.useEffect(() => {
         OffersService.fetchData(update);
     }, []);
 
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 275,
+        bgcolor: 'background.paper',
+        boxShadow: 24,
+        p: 4,
+        borderRadius: '25px',
+        fontFamily: 'Monospace', 
+        fontSize: 20
+    };
+
     const determineEditButton = (offer) => {
         if (offer && !offer.editing) return <div>
-            <Button sx={{ mr: 2 }} color="success" onClick={() => console.log("TODO BUY")} variant="outlined" > {t('buttons.buy')}  </Button >
+                <Button sx={{ mr: 2 }} color="success" onClick={() => setModalOpen(true)} variant="outlined" > {t('buttons.buy')}  </Button >
+                {modalOpen &&
+                <Modal
+                open={true}
+                onClose={() => setModalOpen(false)}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+                >
+                <Box sx={style}>
+                    <Box>
+                    <TextField label="Quantity" variant="outlined" value={quantity} onChange={(e) => setQuantity(e.target.value)} />
+                    <TextField sx={{mt:2}} label="Phone Number" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)}/>
+                    </Box>
+                    <Button sx={{mt: 2, fontSize: 16}} color="success" variant="outlined" onClick={() => submit(offer)} >Submit</Button>
+                </Box>
+                </Modal> }
             {context.token && context.token !== '' && <Button sx={{ mr: 2 }} color="success" onClick={() => toggleEditState(offer)} variant="outlined">{t('buttons.edit')}  </Button>}
         </div>
         else

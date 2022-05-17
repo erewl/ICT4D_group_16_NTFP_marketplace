@@ -31,6 +31,12 @@ class BidsService {
             console.log(response.data)
         })
     }
+
+    setData = (bid) => {
+        return http.post('/api/v1/bids', bid).then(response => {
+            console.log(response.data)
+        })
+    }
 }
 
 export default new BidsService();
