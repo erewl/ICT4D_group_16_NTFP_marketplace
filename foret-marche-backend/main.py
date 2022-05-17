@@ -79,12 +79,29 @@ def post_offers():
 
 @app.route(f'{api_prefix}bids', methods=['POST'])
 def post_bids():
-    body = request.form
-    entry = dict(body)
-    print("Data from form: ", entry)
-
     with Session(engine) as session:
+        body = request.form
+        entry = dict(body)
+        print("Data from form: ", entry)
+        offer_id = entry['offer_id']
         callerId = entry['session.callerid']
+        try:
+            select(Offers).where(Offers.offer_id == offer_id).one()
+        except NoResultFound:
+            print(f"Unable to find offer with id {offer_id}")
+            return Response("""<?xml version="1.0"?>
+                                <response>
+                                    <returncode>400</returncode>
+                                    <message>Invalid offerid</message>
+                                </response>""", mimetype='application/xml')
+
+        findSellerId = select(Users).join(Offers, Offers.seller_id == Users.user_id).where(Offers.offer_id == offer_id )
+        sellerResult = session.scalars(findSellerId).one()
+        print(sellerResult)
+        sellerId = sellerResult.user_id
+        print(sellerId)
+        print('Found seller user under id: ', sellerId, " in the database")
+
         userId = 1 # base init
         findUserByPhoneNumber = select(Users).where(Users.phone_number == callerId)
         try:
@@ -99,14 +116,6 @@ def post_bids():
             session.add(newUser)
             session.commit()
             userId = newUser.user_id
-        
-        offer_id = entry['offer_id']
-        findSellerId = select(Users).join(Offers, Offers.seller_id == Users.user_id).where(Offers.offer_id == offer_id )
-        sellerResult = session.scalars(findSellerId).one()
-        print(sellerResult)
-        sellerId = sellerResult.user_id
-        print(sellerId)
-        print('Found user under id: ', sellerId, " in the database")
         session.commit()
 
         newBid = Bids(
@@ -119,13 +128,13 @@ def post_bids():
         session.add(newBid)
         session.commit()
 
-    xmlResponse = """<?xml version="1.0"?>
-        <response>
-            <returncode>200</returncode>
-            <message>Successful submitted!</message>
-        </response>"""
+        xmlResponse = """<?xml version="1.0"?>
+            <response>
+                <returncode>200</returncode>
+                <message>Successful submitted!</message>
+            </response>"""
 
-    return Response(xmlResponse, mimetype='application/xml')
+        return Response(xmlResponse, mimetype='application/xml')
 
 @app.route(f'{api_prefix}users', methods=['GET'])
 def get_users():
