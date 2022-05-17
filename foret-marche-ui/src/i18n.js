@@ -47,7 +47,10 @@ i18n
                     approve: 'approve',
                     yes: 'yes',
                     no: 'no',
-                    submit: 'submit'
+                    submit: 'submit',
+                    delete: 'delete',
+                    cancel: 'cancel',
+                    save: 'save'
                   }
             }
         },
@@ -84,7 +87,10 @@ i18n
                     approve: 'goedkeuren',
                     yes: 'ja',
                     no: 'nee',
-                    submit: 'verzenden'
+                    submit: 'verzenden',
+                    delete: 'verwijderen',
+                    cancel: 'annuleren',
+                    save: 'opslaan'
                   }
             }
         },
@@ -121,7 +127,10 @@ i18n
                     approve: 'approuver',
                     yes: 'oui',
                     no: 'non',
-                    submit: 'envoyer'
+                    submit: 'envoyer',
+                    delete: 'effacer',
+                    cancel: 'annuler',
+                    save: 'sauvegarder'
                   }
 
             }
