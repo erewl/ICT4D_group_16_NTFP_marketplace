@@ -35,6 +35,12 @@ export default function Offers(props) {
         setState({ ...state, offers: offersCopy })
     }
 
+    const closeEditState = (offer) => {
+        let offersCopy = state.offers
+        offersCopy.find(o => o.id === offer.id).editing = !offersCopy.find(o => o.id === offer.id).editing
+        setState({ ...state, offers: offersCopy })
+    }
+
     const deleteOffer = (offer) => {
         OffersService.deleteData(offer.id, context.token, setState({
             ...state,
@@ -56,8 +62,9 @@ export default function Offers(props) {
             return <div>
                 {context.token && context.token !== '' &&
                     <>
-                        <Button sx={{ mr: 2, }} color="success" onClick={() => deleteOffer(offer)} variant="outlined" > Delete</Button >
-                        <Button sx={{ mr: 2, }} color="success" onClick={() => toggleEditState(offer)} variant="outlined">Save</Button>
+                        <Button sx={{ mr: 2, mt:1}} color="success" onClick={() => closeEditState(offer)} variant="outlined" > {t('buttons.cancel')} </Button >
+                        <Button sx={{ mr: 2, mt:1 }} color="success" onClick={() => deleteOffer(offer)} variant="outlined" > {t('buttons.delete')}</Button >
+                        <Button sx={{ mr: 2, mt:1}} color="success" onClick={() => toggleEditState(offer)} variant="outlined">{t('buttons.save')}</Button>
                     </>
                 }
             </div>
@@ -143,7 +150,7 @@ export default function Offers(props) {
                                     <TableCell> {renderEditableCell(offer, 'unit')} </TableCell>
                                     <TableCell> {renderEditableCell(offer, 'price')} </TableCell>
                                     <TableCell> {renderCell(offer, 'sellerNumber')} </TableCell>
-                                    <TableCell style={{ width: context.token && context.token !== '' ? 250: 125 }}>
+                                    <TableCell style={{ width: context.token && context.token !== '' ? 300: 125 }}>
                                         {determineEditButton(offer)}
                                     </TableCell>
                                 </TableRow>

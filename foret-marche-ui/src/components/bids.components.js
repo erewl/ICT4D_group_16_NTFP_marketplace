@@ -35,6 +35,12 @@ export default function Bids() {
     setState({ ...state, bids: bidsCopy })
   }
 
+  const closeEditState = (bid) => {
+    let bidsCopy = state.bids
+    bidsCopy.find(o => o.id === bid.id).editing = !bidsCopy.find(o => o.id === bid.id).editing
+    setState({ ...state, bids: bidsCopy })
+}
+
   // useEffect is being run before and after each render of the site, to limit the API call only to when no data is in the frontend, the if-clause is introduced
   React.useEffect(() => {
     let response = bidsService.fetchData(update);
@@ -51,7 +57,7 @@ export default function Bids() {
       return <div>
         {context.token && context.token !== '' &&
           <>
-            <Button sx={{ mr: 2, }} color="success" onClick={() => console.log("TODO BUY")} variant="outlined" > {t('buttons.edit')} </Button >
+            <Button sx={{ mr: 2, }} color="success" onClick={() => closeEditState(bid)} variant="outlined" > {t('buttons.cancel')} </Button >
             <Button sx={{ mr: 2, }} color="success" onClick={() => toggleEditState(bid)} variant="outlined">{t('buttons.edit')} </Button>
           </>
         }

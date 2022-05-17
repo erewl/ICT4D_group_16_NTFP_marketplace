@@ -12,6 +12,18 @@ import LanguageIcon from '@mui/icons-material/Language';
 import LoginModal from './login.component';
 import authService from '../services/auth-service';
 import { UserContext } from '../context/UserContext';
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import MenuIcon from '@mui/icons-material/Menu';
+import StorefrontIcon from '@mui/icons-material/Storefront';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import PersonIcon from '@mui/icons-material/Person';
+import AddTaskIcon from '@mui/icons-material/AddTask';
 
 export default function Navbar(props) {
   const { t, i18n } = useTranslation();
@@ -36,6 +48,73 @@ export default function Navbar(props) {
     setContext({...context, token: null})
   }
 
+  const [state, setState] = React.useState({right: false });
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+
+    setState({ ...state, [anchor]: open });
+  };
+
+  const list = (anchor) => (
+    <Box
+      sx={{ width: 250 }}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <List>
+          <ListItem onClick={() => props.changeTab('sell')}>
+            <ListItemButton>
+              <ListItemIcon> <AddCircleOutlineIcon /> </ListItemIcon>
+              <ListItemText primary= {t('navbar.sell')} />
+            </ListItemButton>
+          </ListItem>
+          <ListItem onClick={() => props.changeTab('offers')}>
+            <ListItemButton>
+              <ListItemIcon> <StorefrontIcon /> </ListItemIcon>
+              <ListItemText primary={t('navbar.offers')} />
+            </ListItemButton>
+          </ListItem>
+          <ListItem onClick={() => props.changeTab('bids')}>
+            <ListItemButton>
+              <ListItemIcon> <AddTaskIcon /> </ListItemIcon>
+              <ListItemText primary={t('navbar.bids')} />
+            </ListItemButton>
+          </ListItem>
+          <ListItem onClick={handleClick}>
+            <ListItemButton>
+              <ListItemIcon> <LanguageIcon /> </ListItemIcon>
+              <ListItemText primary={t('navbar.language')} />
+            </ListItemButton>
+          </ListItem>
+          <Divider />
+          {!context.token && context.token !== ''? 
+            <>
+            <ListItem onClick={() => setModalOpen(true)}>
+              <ListItemButton>
+                <ListItemIcon> <PersonIcon /> </ListItemIcon>
+                <ListItemText primary={t('navbar.login')} />
+              </ListItemButton>
+            </ListItem> 
+            </>
+            : 
+            <ListItem onClick={() => authService.logoutUser(removeToken)}>
+              <ListItemButton>
+                <ListItemIcon> <PersonIcon /> </ListItemIcon>
+                <ListItemText primary= {t('navbar.logout')}/>
+              </ListItemButton>
+            </ListItem> 
+          }     
+      </List>
+    </Box>
+  );
+
   const [modalOpen, setModalOpen] = React.useState(false);
 
   return (
@@ -53,7 +132,7 @@ export default function Navbar(props) {
                 Forêt Marché
               </Typography>
             </Box>
-            <Box>
+            <Box sx={{ display: { xs: 'none',  md: 'block' } }}>
               <Button 
                 onClick={handleClick}
                 size="small"
@@ -122,8 +201,21 @@ export default function Navbar(props) {
                   {t('navbar.logout')}
                 </Button>
               }
-              
-            </Box>
+              </Box>
+              <Box component = "span"  sx={{ display: { md: 'none', xs: 'block' }, mt:1  }}> 
+                  {["right"].map((anchor) => (
+                    <React.Fragment key={anchor}>
+                      <Button onClick={toggleDrawer(anchor, true)}> <MenuIcon sx={{color:"white"}} /> </Button>
+                      <Drawer
+                        anchor={anchor}
+                        open={state[anchor]}
+                        onClose={toggleDrawer(anchor, false)}
+                      >
+                        {list(anchor)}
+                      </Drawer>
+                    </React.Fragment>
+                  ))}
+              </Box>  
           </Box>
         </Toolbar>
       </AppBar>

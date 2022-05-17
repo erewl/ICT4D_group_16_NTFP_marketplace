@@ -16,12 +16,12 @@ i18n
         en: {
             translation: {
                 navbar: {
-                    sell: 'sell',
-                    offers: 'offers',
-                    bids: 'bids',
-                    login: 'login',
-                    logout: 'logout',
-                    language: 'language'
+                    sell: 'Sell',
+                    offers: 'Offers',
+                    bids: 'Bids',
+                    login: 'Login',
+                    logout: 'Logout',
+                    language: 'Language'
                   },
                   offers: {
                     products_for_sale: 'Products for Sale',
@@ -42,24 +42,27 @@ i18n
                       edit: 'edit'
                   },
                   buttons: {
-                    buy: 'buy',
-                    edit: 'edit',
-                    approve: 'approve',
-                    yes: 'yes',
-                    no: 'no',
-                    submit: 'submit'
+                    buy: 'Buy',
+                    edit: 'Edit',
+                    approve: 'Approve',
+                    yes: 'Yes',
+                    no: 'No',
+                    submit: 'Submit',
+                    delete: 'Delete',
+                    cancel: 'Cancel',
+                    save: 'Save'
                   }
             }
         },
         nl: {
             translation: {
                 navbar: {
-                    sell: 'verkopen',
-                    offers: 'kopen',
-                    bids: 'biedingen',
-                    login: 'log in',
-                    logout: 'log out',
-                    language: 'taal'
+                    sell: 'Verkopen',
+                    offers: 'Kopen',
+                    bids: 'Biedingen',
+                    login: 'Log in',
+                    logout: 'Log out',
+                    language: 'Taal'
                   },
                   offers: {
                     products_for_sale: 'Producten te Koop',
@@ -79,24 +82,27 @@ i18n
                       buyer: 'Koper'
                   },
                   buttons: {
-                    buy: 'koop',
-                    edit: 'bewerk',
-                    approve: 'goedkeuren',
-                    yes: 'ja',
-                    no: 'nee',
-                    submit: 'verzenden'
+                    buy: 'Koop',
+                    edit: 'Bewerk',
+                    approve: 'Hoedkeuren',
+                    yes: 'Ja',
+                    no: 'Nee',
+                    submit: 'Verzenden',
+                    delete: 'Verwijderen',
+                    cancel: 'Annuleren',
+                    save: 'Opslaan'
                   }
             }
         },
         fr: {
             translation: {
                 navbar: {
-                    sell: 'vendre',
-                    offers: 'acheter',
-                    bids: 'enchères',
-                    login: 'login',
-                    logout: 'logout',
-                    language: 'langue'
+                    sell: 'Vendre',
+                    offers: 'Acheter',
+                    bids: 'Enchères',
+                    login: 'Login',
+                    logout: 'Logout',
+                    language: 'Langue'
                   },
                   offers: {
                     products_for_sale: 'Produits à Vendre',
@@ -118,10 +124,13 @@ i18n
                   buttons:{
                     buy: 'Acheter',
                     edit: 'Éditer',
-                    approve: 'approuver',
-                    yes: 'oui',
-                    no: 'non',
-                    submit: 'envoyer'
+                    approve: 'Approuver',
+                    yes: 'Oui',
+                    no: 'Non',
+                    submit: 'Envoyer',
+                    delete: 'Effacer',
+                    cancel: 'Annuler',
+                    save: 'Sauvegarder'
                   }
 
             }
