@@ -10,17 +10,20 @@
             <var name="offers" expr="offerrequest.data"/>
             <!-- <var name="response" expr="'Response not defined...'" /> -->
             <prompt>
-            18
+            19
             Hello world!
             <var name="offer_id" expr="29"/>
             <var name="quantity" expr="33"/>
-            <value expr="session.callerid"/>
-            <data name="submission_response" src="http://forest-marche.herokuapp.com/api/v1/bids" method="post" fetchtimeout="15s" namelist="offer_id quantity session.callerid" />
+
+            <data name="submission_response" enctype="form-data" src="http://forest-marche.herokuapp.com/api/v1/bids" method="post" fetchtimeout="15s" namelist="offer_id quantity session.callerid" />
             
             <!-- <assign name="response" expr="submission_response" />
             <value expr="response" /> -->
             </prompt>
         </block>
+          <catch event="error.badfetch">
+        <prompt bargein="false">Submission responded with BadFetch</prompt>
+    </catch>
     </form>
 
     <catch event="error.badfetch">
