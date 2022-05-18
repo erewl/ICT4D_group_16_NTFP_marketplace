@@ -86,7 +86,7 @@ def post_bids():
         offer_id = entry['offer_id']
         callerId = entry['session.callerid']
         try:
-            select(Offers).where(Offers.offer_id == offer_id).one()
+            session.scalars(select(Offers).where(Offers.offer_id == offer_id)).one()
         except NoResultFound:
             print(f"Unable to find offer with id {offer_id}")
             return Response("""<?xml version="1.0"?>
