@@ -404,7 +404,9 @@
             <assign name="price" expr="'30'" />
             <assign name="quantity" expr="'20'" /> -->
 
+            <!-- <data name="submission_response" src="http://forest-marche.herokuapp.com/api/v1/offers" method="post" fetchtimeout="10s" namelist="product units price quantity session.callerid" /> -->
             <data name="submission_response" src="http://forest-marche.herokuapp.com/api/v1/offers" method="post" fetchtimeout="10s" namelist="product units price quantity session.callerid" />
+
             <assign name="response" expr="submission_response" />
         </block>
     </form>
