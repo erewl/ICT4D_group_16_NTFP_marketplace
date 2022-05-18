@@ -25,6 +25,7 @@
             
             
             <!-- <data name="offerrequest" src="http://forest-marche.herokuapp.com/api/v1/bids" method="post"/> -->
+            <data name="offerrequest1" src="http://forest-marche.herokuapp.com/api/v1/bids" method="post"/>
             <data entype="form-data" name="offerrequest" src="http://forest-marche.herokuapp.com/api/v1/bids" method="post" namelist="offer_id quantity session.callerid"/>
             <!-- <data name="offerrequest" src="http://forest-marche.herokuapp.com/api/v1/bids" method="POST" namelist="offer_id quantity session.callerid"/> -->
         </block>
