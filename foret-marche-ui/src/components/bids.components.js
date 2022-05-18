@@ -22,7 +22,7 @@ export default function Bids() {
 
   const update = s => {
     let bids = s.map(bid => ({ ...bid, editing: false }))
-    // bids.sort((a, b) => b.bidId - a.bidId)
+    bids.sort((a, b) => b.bidId - a.bidId)
     setState({ ...state, bids: bids })
   }
 
@@ -31,13 +31,13 @@ export default function Bids() {
     if (bid.editing) { // when editing is being toggled from true -> false: we are saving data
       bidsService.updateData(bid, context.token)
     }
-    bidsCopy.find(o => o.id === bid.bidId).editing = !bidsCopy.find(o => o.id === bid.bidId).editing
+    bidsCopy.find(b => b.bidId === bid.bidId).editing = !bidsCopy.find(b => b.bidId === bid.bidId).editing
     setState({ ...state, bids: bidsCopy })
   }
 
   const closeEditState = (bid) => {
     let bidsCopy = state.bids
-    bidsCopy.find(o => o.id === bid.bidId).editing = !bidsCopy.find(o => o.id === bid.bidId).editing
+    bidsCopy.find(b => b.bidId === bid.bidId).editing = !bidsCopy.find(b => b.bidId === bid.bidId).editing
     setState({ ...state, bids: bidsCopy })
   }
 
@@ -47,7 +47,6 @@ export default function Bids() {
   }, []);
 
   const approveBid = (bidId) => {
-    console.log(bidId)
     bidsService.approveBid(bidId, context.token, () => {
       setState({
         ...state,
@@ -115,9 +114,9 @@ export default function Bids() {
 
     bidCopy[attribute] = event.target.value
     // find existing bid and replace with updated bid in the bids-array
-    bidsCopy = bidsCopy.map(o => {
-      if (o.id === bidCopy.bidId) return bidCopy
-      else return o
+    bidsCopy = bidsCopy.map(b => {
+      if (b.bidId === bidCopy.bidId) return bidCopy
+      else return b
     })
     setState({ ...state, bids: bidsCopy })
   };
