@@ -79,48 +79,45 @@ def post_offers():
 
 
 @app.route(f'{api_prefix}bids/<bidId>/approve', methods=['POST'])
-def approve_bid():
+def approve_bid(bidId):
     with Session(engine) as session:
-        body = request.form
-        entry = dict(body)
-        print("Data from form: ", entry)
-        bid_id = entry['bid_id']
         bid = None
         offer = None
         try:
-            bid = session.scalars(select(Bids).where(Bids.bid_id == bid_id)).one()
+            bid = session.scalars(select(Bids).where(Bids.bid_id == bidId)).one()
             try:
              offer = session.scalars(select(Offers).where(Offers.offer_id == bid.offer_id)).one()
-             if(bid.quantity < offer.quantity):
-                print('fs')
-             elif bid.quantity == offer.quantity: # delete offer, delete quantity, create sale
-                session.query(Bids).filter(Bids.bid_id==bid.bid_id).delete()
-                session.query(Offers).filter(Offers.offer_id==offer.offer_id).delete()
-                sale = {}
-
+             if(bid.quantity <= offer.quantity):
                 newSale = Sales(
                     seller_id = bid.seller_id,
                     buyer_id = bid.buyer_id,
-                    product_name = entry['product'],
+                    product = offer.product_name,
                     price = offer.price,
-                    quantity = entry['quantity'],
-                    unit = offer.units
+                    quantity = bid.quantity,
+                    unit = offer.unit
                 )
-
+                # convert bid into sale, remove bid
                 session.add(newSale)
+                session.query(Bids).filter(Bids.bid_id==bid.bid_id).delete()
+                # update offer with reduced quantity
+                if bid.quantity < offer.quantity:
+                    stmt = update(Offers).where(Offers.offer_id == offer.offer_id)
+                    stmt = stmt.values(quantity= offer.quantity - bid.quantity)
+                    session.execute(
+                        stmt.execution_options(synchronize_session="fetch")
+                    )
+                # or delete offer and bid if bid buys out the entire stock of the offer
+                else:
+                    session.query(Offers).filter(Offers.offer_id==offer.offer_id).delete()
                 session.commit()
-                print("fsdhfhjks")
+                return {'message': "Sale successfully administered"}
              else: # error
-                return {}
+                print('Bid quantity was more than offer could offer')
+                return {'message': "Error, bid quantity invalid"}
             except NoResultFound:
-                print("No offer found")
+                return {'message': "Error, no valid offer"}
         except NoResultFound:
-            print("No bid found")
-        # fetch bid by id
-        # fetch offer by bid.offer_id
-        # match bid.quantity with offer.quantity (bid.q < offer.q)
-        # update offer
-        # create sale
+            return {'message': "Error, no valid Bid"}
 
 @app.route(f'{api_prefix}bids', methods=['POST'])
 def post_bids():
@@ -225,6 +222,26 @@ def get_offers():
             })
     return jsonify({'data': offers})
 
+@app.route(f'{api_prefix}sales', methods=['GET'])
+def get_sales():
+    with Session(engine) as session:
+        bids = []
+        buyer = aliased(Users)
+        seller = aliased(Users)
+        allSales = session.query(Sales, buyer, seller)\
+            .join(buyer, Sales.buyer_id == buyer.user_id)\
+            .join(seller, Sales.seller_id == seller.user_id)\
+            .all()
+        for saleResult, buyerResult, sellerResult in allSales:
+            bids.append({
+                'saleId': saleResult.sale_id,
+                'product': saleResult.product,
+                'buyer': buyerResult.phone_number,
+                'seller': sellerResult.phone_number,
+                'quantity': saleResult.quantity
+            })
+    return jsonify({'data': bids})
+
 @app.route(f'{api_prefix}bids', methods=['GET'])
 def get_bids():
     with Session(engine) as session:
@@ -238,6 +255,7 @@ def get_bids():
             .all()
         for bidResult, buyerResult, sellerResult, offerResult in allBids:
             bids.append({
+                'bidId': bidResult.bid_id,
                 'offerId': bidResult.offer_id,
                 'product': offerResult.product_name,
                 'product_lower': offerResult.product_name.replace(" ", "_").lower(),
