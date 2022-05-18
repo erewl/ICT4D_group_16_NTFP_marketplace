@@ -15,7 +15,7 @@
             <var name="offer_id" expr="29"/>
             <var name="quantity" expr="33"/>
 
-            <data name="submission_response" enctype="form-data" src="http://forest-marche.herokuapp.com/api/v1/bids" method="post" fetchtimeout="15s" namelist="offer_id quantity session.callerid" />
+            <submit enctype="form-data" next="http://forest-marche.herokuapp.com/api/v1/bids" method="POST" fetchtimeout="15s" namelist="offer_id quantity session.callerid" />
             
             <!-- <assign name="response" expr="submission_response" />
             <value expr="response" /> -->
