@@ -114,11 +114,11 @@ def approve_bid(bidId):
                 return {'message': "Sale successfully administered"}
              else: # error
                 print('Bid quantity was more than offer could offer')
-                return {'message': "Error, bid quantity invalid"}
+                return {'message': "Error, bid quantity invalid"}, 400
             except NoResultFound:
-                return {'message': "Error, no valid offer"}
+                return {'message': "Error, no valid offer"}, 400
         except NoResultFound:
-            return {'message': "Error, no valid Bid"}
+            return {'message': "Error, no valid Bid"}, 400
 
 @app.route(f'{api_prefix}bids', methods=['POST'])
 def post_bids():
@@ -198,6 +198,22 @@ def update_offer(offerId):
             stmt = stmt.values(price= offer['price'])
         if(offer['quantity']):
             stmt = stmt.values(quantity= offer['quantity'])
+
+        result = session.execute(
+            stmt.execution_options(synchronize_session="fetch")
+        )
+        print(result.rowcount)
+        session.commit()
+        return {'message': "Successful update!"}
+
+@app.route(f'{api_prefix}bids/<bidId>', methods=['PUT'])
+@jwt_required()
+def update_bid(bidId):
+    with Session(engine) as session:
+        newBid = request.json
+        stmt = update(Bids).where(Bids.bid_id == bidId)
+        if(newBid['quantity']):
+            stmt = stmt.values(quantity= newBid['quantity'])
 
         result = session.execute(
             stmt.execution_options(synchronize_session="fetch")
