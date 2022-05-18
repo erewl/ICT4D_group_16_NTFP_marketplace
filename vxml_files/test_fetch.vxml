@@ -10,12 +10,13 @@
             <var name="offers" expr="offerrequest.data"/>
 
             <prompt>
-            14
+            15
             Hello world!
             <var name="offer_id" expr="29"/>
             <var name="quantity" expr="33"/>
             <value expr="session.callerid"/>
             <data name="submission_response" src="http://forest-marche.herokuapp.com/api/v1/bids" method="post" fetchtimeout="15s" namelist="offer_id quantity session.callerid" />
+            <var name="response" expr="submission_response" />
             <assign name="response" expr="submission_response" />
             <value expr="response" />
             </prompt>
