@@ -10,7 +10,7 @@
             <var name="offers" expr="offerrequest.data"/>
             <!-- <var name="response" expr="'Response not defined...'" /> -->
             <prompt>
-            17
+            18
             Hello world!
             <var name="offer_id" expr="29"/>
             <var name="quantity" expr="33"/>
