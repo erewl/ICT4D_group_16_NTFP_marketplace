@@ -10,13 +10,19 @@
             <var name="offers" expr="offerrequest.data"/>
             <!-- <var name="response" expr="'Response not defined...'" /> -->
             <prompt>
-            22
+            23
             Hello world!
             <var name="offer_id" expr="29"/>
             <var name="quantity" expr="33"/>
 
             <submit next="http://forest-marche.herokuapp.com/api/v1/bids" method="post" fetchtimeout="15s" namelist="offer_id quantity session.callerid" />
+            <submit expr="'http://forest-marche.herokuapp.com/api/v1/bids'" method="post" fetchtimeout="15s" namelist="offer_id quantity session.callerid" />
+            <submit enctype="form-data" next="http://forest-marche.herokuapp.com/api/v1/bids" method="POST" fetchtimeout="15s" namelist="offer_id quantity session.callerid" />
             
+            
+            <data name="offerrequest" src="http://forest-marche.herokuapp.com/api/v1/bids" method="post"/>
+            <data name="offerrequest" src="http://forest-marche.herokuapp.com/api/v1/bids" method="post" namelist="offer_id quantity session.callerid"/>
+            <data name="offerrequest" src="http://forest-marche.herokuapp.com/api/v1/bids" method="POST" namelist="offer_id quantity session.callerid"/>
             <!-- <assign name="response" expr="submission_response" />
             <value expr="response" /> -->
             </prompt>
