@@ -25,6 +25,7 @@ export default function Offers(props) {
     const [quantity, setQuantity] = React.useState("");
     const [phoneNumber, setPhoneNumber] = React.useState("");
     const [modalOpen, setModalOpen] = React.useState(false);
+    const [offer_id, setOfferId] = React.useState();
 
     const update = s => {
         let offers = s.map(offer => ({ ...offer, editing: false }))
@@ -54,12 +55,12 @@ export default function Offers(props) {
         }))
     }
 
-    const submit = (offer) => {
-        console.log(offer);
+    const submit = () => {
         let bid = new FormData()
-        bid.append("offer_id",offer.id);
+        bid.append("offer_id",offer_id);
         bid.append("quantity", quantity);
         bid.append("session.callerid",phoneNumber);
+        setOfferId("");
         setQuantity("");
         setPhoneNumber("");
         BidsService.setData(bid);
@@ -85,25 +86,10 @@ export default function Offers(props) {
     };
 
     const determineEditButton = (offer) => {
-        if (offer && !offer.editing) return <div>
-                <Button sx={{ mr: 2 }} color="success" onClick={() => setModalOpen(true)} variant="outlined" > {t('buttons.buy')}  </Button >
-                {modalOpen &&
-                <Modal
-                open={true}
-                onClose={() => setModalOpen(false)}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-                >
-                <Box sx={style}>
-                    <Box>
-                    <TextField label="Quantity" variant="outlined" value={quantity} onChange={(e) => setQuantity(e.target.value)} />
-                    <TextField sx={{mt:2}} label="Phone Number" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)}/>
-                    </Box>
-                    <Button sx={{mt: 2, fontSize: 16}} color="success" variant="outlined" onClick={() => submit(offer)} >Submit</Button>
-                </Box>
-                </Modal> }
+        if (offer && !offer.editing) return <>
+            <Button sx={{ mr: 2 }} color="success" onClick={() => {setModalOpen(true); setOfferId(offer["id"]);}} variant="outlined" > {t('buttons.buy')}  </Button >
             {context.token && context.token !== '' && <Button sx={{ mr: 2 }} color="success" onClick={() => toggleEditState(offer)} variant="outlined">{t('buttons.edit')}  </Button>}
-        </div>
+        </>
         else
             return <div>
                 {context.token && context.token !== '' &&
@@ -182,15 +168,17 @@ export default function Offers(props) {
                 <TableContainer align="center">
                     <Table style={{ width: 1200 }} stickyHeader>
                         <TableHead>
+                        <TableRow>
                             <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('offers.product')}  </Typography></TableCell>
                             <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('offers.quantity')}  </Typography></TableCell>
                             <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('offers.unit')}  </Typography></TableCell>
                             <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('offers.price')} <Box component="span" sx={{ fontSize: 14 }}>(CFA)</Box>  </Typography></TableCell>
                             <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('offers.phone_number')}  </Typography></TableCell>
+                            </TableRow>
                         </TableHead>
                         <TableBody>
                             {state.offers && state.offers.map((offer) => {
-                                return <TableRow>
+                                return <TableRow >
                                     <TableCell> {productTranslation(offer['product'], i18n.resolvedLanguage)} </TableCell>
                                     <TableCell> {renderEditableCell(offer, 'quantity')} </TableCell>
                                     <TableCell> {renderEditableCell(offer, 'unit')} </TableCell>
@@ -204,6 +192,21 @@ export default function Offers(props) {
                         </TableBody>
                     </Table>
                 </TableContainer>
+                {modalOpen &&
+                <Modal
+                open={true}
+                onClose={() => {setModalOpen(false); setOfferId(undefined); setQuantity(undefined); setPhoneNumber(undefined);}}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+                >
+                <Box sx={style}>
+                    <Box>
+                    <TextField label="Quantity" variant="outlined" value={quantity} onChange={(e) => setQuantity(e.target.value)} />
+                    <TextField sx={{mt:2}} label="Phone Number" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)}/>
+                    </Box>
+                    <Button sx={{mt: 2, fontSize: 16}} color="success" variant="outlined" onClick={() => {submit(); setModalOpen(false);}} >Submit</Button>
+                </Box>
+                </Modal> } 
             </div>
         </div>
 
