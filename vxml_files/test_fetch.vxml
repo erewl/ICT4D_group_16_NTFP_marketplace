@@ -10,10 +10,15 @@
             <var name="offers" expr="offerrequest.data"/>
             <!-- <var name="response" expr="'Response not defined...'" /> -->
             <prompt>
-            29
+            30
             Hello world!
             <var name="offer_id" expr="29"/>
             <var name="quantity" expr="33"/>
+             
+             <filled>
+              <assign name="offer_id" expr="29"/>
+              <assign name="quantity" expr="33"/>
+            </filled>
 
             
             <!-- <assign name="response" expr="submission_response" />
