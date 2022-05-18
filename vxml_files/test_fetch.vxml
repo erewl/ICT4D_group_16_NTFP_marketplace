@@ -10,7 +10,7 @@
             <var name="offers" expr="offerrequest.data"/>
             <!-- <var name="response" expr="'Response not defined...'" /> -->
             <prompt>
-            16
+            17
             Hello world!
             <var name="offer_id" expr="29"/>
             <var name="quantity" expr="33"/>
@@ -25,6 +25,11 @@
 
     <catch event="error.badfetch">
         <prompt bargein="false">Submission responded with BadFetch</prompt>
+    </catch>
+    <catch event="error">
+        <prompt bargein="true">Submission responded with BadFetch
+        <value expr="_message"/>
+        </prompt>
     </catch>
 
 
