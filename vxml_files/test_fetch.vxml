@@ -10,14 +10,21 @@
             <var name="offers" expr="offerrequest.data"/>
 
             <prompt>
-            12
+            13
             Hello world!
             <var name="offer_id" expr="29"/>
             <var name="quantity" expr="33"/>
-            <data name="submission_response" src="http://forest-marche.herokuapp.com/api/v1/bids" method="post" fetchtimeout="10s" namelist="offer_id quantity session.callerid" />
+            <value expr="session.callerid"/>
+            <data name="submission_response" src="http://forest-marche.herokuapp.com/api/v1/bids" method="post" fetchtimeout="15s" namelist="offer_id quantity session.callerid" />
+            <assign name="response" expr="submission_response" />
+            <value expr="respone" />
             </prompt>
         </block>
     </form>
+
+    <catch event="error.badfetch">
+        <prompt bargein="false">Submission responded with BadFetch</prompt>
+    </catch>
 
 
 </vxml>
