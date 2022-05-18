@@ -79,6 +79,7 @@ def post_offers():
 
 
 @app.route(f'{api_prefix}bids/<bidId>/approve', methods=['POST'])
+@jwt_required()
 def approve_bid(bidId):
     with Session(engine) as session:
         bid = None
