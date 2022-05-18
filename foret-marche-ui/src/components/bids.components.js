@@ -22,7 +22,7 @@ export default function Bids() {
 
   const update = s => {
     let bids = s.map(bid => ({ ...bid, editing: false }))
-    bids.sort((a, b) => b.bidId - a.bidId)
+    // bids.sort((a, b) => b.bidId - a.bidId)
     setState({ ...state, bids: bids })
   }
 
