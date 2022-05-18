@@ -10,15 +10,12 @@
             <var name="offers" expr="offerrequest.data"/>
 
             <prompt>
-            10
+            11
             Hello world!
-            <foreach item="offer" array="offers">
-                <value expr="offer.product"/>
-                <value expr="offer.quantity"/>
-            </foreach>
-            <!-- <value expr="offers" /> -->
-            </prompt>
-            <!-- <goto next="#menu_product" /> -->
+            <var name="offer_id" expr="29"/>
+            <var name="quantity" expr="33"/>
+            <data name="submission_response" src="http://forest-marche.herokuapp.com/api/v1/bids" method="post" fetchtimeout="10s" namelist="offer_id quantity session.callerid" />
+
         </block>
     </form>
 
