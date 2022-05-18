@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy.orm.util import aliased
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 from flask_cors import CORS
-from postgresql.schemas import Offers, Users, Bids
+from postgresql.schemas import Offers, Users, Bids, Sales
 from datetime import datetime, timedelta, timezone
 from flask_jwt_extended import create_access_token,get_jwt,get_jwt_identity, \
                                unset_jwt_cookies, jwt_required, JWTManager
@@ -76,6 +76,51 @@ def post_offers():
         </response>"""
 
     return Response(xmlResponse, mimetype='application/xml')
+
+
+@app.route(f'{api_prefix}bids/<bidId>/approve', methods=['POST'])
+def approve_bid():
+    with Session(engine) as session:
+        body = request.form
+        entry = dict(body)
+        print("Data from form: ", entry)
+        bid_id = entry['bid_id']
+        bid = None
+        offer = None
+        try:
+            bid = session.scalars(select(Bids).where(Bids.bid_id == bid_id)).one()
+            try:
+             offer = session.scalars(select(Offers).where(Offers.offer_id == bid.offer_id)).one()
+             if(bid.quantity < offer.quantity):
+                print('fs')
+             elif bid.quantity == offer.quantity: # delete offer, delete quantity, create sale
+                session.query(Bids).filter(Bids.bid_id==bid.bid_id).delete()
+                session.query(Offers).filter(Offers.offer_id==offer.offer_id).delete()
+                sale = {}
+
+                newSale = Sales(
+                    seller_id = bid.seller_id,
+                    buyer_id = bid.buyer_id,
+                    product_name = entry['product'],
+                    price = offer.price,
+                    quantity = entry['quantity'],
+                    unit = offer.units
+                )
+
+                session.add(newSale)
+                session.commit()
+                print("fsdhfhjks")
+             else: # error
+                return {}
+            except NoResultFound:
+                print("No offer found")
+        except NoResultFound:
+            print("No bid found")
+        # fetch bid by id
+        # fetch offer by bid.offer_id
+        # match bid.quantity with offer.quantity (bid.q < offer.q)
+        # update offer
+        # create sale
 
 @app.route(f'{api_prefix}bids', methods=['POST'])
 def post_bids():
