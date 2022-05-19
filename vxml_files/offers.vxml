@@ -14,7 +14,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            33
+            34
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/welcome.mp3'" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/welcome.mp3" />
             </prompt>
@@ -417,8 +417,8 @@
         </block>
     </form>
 
-    <!-- <catch event="error.badfetch">
-        <prompt bargein="false">Submission responded with BadFetch</prompt>
-    </catch> -->
+    <catch event="error.badfetch">
+        <prompt bargein="false">Here is the catch bad fetch</prompt>
+    </catch>
 
 </vxml>
