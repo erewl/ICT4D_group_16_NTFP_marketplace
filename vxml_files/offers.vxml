@@ -14,7 +14,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            6
+            7
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/welcome.mp3'" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/welcome.mp3" />
             </prompt>
@@ -162,12 +162,11 @@
                     <break time="500ms"/>
                     <value expr="offer.price"/>
                     <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/franc.mp3'" />
-                    <break time="500ms"/>
-                    Per
+                    <break time="100ms"/>
+                    <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/per.mp3'" />
                     <value expr="offer.unit" />
                     <break time="1000ms"/>
-                    <break time="1000ms"/>
-                    Availability:
+                    <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/availability.mp3'" />
                     <value expr="offer.quantity" />
                     <break time="1000ms"/>
                     <value expr="offer.unit" />
@@ -222,7 +221,7 @@
                 <value expr="selected_offer.unit" />
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/of.mp3'" />
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + selected_offer.product_lower + '.mp3'" />     
-                Would you like to buy?           
+                <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/would_like_buy.mp3'" />         
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/enter_quantity.mp3'" />
             </prompt>
 
@@ -232,7 +231,7 @@
                     <assign name="quantity" expr="buy_quantity_form" />
                     <goto next="#confirm_buy" />
                 <else/>
-                    This number exceeds the availability, please try again.
+                   <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/exceeds_availability.mp3'" />
                     <goto next="#buy_details" />
                 </if>
             </filled>
@@ -253,12 +252,12 @@
         <break time="500ms"/>
         <value expr="selected_offer.price"/>
         <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/franc'  + '.mp3'" />
-        <break time="500ms"/>
-        Per
-        <break time="500ms"/>
+        <break time="200ms"/>
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/per.mp3'" />
+        <break time="200ms"/>
         <value expr="selected_offer.unit"/>
         <break time="500ms"/>
-        By confirming you consent to you phone number being shared with Foret marchet.
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/consent.mp3'" />
         
         <break time="500ms"/>
             <enumerate>
@@ -370,7 +369,7 @@
                 <value expr="units" />
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/of.mp3'" />
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + product + '.mp3'" />  
-                Would you like to sell?
+                <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/would_like_sell.mp3'" />
                 <break time="500"/>              
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/enter_quantity.mp3'" />
             </prompt>
@@ -386,7 +385,7 @@
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + 'price_question.mp3'" />
 
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + product + '.mp3'" />
-            Per
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/per.mp3'" />
             <value expr="units" />
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/enter_price.mp3'" />
             </prompt>
@@ -418,16 +417,16 @@
         <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/of.mp3'" />
         <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + product + '.mp3'" />
         <break time="500ms"/>
-        For 
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/for.mp3'" />
         <break time="500ms"/>
             <value expr="price"/>
         <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/franc'  + '.mp3'" />
         <break time="500ms"/>
-        Per
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/per.mp3'" />
         <break time="500ms"/>
             <value expr="units"/>
         <break time="500ms"/>
-        By confirming you consent to you phone number being shared with Foret marchet.
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/consent.mp3'" />
         
         <break time="500ms"/>
             <enumerate>
