@@ -222,10 +222,10 @@
 
             <filled>
                 <!-- <if cond="buy_quantity_form < available_quantity + 1"> -->
-                <if cond="1 == 1">
+                <if cond="buy_quantity_form &lt; available_quantity">
                     Test
-                    <value expr="buy_quantity_form"/>
-                    <value expr="available_quantity"/>
+                    <!-- <value expr="buy_quantity_form"/>
+                    <value expr="available_quantity"/> -->
                     <assign name="quantity" expr="buy_quantity_form" />
                     Selected:
                     <value expr="quantity" />
