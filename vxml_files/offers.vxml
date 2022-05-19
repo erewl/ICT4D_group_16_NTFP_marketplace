@@ -221,7 +221,7 @@
             </prompt>
 
             <filled>
-                <if cond="quantity <= available_quantity">
+                <!-- <if cond="quantity <= available_quantity">
                     <assign name="quantity" expr="buy_quantity_form" />
                     Selected:
                     <value expr="quantity" />
@@ -229,7 +229,8 @@
                 <else/>
                     This number exceeds the availability, please try again.
                     <reprompt/>
-                </if>
+                </if> -->
+                This works?
             </filled>
         </field>
     </form>
