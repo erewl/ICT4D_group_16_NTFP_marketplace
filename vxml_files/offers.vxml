@@ -129,7 +129,7 @@
     <var name="iterator" expr="1" />
     <var name="selected_offer" expr="'none chosen'" />
     <var name="offer_id" expr="'none chosen'" />
-    <var name="available_quantity" = "'none'" />
+    <var name="available_quantity" expr="'none'" />
     <form id="list_offers">
         <field name="offer_selection">
             <grammar version="1.0" root="keypress" mode="dtmf" >
@@ -222,13 +222,13 @@
 
             <filled>
                 <if cond="quantity <= available_quantity">
-                <assign name="quantity" expr="buy_quantity_form" />
-                Selected:
-                <value expr="quantity" />
-                <goto next="#confirm_buy" />
+                    <assign name="quantity" expr="buy_quantity_form" />
+                    Selected:
+                    <value expr="quantity" />
+                    <goto next="#confirm_buy" />
                 <else/>
-                This number exceeds the availability, please try again.
-                <reprompt/>
+                    This number exceeds the availability, please try again.
+                    <reprompt/>
                 </if>
             </filled>
         </field>
