@@ -14,7 +14,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            1
+            2
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/welcome.mp3'" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/welcome.mp3" />
             </prompt>
@@ -376,9 +376,9 @@
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/enter_quantity.mp3'" />
             </prompt>
 
-            <filled>
+            <!-- <filled>
                 <assign name="quantity" expr="form_quantity" />
-            </filled>
+            </filled> -->
         </field>
 
 
@@ -391,12 +391,18 @@
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/enter_price.mp3'" />
             </prompt>
 
-            <filled>
+            <!-- <filled>
                 <assign name="price" expr="form_price" />
-            </filled>
+            </filled> -->
         </field>
 
-        <filled>
+        <!-- <filled>
+            <goto next="#confirm_sell" />
+        </filled> -->
+
+        <filled mode="all" namelist="form_quantity form_price">
+            <assign name="quantity" expr="form_quantity" />
+            <assign name="price" expr="form_price" />
             <goto next="#confirm_sell" />
         </filled>
 
