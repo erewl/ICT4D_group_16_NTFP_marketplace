@@ -14,7 +14,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            2
+            3
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/welcome.mp3'" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/welcome.mp3" />
             </prompt>
@@ -384,10 +384,10 @@
 
         <field name="form_price" type="number">
             <prompt>
-            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' 'pice_question.mp3'" />
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + 'pice_question.mp3'" />
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + product + '.mp3'" />
             Per
-            <value expr="product" />
+            <value expr="units" />
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/enter_price.mp3'" />
             </prompt>
 
