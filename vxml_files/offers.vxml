@@ -14,7 +14,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            22
+            23
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/welcome.mp3'" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/welcome.mp3" />
             </prompt>
@@ -221,7 +221,7 @@
             </prompt>
 
             <filled>
-                <!-- <if cond="quantity &le; available_quantity">
+                <if cond="buy_quantity_form < available_quantity + 1">
                     <assign name="quantity" expr="buy_quantity_form" />
                     Selected:
                     <value expr="quantity" />
@@ -229,8 +229,7 @@
                 <else/>
                     This number exceeds the availability, please try again.
                     <reprompt/>
-                </if> -->
-                Is this the problem?
+                </if>
             </filled>
         </field>
     </form>
