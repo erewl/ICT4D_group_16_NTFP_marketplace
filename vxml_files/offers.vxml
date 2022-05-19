@@ -246,7 +246,7 @@
         For 
         <break time="500ms"/>
         <value expr="selected_offer.price"/>
-        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + franc + '.mp3'" />
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/franc'  + '.mp3'" />
         <break time="500ms"/>
         Per
         <break time="500ms"/>
