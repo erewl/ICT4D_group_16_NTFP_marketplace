@@ -22,7 +22,7 @@ export default function Bids() {
 
   const update = s => {
     let bids = s.map(bid => ({ ...bid, editing: false }))
-    bids.sort((a, b) => b.id - a.id)
+    bids.sort((a, b) => b.bidId - a.bidId)
     setState({ ...state, bids: bids })
   }
 
@@ -31,24 +31,33 @@ export default function Bids() {
     if (bid.editing) { // when editing is being toggled from true -> false: we are saving data
       bidsService.updateData(bid, context.token)
     }
-    bidsCopy.find(o => o.id === bid.id).editing = !bidsCopy.find(o => o.id === bid.id).editing
+    bidsCopy.find(b => b.bidId === bid.bidId).editing = !bidsCopy.find(b => b.bidId === bid.bidId).editing
     setState({ ...state, bids: bidsCopy })
   }
 
   const closeEditState = (bid) => {
     let bidsCopy = state.bids
-    bidsCopy.find(o => o.id === bid.id).editing = !bidsCopy.find(o => o.id === bid.id).editing
+    bidsCopy.find(b => b.bidId === bid.bidId).editing = !bidsCopy.find(b => b.bidId === bid.bidId).editing
     setState({ ...state, bids: bidsCopy })
-}
+  }
 
   // useEffect is being run before and after each render of the site, to limit the API call only to when no data is in the frontend, the if-clause is introduced
   React.useEffect(() => {
     let response = bidsService.fetchData(update);
   }, []);
 
+  const approveBid = (bidId) => {
+    bidsService.approveBid(bidId, context.token, () => {
+      setState({
+        ...state,
+        bids: state.bids.filter(b => b.bidId !== bidId)
+      })
+    })
+  }
+
   const determineEditButton = (bid) => {
     if (bid && !bid.editing) return <div>
-      <Button sx={{ mr: 2 }} color="success" onClick={() => console.log("TODO BUY")} variant="outlined" > {t('buttons.approve')} </Button >
+      <Button sx={{ mr: 2 }} color="success" onClick={() => approveBid(bid.bidId)} variant="outlined" > {t('buttons.approve')} </Button >
       {context.token && context.token !== '' &&
         < Button sx={{ mr: 2 }} color="success" onClick={() => toggleEditState(bid)} variant="outlined">{t('buttons.edit')} </Button>
       }
@@ -105,9 +114,9 @@ export default function Bids() {
 
     bidCopy[attribute] = event.target.value
     // find existing bid and replace with updated bid in the bids-array
-    bidsCopy = bidsCopy.map(o => {
-      if (o.id === bidCopy.id) return bidCopy
-      else return o
+    bidsCopy = bidsCopy.map(b => {
+      if (b.bidId === bidCopy.bidId) return bidCopy
+      else return b
     })
     setState({ ...state, bids: bidsCopy })
   };
