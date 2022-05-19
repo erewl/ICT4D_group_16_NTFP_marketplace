@@ -14,7 +14,6 @@
     <form id="greeting">
         <block>
             <prompt>
-            8
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/welcome.mp3'" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/welcome.mp3" />
             </prompt>
@@ -230,7 +229,6 @@
             </prompt>
 
             <filled>
-                <!-- <if cond="buy_quantity_form < available_quantity + 1"> -->
                 <if cond="buy_quantity_form &lt; available_quantity + 1">
                     <assign name="quantity" expr="buy_quantity_form" />
                     <goto next="#confirm_buy" />
@@ -298,12 +296,16 @@
         <goto next="#customer_type" />
     </catch>
 
-<!-- <form id="send_bid">
 
-</form> -->
 
-   
-    <!-- entering products to sell, main menu -->
+
+
+
+
+
+
+
+
     <var name="units" expr="'none'"/>
     <menu id="sell_menu" scope="dialog">
 
@@ -313,7 +315,7 @@
 
         <prompt>
             <enumerate>
-                <break time="1000" />
+                <break time="500" />
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/for.mp3'" />
                 <value expr="_prompt" />
             </enumerate>
@@ -337,7 +339,7 @@
          <choice event="kg_product_selected" dtmf="4" message="nuts">
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/nuts.mp3'" />
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/select.mp3'" />
-            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/3.mp3'" />
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/4.mp3'" />
         </choice>
 
         <nomatch>
@@ -382,10 +384,6 @@
                 <break time="500"/>              
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/enter_quantity.mp3'" />
             </prompt>
-
-            <!-- <filled>
-                <assign name="quantity" expr="form_quantity" />
-            </filled> -->
         </field>
 
 
@@ -422,9 +420,7 @@
         <break time="500ms"/>
             <value expr="price"/>
         <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/franc'  + '.mp3'" />
-        <break time="500ms"/>
         <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/per.mp3'" />
-        <break time="500ms"/>
         <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + units + '.mp3'" />
         <break time="500ms"/>
         <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/consent.mp3'" />
