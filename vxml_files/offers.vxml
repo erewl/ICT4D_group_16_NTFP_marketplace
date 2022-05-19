@@ -232,7 +232,7 @@
                     <goto next="#confirm_buy" />
                 <else/>
                     This number exceeds the availability, please try again.
-                    <reprompt/>
+                    <goto next="#buy_details" />
                 </if>
             </filled>
         </field>
