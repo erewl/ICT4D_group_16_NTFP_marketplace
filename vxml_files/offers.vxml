@@ -14,7 +14,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            7
+            8
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/welcome.mp3'" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/welcome.mp3" />
             </prompt>
@@ -105,10 +105,15 @@
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/select.mp3'" />
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/2.mp3'" />
         </choice>
-        <choice event="buy_product_selected" dtmf="3" messageexpr="'essential_oils'">
-            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/essential_oils.mp3'" />
+        <choice event="buy_product_selected" dtmf="3" messageexpr="'sesame_oil'">
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/sesame_oil.mp3'" />
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/select.mp3'" />
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/3.mp3'" />
+        </choice>
+        <choice event="buy_product_selected" dtmf="4" messageexpr="'nuts'">
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/nuts.mp3'" />
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/select.mp3'" />
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/4.mp3'" />
         </choice>
 
         <nomatch>
@@ -175,7 +180,7 @@
                 </if>
                 <break time="300ms"/>
             </foreach>
-            End list
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/end_list.mp3'" />
             </prompt>
 
             <filled>
@@ -211,7 +216,6 @@
             </noinput>
         </field>
     </form>
-
 
     <var name="quantity" expr="0" />
     <form id="buy_details">
@@ -325,8 +329,13 @@
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/select.mp3'" />
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/2.mp3'" />
         </choice>
-        <choice event="kg_product_selected" dtmf="3" message="essential_oils">
-            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/essential_oils.mp3'" />
+        <choice event="fluid_product_selection" dtmf="3" message="sesame_oil">
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/sesame_oil.mp3'" />
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/select.mp3'" />
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/3.mp3'" />
+        </choice>
+         <choice event="kg_product_selected" dtmf="4" message="nuts">
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/nuts.mp3'" />
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/select.mp3'" />
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/3.mp3'" />
         </choice>
@@ -386,18 +395,10 @@
 
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + product + '.mp3'" />
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/per.mp3'" />
-            <value expr="units" />
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + units + '.mp3'" />
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/enter_price.mp3'" />
             </prompt>
-
-            <!-- <filled>
-                <assign name="price" expr="form_price" />
-            </filled> -->
         </field>
-
-        <!-- <filled>
-            <goto next="#confirm_sell" />
-        </filled> -->
 
         <filled mode="all" namelist="form_quantity form_price">
             <assign name="quantity" expr="form_quantity" />
@@ -413,7 +414,7 @@
         <break time="500ms"/>
             <value expr="quantity"/>
         <break time="500ms"/>
-            <value expr="units"/>
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + units + '.mp3'" />
         <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/of.mp3'" />
         <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + product + '.mp3'" />
         <break time="500ms"/>
@@ -424,7 +425,7 @@
         <break time="500ms"/>
         <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/per.mp3'" />
         <break time="500ms"/>
-            <value expr="units"/>
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + units + '.mp3'" />
         <break time="500ms"/>
         <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/consent.mp3'" />
         
@@ -458,7 +459,7 @@
             <assign name="product" expr="'Shea Butter'" />
         <elseif cond="product == 'honey'" />
             <assign name="product" expr="'Honey'" />
-        <elseif cond="product == 'essential_oils'" />
+        <elseif cond="product == 'sesame_oil'" />
             <assign name="product" expr="'Sesame Oil'" />
         <elseif cond="product == 'nuts'" />
             <assign name="product" expr="'Nuts'" />
