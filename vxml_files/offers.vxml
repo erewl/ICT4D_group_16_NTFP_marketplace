@@ -14,7 +14,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            35
+            1
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/welcome.mp3'" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/welcome.mp3" />
             </prompt>
@@ -84,7 +84,6 @@
         <goto next="#sell_menu" />
     </catch>
 
-
     <menu id="buy_menu" scope="dialog">
         <prompt><break time="200" />
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/select_product_to_buy.mp3'" />
@@ -126,6 +125,7 @@
             <break time="200" />
         </prompt>
         <assign name="product" expr="_message" />
+
         <prompt>
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/selected.mp3'" />
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + product + '.mp3'" />
@@ -250,7 +250,7 @@
         <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/of.mp3'" />
         <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + selected_offer.product_lower + '.mp3'" />
         <break time="500ms"/>
-        For 
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + 'for.mp3'" /> 
         <break time="500ms"/>
         <value expr="selected_offer.price"/>
         <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/franc'  + '.mp3'" />
@@ -448,36 +448,23 @@
         <reprompt /></noinput>
     </menu>
 
-    <catch event="confirm_buy_yes">
+    <catch event="confirm_sell_yes">
+        <if cond="product == 'shea_butter'">
+            <assign name="product" expr="'Shea Butter'" />
+        <elseif cond="product == 'honey'" />
+            <assign name="product" expr="'Honey'" />
+        <elseif cond="product == 'essential_oils'" />
+            <assign name="product" expr="'Sesame Oil'" />
+        <elseif cond="product == 'nuts'" />
+            <assign name="product" expr="'Nuts'" />
+        </if>
+
         <submit next="http://forest-marche.herokuapp.com/api/v1/offers" method="post" fetchtimeout="15s" namelist="product quantity price session.callerid units" />
     </catch>
 
     <catch event="confirm_sell_no">
         <break time="500" />
         <goto next="#customer_type" />
-    </catch>
-
-
-    <!-- <form id="submission">
-        <block>
-            <prompt>
-                <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/submission_goodbye.mp3" />
-            </prompt>
-            <!-- <assign name="product" expr="'Shea Butter'" />
-            <assign name="units" expr="'Liters'" />
-            <assign name="price" expr="'30'" />
-            <assign name="quantity" expr="'20'" /> -->
-
-            <!-- <data name="submission_response" src="http://forest-marche.herokuapp.com/api/v1/offers" method="post" fetchtimeout="10s" namelist="product units price quantity session.callerid" /> -->
-            <data name="submission_response" src="http://forest-marche.herokuapp.com/api/v1/offers" method="post" fetchtimeout="10s" namelist="product units price quantity session.callerid" />
-
-            <assign name="response" expr="submission_response" />
-        </block>
-    </form> -->
-
-    <catch event="error.badfetch">
-        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/submit_success.mp3'" />
-        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/thanks_for_using.mp3'" />
     </catch>
 
 </vxml>
