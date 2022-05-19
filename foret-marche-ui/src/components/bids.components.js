@@ -67,7 +67,7 @@ export default function Bids() {
         {context.token && context.token !== '' &&
           <>
             <Button sx={{ mr: 2, }} color="success" onClick={() => closeEditState(bid)} variant="outlined" > {t('buttons.cancel')} </Button >
-            <Button sx={{ mr: 2, }} color="success" onClick={() => toggleEditState(bid)} variant="outlined">{t('buttons.edit')} </Button>
+            <Button sx={{ mr: 2, }} color="success" onClick={() => toggleEditState(bid)} variant="outlined">{t('buttons.save')} </Button>
           </>
         }
       </div>

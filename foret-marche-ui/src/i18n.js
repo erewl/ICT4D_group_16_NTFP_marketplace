@@ -50,7 +50,10 @@ i18n
                     submit: 'Submit',
                     delete: 'Delete',
                     cancel: 'Cancel',
-                    save: 'Save'
+                    save: 'Save',
+                  },
+                  sales: {
+                    sold: "Sales"
                   }
             }
         },
@@ -91,6 +94,9 @@ i18n
                     delete: 'Verwijderen',
                     cancel: 'Annuleren',
                     save: 'Opslaan'
+                  },
+                  sales: {
+                    sold: "Verkocht"
                   }
             }
         },
@@ -131,7 +137,11 @@ i18n
                     delete: 'Effacer',
                     cancel: 'Annuler',
                     save: 'Sauvegarder'
+                  },
+                  sales: {
+                    sold: "Vendu"
                   }
+                  
 
             }
         } 

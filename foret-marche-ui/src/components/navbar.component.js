@@ -185,9 +185,16 @@ export default function Navbar(props) {
               <Button onClick={() => props.changeTab('offers')} color="inherit" sx={{ fontFamily: 'Monospace', fontSize: 20, color: "white" }} >
               {t('navbar.offers')}
               </Button>
+              {!context.token && context.token !== ''? 
+              <></>:
               <Button onClick={() => props.changeTab('bids')} color="inherit" sx={{ fontFamily: 'Monospace', fontSize: 20, color: "white" }} >
               {t('navbar.bids')}
-              </Button>
+              </Button>}
+              {!context.token && context.token !== ''? 
+              <></>:
+              <Button onClick={() => props.changeTab('sales')} color="inherit" sx={{ fontFamily: 'Monospace', fontSize: 20, color: "white" }} >
+              {t('sales.sold')}
+              </Button>}
               {!context.token && context.token !== ''? 
                 <>
                   <Button color="inherit" onClick={() => setModalOpen(true)} sx={{ fontFamily: 'Monospace', fontSize: 20 }} >

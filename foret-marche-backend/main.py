@@ -255,7 +255,9 @@ def get_sales():
                 'product': saleResult.product,
                 'buyer': buyerResult.phone_number,
                 'seller': sellerResult.phone_number,
-                'quantity': saleResult.quantity
+                'quantity': saleResult.quantity,
+                'unit': saleResult.unit,
+                'price': saleResult.price
             })
     return jsonify({'data': bids})
 
