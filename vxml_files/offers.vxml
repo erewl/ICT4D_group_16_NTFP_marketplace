@@ -14,7 +14,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            17
+            18
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/welcome.mp3'" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/welcome.mp3" />
             </prompt>
@@ -128,6 +128,7 @@
 
     <var name="iterator" expr="1" />
     <var name="selected_offer" expr="'none chosen'" />
+    <var name="offer_id" expr="'none chosen'" />
     <form id="list_offers">
         <field name="offer_selection">
             <grammar version="1.0" root="keypress" mode="dtmf" >
@@ -180,6 +181,7 @@
                         <if cond="product == offer.product_lower">
                             <if cond="offer_selection == iterator">
                                 <assign name="selected_offer" expr="offer"/>
+                                <assign name="offer_id" expr="offer.id"/>
                             </if>
                             <assign name="iterator" expr="iterator + 1" />
                         </if>
@@ -204,7 +206,7 @@
     </form>
 
 
-    <var name="buy_quantity" expr="0" />
+    <var name="quantity" expr="0" />
     <form id="buy_details">
         <field name="buy_quantity_form" type="number">
             <prompt>
@@ -217,9 +219,9 @@
             </prompt>
 
             <filled>
-                <assign name="buy_quantity" expr="buy_quantity_form" />
+                <assign name="quantity" expr="buy_quantity_form" />
                 Selected:
-                <value expr="buy_quantity" />
+                <value expr="quantity" />
                 <goto next="#confirm_buy" />
             </filled>
         </field>
@@ -229,7 +231,7 @@
         <prompt>
         <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/are_you_sure_buy.mp3'" />
         <break time="500ms"/>
-        <value expr="buy_quantity"/>
+        <value expr="quantity"/>
         <break time="500ms"/>
         <value expr="selected_offer.unit"/>
         <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/of.mp3'" />
@@ -278,7 +280,6 @@
         <!-- Do the database stuff here -->
         <!-- <value expr="selected_offer.id"/> -->
         <var name="offer_id" expr="selected_offer.id" />
-        <var name="quantity" expr="buy_quantity" />
         <submit next="http://forest-marche.herokuapp.com/api/v1/bids" method="post" fetchtimeout="15s" namelist="selected_offer.id buy_quantity session.callerid" />
         <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/submit_success.mp3'" />
         <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/thanks_for_using.mp3'" />
