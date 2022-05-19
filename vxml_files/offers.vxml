@@ -14,7 +14,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            20
+            21
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/welcome.mp3'" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/welcome.mp3" />
             </prompt>
@@ -129,6 +129,7 @@
     <var name="iterator" expr="1" />
     <var name="selected_offer" expr="'none chosen'" />
     <var name="offer_id" expr="'none chosen'" />
+    <var name="available_quantity" = "'none'" />
     <form id="list_offers">
         <field name="offer_selection">
             <grammar version="1.0" root="keypress" mode="dtmf" >
@@ -182,6 +183,7 @@
                             <if cond="offer_selection == iterator">
                                 <assign name="selected_offer" expr="offer"/>
                                 <assign name="offer_id" expr="offer.id"/>
+                                <assign name="available_quantity" expr="offer.quantity" />
                             </if>
                             <assign name="iterator" expr="iterator + 1" />
                         </if>
@@ -219,10 +221,15 @@
             </prompt>
 
             <filled>
+                <if cond="quantity <= available_quantity">
                 <assign name="quantity" expr="buy_quantity_form" />
                 Selected:
                 <value expr="quantity" />
                 <goto next="#confirm_buy" />
+                <else/>
+                This number exceeds the availability, please try again.
+                <reprompt/>
+                </if>
             </filled>
         </field>
     </form>
@@ -414,8 +421,8 @@
         </block>
     </form>
 
-    <catch event="error.badfetch">
+    <!-- <catch event="error.badfetch">
         <prompt bargein="false">Submission responded with BadFetch</prompt>
-    </catch>
+    </catch> -->
 
 </vxml>
