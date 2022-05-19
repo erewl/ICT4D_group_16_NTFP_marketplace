@@ -14,7 +14,7 @@
     <form id="greeting">
         <block>
             <prompt>
-            34
+            35
                 <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings2/welcome.mp3'" />
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/fr_recordings2/welcome.mp3" />
             </prompt>
@@ -112,6 +112,13 @@
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/select.mp3'" />
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/3.mp3'" />
         </choice>
+
+        <nomatch>
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/no_option_match.mp3'" />
+        <reprompt /></nomatch>
+        <noinput>
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/question_repeat.mp3'" />
+        <reprompt /></noinput>
     </menu>
 
      <catch event="buy_product_selected">
@@ -281,8 +288,7 @@
 
     <catch event="confirm_buy_yes">
         <submit next="http://forest-marche.herokuapp.com/api/v1/bids" method="post" fetchtimeout="15s" namelist="offer_id quantity session.callerid" />
-        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/submit_success.mp3'" />
-        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/thanks_for_using.mp3'" />
+        
     </catch>
 
     <catch event="confirm_buy_no">
@@ -296,6 +302,7 @@
 
    
     <!-- entering products to sell, main menu -->
+    <var name="units" expr="'none'"/>
     <menu id="sell_menu" scope="dialog">
 
         <prompt>
@@ -326,15 +333,12 @@
             <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/3.mp3'" />
         </choice>
 
-        <noinput>
-            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/product_list_repeat.mp3'" />
-            <reprompt />
-        </noinput>
-
         <nomatch>
-            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/no_product_match.mp3'" />
-            <reprompt />
-        </nomatch>
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/no_product_match.mp3'" />
+        <reprompt /></nomatch>
+        <noinput>
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/question_repeat.mp3'" />
+        <reprompt /></noinput>
     </menu>
 
 
@@ -358,16 +362,18 @@
         <goto next="#details" />
     </catch>
 
-
+    <var name="quantity" expr="'none'"/>
+    <var name="price" expr="'none'" />
     <form id="details">
         <field name="form_quantity" type="number">
             <prompt>
-                How many
-                <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language '/how_many.mp3'" />
+                <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/how_many.mp3'" />
                 <value expr="units" />
-                <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language '/of.mp3'" />
-                <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + product + '.mp3'" />                
-                <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language '/enter_quantity.mp3'" />
+                <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/of.mp3'" />
+                <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + product + '.mp3'" />  
+                Would you like to sell?
+                <break time="500"/>              
+                <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/enter_quantity.mp3'" />
             </prompt>
 
             <filled>
@@ -378,12 +384,11 @@
 
         <field name="form_price" type="number">
             <prompt>
-
-                How much is the <value expr="units" />
-                price for
-                <value expr="product" />
-                ?
-                Enter the price and press hash
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' 'pice_question.mp3'" />
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + product + '.mp3'" />
+            Per
+            <value expr="product" />
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/enter_price.mp3'" />
             </prompt>
 
             <filled>
@@ -391,16 +396,69 @@
             </filled>
         </field>
 
-
         <filled>
-            <goto next="#submission" />
+            <goto next="#confirm_sell" />
         </filled>
 
     </form>
 
-    <!-- TODO repeating and confirmation -->
+    <menu id="confirm_sell" scope="dialog">
+        <prompt>
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/are_you_sure_sell.mp3'" />
+        <break time="500ms"/>
+        <value expr="quantity"/>
+        <break time="500ms"/>
+        <value expr="units"/>
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/of.mp3'" />
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/' + product + '.mp3'" />
+        <break time="500ms"/>
+        For 
+        <break time="500ms"/>
+        <value expr="price"/>
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/franc'  + '.mp3'" />
+        <break time="500ms"/>
+        Per
+        <break time="500ms"/>
+        <value expr="units"/>
+        <break time="500ms"/>
+        By confirming you consent to you phone number being shared with Foret marchet.
+        
+        <break time="500ms"/>
+            <enumerate>
+                <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/for.mp3'" />
+                <value expr="_prompt" />
+            </enumerate>
+        </prompt>
 
-    <form id="submission">
+        <choice event="confirm_sell_yes" dtmf="1" messageexpr="'yes'">
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/yes.mp3'" />
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/select.mp3'" />
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/1.mp3'" />
+        </choice>
+        <choice event="confirm_sell_no" dtmf="2" messageexpr="'no'">
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/no.mp3'" />
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/select.mp3'" />
+            <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/2.mp3'" />
+        </choice>
+         <nomatch>
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/no_option_match.mp3'" />
+        <reprompt /></nomatch>
+        <noinput>
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/question_repeat.mp3'" />
+        <reprompt /></noinput>
+    </menu>
+
+    <catch event="confirm_buy_yes">
+        <submit next="http://forest-marche.herokuapp.com/api/v1/offers" method="post" fetchtimeout="15s" namelist="product quantity price session.callerid units" />
+    </catch>
+
+    <catch event="confirm_sell_no">
+        <break time="500" />
+        <goto next="#customer_type" />
+    </catch>
+
+
+    <!-- <form id="submission">
         <block>
             <prompt>
                 <audio src="https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/en_recordings/submission_goodbye.mp3" />
@@ -415,10 +473,11 @@
 
             <assign name="response" expr="submission_response" />
         </block>
-    </form>
+    </form> -->
 
     <catch event="error.badfetch">
-        <prompt bargein="false">Here is the catch bad fetch</prompt>
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/submit_success.mp3'" />
+        <audio expr="'https://raw.githubusercontent.com/erewl/ICT4D_group_16_NTFP_marketplace/main/' + language + '/thanks_for_using.mp3'" />
     </catch>
 
 </vxml>
