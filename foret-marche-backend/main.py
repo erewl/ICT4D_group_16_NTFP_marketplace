@@ -303,6 +303,7 @@ def delete_bid(bidId):
 
 
 app.config["JWT_SECRET_KEY"] = "please-remember-to-change-me"
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(days=30)
 jwt = JWTManager(app)
 
 @app.route(f'{api_prefix}auth/login', methods=["POST"])
