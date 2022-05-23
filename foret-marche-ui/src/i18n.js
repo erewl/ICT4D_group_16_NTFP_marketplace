@@ -31,6 +31,7 @@ i18n
                     unit: 'Unit',
                     price: 'Price',
                     phone_number: 'Phone Number',
+                    offer_number: 'Offer #',
                   },
                   bids: {
                       bids:'Bids',
@@ -54,6 +55,10 @@ i18n
                   },
                   sales: {
                     sold: "Sales"
+                  },
+                  alerts:{
+                    approve_quantity_error: "Bid quantity invalid, please check if there is enough availability",
+                    bid_quantity_error: "Please enter a valid quantity" 
                   }
             }
         },
@@ -75,6 +80,7 @@ i18n
                     unit: 'Eenheid',
                     price: 'Prijs',
                     phone_number: 'Telefoonnummer',
+                    offer_number: 'Bod #',
                   },
                   bids: {
                       bids:'Biedingen',
@@ -87,7 +93,7 @@ i18n
                   buttons: {
                     buy: 'Koop',
                     edit: 'Bewerk',
-                    approve: 'Hoedkeuren',
+                    approve: 'Goedkeuren',
                     yes: 'Ja',
                     no: 'Nee',
                     submit: 'Verzenden',
@@ -97,6 +103,10 @@ i18n
                   },
                   sales: {
                     sold: "Verkocht"
+                  },
+                  alerts:{
+                    approve_quantity_error: "Hoeveelheid ongeldig, controleer of er voldoende beschikbaarheid is",
+                    bid_quantity_error: "Voer een geldig aantal in"
                   }
             }
         },
@@ -118,6 +128,7 @@ i18n
                     unit: 'Unité',
                     price: 'Prix',
                     phone_number: 'Numéro de Téléphone',
+                    offer_number: 'Offre #',
                   },
                   bids: {
                       bids:'Enchères',
@@ -140,6 +151,10 @@ i18n
                   },
                   sales: {
                     sold: "Vendu"
+                  },
+                  alerts:{
+                    approve_quantity_error: "Quantité invalide, veuillez vérifier si la disponibilité est suffisante",
+                    bid_quantity_error: "Veuillez entrer une quantité valide" 
                   }
                   
 

@@ -1,7 +1,9 @@
 
 import http from "../http-commons";
+import i18n from '../i18n';
 
 class BidsService {
+    
 
     fetchData = (setResponse) => {
         return http.get(`/api/v1/bids`).then(response => {
@@ -29,7 +31,7 @@ class BidsService {
             
             console.log(response.data)
             callback()
-        }).catch(err => alert("Bid quantity invalid, please check if there is enough availability"))
+        }).catch(err => alert(i18n.t('alerts.approve_quantity_error')))
     }
 
     updateData = (bid, token) => {

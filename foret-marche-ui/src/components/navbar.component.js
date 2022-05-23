@@ -204,7 +204,7 @@ export default function Navbar(props) {
                     <LoginModal open={true} setClose={() => setModalOpen(false) } setOpen={() => setModalOpen(true)} />
                   }
                 </> :
-                <Button color="inherit" onClick={() => authService.logoutUser(removeToken) } sx={{ fontFamily: 'Monospace', fontSize: 20 }}>
+                <Button color="inherit" onClick={() => {authService.logoutUser(removeToken); props.changeTab('offers'); }} sx={{ fontFamily: 'Monospace', fontSize: 20 }}>
                   {t('navbar.logout')}
                 </Button>
               }

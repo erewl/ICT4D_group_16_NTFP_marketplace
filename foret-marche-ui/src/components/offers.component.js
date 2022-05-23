@@ -12,6 +12,7 @@ import OffersService from '../services/offers-service';
 import BidsService from '../services/bids-service';
 import { TextField } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import i18n from '../i18n';
 import { UserContext } from '../context/UserContext';
 import Modal from '@mui/material/Modal';
 
@@ -58,7 +59,7 @@ export default function Offers(props) {
 
     const submit = () => {
         if (quantity > offer_quantity){
-            alert("Please enter a valid quantity")
+            alert(i18n.t('alerts.bid_quantity_error'))
             setQuantity("");
             setOfferQuantity("")
         }
@@ -175,11 +176,11 @@ export default function Offers(props) {
             </Box>
             <div style={{ width: '100%' }}>
                 <TableContainer align="center">
-                    <Table style={{ width: 1200 }} stickyHeader>
+                    <Table style={{ width: context.token && context.token !== '' ? 1350: 1200 }} stickyHeader>
                         <TableHead>
                         <TableRow>
                             {context.token && context.token !== '' &&      
-                            <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('bids.offer')}  </Typography></TableCell> 
+                            <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('offers.offer_number')} </Typography></TableCell> 
                             }
                             <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('offers.product')}  </Typography></TableCell>
                             <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('offers.quantity')}  </Typography></TableCell>
