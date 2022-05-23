@@ -26,9 +26,10 @@ class BidsService {
 
     approveBid = (bidId, token, callback) => {
         return http.post(`/api/v1/bids/${bidId}/approve`, {}, this.createHeader(token)).then(response => {
+            
             console.log(response.data)
             callback()
-        })
+        }).catch(err => alert("Bid quantity invalid, please check if there is enough availability"))
     }
 
     updateData = (bid, token) => {
