@@ -259,7 +259,7 @@ def get_sales():
                 'unit': saleResult.unit,
                 'price': saleResult.price
             })
-    return jsonify({'data': bids})
+    return jsonify({'data': bids[::-1]})
 
 @app.route(f'{api_prefix}bids', methods=['GET'])
 def get_bids():
