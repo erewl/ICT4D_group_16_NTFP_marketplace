@@ -4,6 +4,7 @@ import Navbar from "./components/navbar.component"
 import Offers from "./components/offers.component"
 import Bids from "./components/bids.components"
 import Sell from "./components/sell.components"
+import Sales from "./components/sales.component"
 import { UserContextProvider } from './context/UserContext';
 
 function App() {
@@ -22,6 +23,9 @@ function App() {
         }
         {state.selected && state.selected === 'sell' &&
           <Sell />
+        }
+        {state.selected && state.selected === 'sales' &&
+          <Sales />
         }
       </div>
     </UserContextProvider>

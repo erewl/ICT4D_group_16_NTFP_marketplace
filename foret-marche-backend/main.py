@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy.orm.util import aliased
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 from flask_cors import CORS
-from postgresql.schemas import Offers, Users, Bids
+from postgresql.schemas import Offers, Users, Bids, Sales
 from datetime import datetime, timedelta, timezone
 from flask_jwt_extended import create_access_token,get_jwt,get_jwt_identity, \
                                unset_jwt_cookies, jwt_required, JWTManager
@@ -76,6 +76,49 @@ def post_offers():
         </response>"""
 
     return Response(xmlResponse, mimetype='application/xml')
+
+
+@app.route(f'{api_prefix}bids/<bidId>/approve', methods=['POST'])
+@jwt_required()
+def approve_bid(bidId):
+    with Session(engine) as session:
+        bid = None
+        offer = None
+        try:
+            bid = session.scalars(select(Bids).where(Bids.bid_id == bidId)).one()
+            try:
+             offer = session.scalars(select(Offers).where(Offers.offer_id == bid.offer_id)).one()
+             if(bid.quantity <= offer.quantity):
+                newSale = Sales(
+                    seller_id = bid.seller_id,
+                    buyer_id = bid.buyer_id,
+                    product = offer.product_name,
+                    price = offer.price,
+                    quantity = bid.quantity,
+                    unit = offer.unit
+                )
+                # convert bid into sale, remove bid
+                session.add(newSale)
+                session.query(Bids).filter(Bids.bid_id==bid.bid_id).delete()
+                # update offer with reduced quantity
+                if bid.quantity < offer.quantity:
+                    stmt = update(Offers).where(Offers.offer_id == offer.offer_id)
+                    stmt = stmt.values(quantity= offer.quantity - bid.quantity)
+                    session.execute(
+                        stmt.execution_options(synchronize_session="fetch")
+                    )
+                # or delete offer and bid if bid buys out the entire stock of the offer
+                else:
+                    session.query(Offers).filter(Offers.offer_id==offer.offer_id).delete()
+                session.commit()
+                return {'message': "Sale successfully administered"}
+             else: # error
+                print('Bid quantity was more than offer could offer')
+                return {'message': "Error, bid quantity invalid"}, 400
+            except NoResultFound:
+                return {'message': "Error, no valid offer"}, 400
+        except NoResultFound:
+            return {'message': "Error, no valid Bid"}, 400
 
 @app.route(f'{api_prefix}bids', methods=['POST'])
 def post_bids():
@@ -163,6 +206,22 @@ def update_offer(offerId):
         session.commit()
         return {'message': "Successful update!"}
 
+@app.route(f'{api_prefix}bids/<bidId>', methods=['PUT'])
+@jwt_required()
+def update_bid(bidId):
+    with Session(engine) as session:
+        newBid = request.json
+        stmt = update(Bids).where(Bids.bid_id == bidId)
+        if(newBid['quantity']):
+            stmt = stmt.values(quantity= newBid['quantity'])
+
+        result = session.execute(
+            stmt.execution_options(synchronize_session="fetch")
+        )
+        print(result.rowcount)
+        session.commit()
+        return {'message': "Successful update!"}
+
 @app.route(f'{api_prefix}offers', methods=['GET'])
 def get_offers():
     with Session(engine) as session:
@@ -180,6 +239,28 @@ def get_offers():
             })
     return jsonify({'data': offers})
 
+@app.route(f'{api_prefix}sales', methods=['GET'])
+def get_sales():
+    with Session(engine) as session:
+        bids = []
+        buyer = aliased(Users)
+        seller = aliased(Users)
+        allSales = session.query(Sales, buyer, seller)\
+            .join(buyer, Sales.buyer_id == buyer.user_id)\
+            .join(seller, Sales.seller_id == seller.user_id)\
+            .all()
+        for saleResult, buyerResult, sellerResult in allSales:
+            bids.append({
+                'saleId': saleResult.sale_id,
+                'product': saleResult.product,
+                'buyer': buyerResult.phone_number,
+                'seller': sellerResult.phone_number,
+                'quantity': saleResult.quantity,
+                'unit': saleResult.unit,
+                'price': saleResult.price
+            })
+    return jsonify({'data': bids[::-1]})
+
 @app.route(f'{api_prefix}bids', methods=['GET'])
 def get_bids():
     with Session(engine) as session:
@@ -193,6 +274,7 @@ def get_bids():
             .all()
         for bidResult, buyerResult, sellerResult, offerResult in allBids:
             bids.append({
+                'bidId': bidResult.bid_id,
                 'offerId': bidResult.offer_id,
                 'product': offerResult.product_name,
                 'product_lower': offerResult.product_name.replace(" ", "_").lower(),
@@ -221,6 +303,7 @@ def delete_bid(bidId):
 
 
 app.config["JWT_SECRET_KEY"] = "please-remember-to-change-me"
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(days=30)
 jwt = JWTManager(app)
 
 @app.route(f'{api_prefix}auth/login', methods=["POST"])

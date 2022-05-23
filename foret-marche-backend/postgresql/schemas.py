@@ -5,6 +5,7 @@ metadata_obj = MetaData()
 
 Base = declarative_base()
 
+
 class Users(Base):
      __tablename__ = "users"
      user_id = Column(Integer, primary_key=True, autoincrement=True)
@@ -32,7 +33,9 @@ class Bids(Base):
 class Sales(Base):
      __tablename__ = "sales"
      sale_id = Column(Integer, primary_key=True, autoincrement=True)
-     offer_id = Column( Integer, ForeignKey("offers.offer_id"))
+     product = Column(String(50), nullable=False)
      seller_id = Column( Integer, ForeignKey("users.user_id"))
      buyer_id = Column( Integer, ForeignKey("users.user_id"))
+     price = Column(Integer, nullable=False)
+     unit = Column(String(50), nullable=False)
      quantity = Column( Integer, nullable=False)

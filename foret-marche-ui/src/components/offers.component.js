@@ -12,6 +12,7 @@ import OffersService from '../services/offers-service';
 import BidsService from '../services/bids-service';
 import { TextField } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import i18n from '../i18n';
 import { UserContext } from '../context/UserContext';
 import Modal from '@mui/material/Modal';
 
@@ -22,7 +23,8 @@ export default function Offers(props) {
 
     const [context, setContext] = useContext(UserContext);
 
-    const [quantity, setQuantity] = React.useState("");
+    const [quantity, setQuantity] = React.useState();
+    const [offer_quantity, setOfferQuantity] = React.useState();
     const [phoneNumber, setPhoneNumber] = React.useState("");
     const [modalOpen, setModalOpen] = React.useState(false);
     const [offer_id, setOfferId] = React.useState();
@@ -56,14 +58,22 @@ export default function Offers(props) {
     }
 
     const submit = () => {
-        let bid = new FormData()
-        bid.append("offer_id",offer_id);
-        bid.append("quantity", quantity);
-        bid.append("session.callerid",phoneNumber);
-        setOfferId("");
-        setQuantity("");
-        setPhoneNumber("");
-        BidsService.setData(bid);
+        if (quantity > offer_quantity){
+            alert(i18n.t('alerts.bid_quantity_error'))
+            setQuantity("");
+            setOfferQuantity("")
+        }
+        else {
+            let bid = new FormData()
+            bid.append("offer_id",offer_id);
+            bid.append("quantity", quantity);
+            bid.append("session.callerid",phoneNumber);
+            setOfferId("");
+            setQuantity();
+            setPhoneNumber("");
+            setOfferQuantity()
+            BidsService.setData(bid);
+        }
       }
 
     // useEffect is being run before and after each render of the site, to limit the API call only to when no data is in the frontend, the if-clause is introduced
@@ -87,7 +97,7 @@ export default function Offers(props) {
 
     const determineEditButton = (offer) => {
         if (offer && !offer.editing) return <>
-            <Button sx={{ mr: 2 }} color="success" onClick={() => {setModalOpen(true); setOfferId(offer["id"]);}} variant="outlined" > {t('buttons.buy')}  </Button >
+            <Button sx={{ mr: 2 }} color="success" onClick={() => {setModalOpen(true); setOfferId(offer["id"]); setOfferQuantity(offer["quantity"])}} variant="outlined" > {t('buttons.buy')}  </Button >
             {context.token && context.token !== '' && <Button sx={{ mr: 2 }} color="success" onClick={() => toggleEditState(offer)} variant="outlined">{t('buttons.edit')}  </Button>}
         </>
         else
@@ -166,9 +176,12 @@ export default function Offers(props) {
             </Box>
             <div style={{ width: '100%' }}>
                 <TableContainer align="center">
-                    <Table style={{ width: 1200 }} stickyHeader>
+                    <Table style={{ width: context.token && context.token !== '' ? 1350: 1200 }} stickyHeader>
                         <TableHead>
                         <TableRow>
+                            {context.token && context.token !== '' &&      
+                            <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('offers.offer_number')} </Typography></TableCell> 
+                            }
                             <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('offers.product')}  </Typography></TableCell>
                             <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('offers.quantity')}  </Typography></TableCell>
                             <TableCell> <Typography sx={{ fontWeight: "bold", fontSize: 24, fontFamily: 'Monospace' }}> {t('offers.unit')}  </Typography></TableCell>
@@ -179,6 +192,9 @@ export default function Offers(props) {
                         <TableBody>
                             {state.offers && state.offers.map((offer) => {
                                 return <TableRow >
+                                    {context.token && context.token !== '' &&   
+                                    <TableCell> {renderCell(offer, 'id')} </TableCell>
+                                     }
                                     <TableCell> {productTranslation(offer['product'], i18n.resolvedLanguage)} </TableCell>
                                     <TableCell> {renderEditableCell(offer, 'quantity')} </TableCell>
                                     <TableCell> {renderEditableCell(offer, 'unit')} </TableCell>
