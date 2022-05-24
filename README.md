@@ -3,10 +3,10 @@
 The web application is deployed here: https://forest-marche.herokuapp.com/
 
 # Directories
-*foret-marche-backend* contains the Flask backend with the postgresql database
-*foret-marche-ui* contains the React frontend
-*vxml_files* contains the vxml files for Voxeo
-*other directories* contain the recording files 
+- *foret-marche-backend* contains the Flask backend with the postgresql database
+- *foret-marche-ui* contains the React frontend
+- *vxml_files* contains the vxml files for Voxeo
+- *other directories* contain the recording files 
 
 # Setup and Development
 
